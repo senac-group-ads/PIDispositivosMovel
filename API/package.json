@@ -1,0 +1,26 @@
+{
+  "name": "api",
+  "version": "0.0.1",
+  "description": "Projeto Integrador para dispositivos móveis Parte API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/node": "^20.11.30",
+    "drizzle-kit": "^0.20.14",
+    "tsx": "^4.7.1",
+    "typescript": "^5.4.3"
+  },
+  "dependencies": {
+    "@paralleldrive/cuid2": "^2.2.2",
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.5",
+    "drizzle-orm": "^0.30.5",
+    "postgres": "^3.4.4"
+  }
+}
