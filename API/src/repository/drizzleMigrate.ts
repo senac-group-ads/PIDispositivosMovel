@@ -2,8 +2,9 @@ import postgres from "postgres";
 
 import { drizzle } from "drizzle-orm/postgres-js"
 import { migrate } from "drizzle-orm/postgres-js/migrator"
+import { env } from "../lib/env";
 
-const conect = postgres('postgresql://postgres:abc.123@localhost:3339/find-a-friend', {max: 1})
+const conect = postgres(env.DATABASE_URL, {max: 1})
 const db = drizzle(conect)
 
 async function exec() {
