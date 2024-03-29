@@ -4,7 +4,9 @@
   "description": "Projeto Integrador para dispositivos móveis Parte API",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "generate": "drizzle-kit generate:pg",
+    "migrate": "tsx src/repository/drizzleMigrate.ts"
   },
   "keywords": [],
   "author": "",
@@ -13,6 +15,7 @@
     "@types/bcrypt": "^5.0.2",
     "@types/node": "^20.11.30",
     "drizzle-kit": "^0.20.14",
+    "pg": "^8.11.3",
     "tsx": "^4.7.1",
     "typescript": "^5.4.3"
   },

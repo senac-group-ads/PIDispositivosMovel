@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  api-solid-pg:
+    image: postgres:14-alpine
+    ports:
+      - 3339:5432
+    environment:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: abc.123
+          POSTGRES_DB: find-a-friend

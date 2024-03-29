@@ -1,0 +1,27 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1711718900913,
+      "tag": "0000_medical_hydra",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1711723317856,
+      "tag": "0001_salty_calypso",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1711723760582,
+      "tag": "0002_exotic_green_goblin",
+      "breakpoints": true
+    }
+  ]
+}
