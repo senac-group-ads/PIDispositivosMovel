@@ -5,12 +5,14 @@
   "main": "index.js",
   "scripts": {
     "generate": "drizzle-kit generate:pg",
-    "migrate": "tsx src/repository/drizzleMigrate.ts"
+    "migrate": "tsx src/repository/drizzleMigrate.ts",
+    "seed": "tsx src/repository/seed.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@faker-js/faker": "^8.4.1",
     "@types/bcrypt": "^5.0.2",
     "@types/node": "^20.11.30",
     "drizzle-kit": "^0.20.14",
