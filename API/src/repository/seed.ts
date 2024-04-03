@@ -1,6 +1,7 @@
 import { faker } from '@faker-js/faker'
 import { pets, users } from './drizzle'
 import { db } from "./connection"
+import { createId } from '@paralleldrive/cuid2'
 
 /**
  * Reset database
@@ -17,10 +18,12 @@ async function seeded() {
     */
     await db.insert(users).values([
         {
+            id: createId(),
             name: faker.person.fullName(),
             email: faker.internet.email(),
         },
         {
+            id: createId(),
             name: faker.person.fullName(),
             email: faker.internet.email(),
         }
@@ -33,6 +36,7 @@ async function seeded() {
 
     const [ong] = await db.insert(users).values([
         {
+            id: createId(),
             name: faker.person.fullName(),
             email: 'admin@admin.com',
             role: 'ong'

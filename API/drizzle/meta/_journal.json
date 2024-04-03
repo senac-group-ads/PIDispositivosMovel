@@ -5,22 +5,15 @@
     {
       "idx": 0,
       "version": "5",
-      "when": 1711718900913,
-      "tag": "0000_medical_hydra",
+      "when": 1712167236500,
+      "tag": "0000_premium_swarm",
       "breakpoints": true
     },
     {
       "idx": 1,
       "version": "5",
-      "when": 1711723317856,
-      "tag": "0001_salty_calypso",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "5",
-      "when": 1711723760582,
-      "tag": "0002_exotic_green_goblin",
+      "when": 1712168640419,
+      "tag": "0001_tricky_mongoose",
       "breakpoints": true
     }
   ]

@@ -6,7 +6,8 @@
   "scripts": {
     "generate": "drizzle-kit generate:pg",
     "migrate": "tsx src/repository/drizzleMigrate.ts",
-    "seed": "tsx src/repository/seed.ts"
+    "seed": "tsx src/repository/seed.ts",
+    "test": "vitest run --dir src/application/use-cases"
   },
   "keywords": [],
   "author": "",
@@ -15,10 +16,13 @@
     "@faker-js/faker": "^8.4.1",
     "@types/bcrypt": "^5.0.2",
     "@types/node": "^20.11.30",
+    "@vitest/coverage-v8": "^1.4.0",
     "drizzle-kit": "^0.20.14",
     "pg": "^8.11.3",
     "tsx": "^4.7.1",
-    "typescript": "^5.4.3"
+    "typescript": "^5.4.3",
+    "vite-tsconfig-paths": "^4.3.2",
+    "vitest": "^1.4.0"
   },
   "dependencies": {
     "@paralleldrive/cuid2": "^2.2.2",
