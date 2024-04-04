@@ -6,11 +6,11 @@ import { Replace } from "../../lib/Replace"
 */
 
 export enum Role {
-    ong = 'ong',
-    costumer = 'costumer'
+    ong = "ong",
+    costumer = "costumer"
 }
 
-interface IUSer {
+export interface IUSer {
     name: string
     email: string
     password: string
@@ -19,7 +19,7 @@ interface IUSer {
     contato: string
     role: Role
     avata?: string | null
-    created_at: Date
+    createdAt: Date
     update_at?: Date | null
 }
 
@@ -27,11 +27,11 @@ export class User {
     private _id: string
     private props: IUSer
 
-    constructor(props: Replace<IUSer, {created_at?: Date}>) {
+    constructor(props: Replace<IUSer, {createdAt?: Date}>) {
         this._id = createId(),
         this.props = {
             ...props,
-            created_at: props.created_at ?? new Date(),
+            createdAt: props.createdAt ?? new Date(),
           }
     }
 
@@ -108,7 +108,7 @@ export class User {
         return this.props.update_at
       }
     
-      public get created(): Date {
-        return this.props.created_at
+      public get createdAt(): Date {
+        return this.props.createdAt
       }
 }

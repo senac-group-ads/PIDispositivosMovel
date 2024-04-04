@@ -1,1 +1,0 @@
-ALTER TABLE "users" ALTER COLUMN "numble" SET DATA TYPE text;

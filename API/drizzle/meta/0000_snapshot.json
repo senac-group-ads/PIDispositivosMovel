@@ -1,5 +1,5 @@
 {
-  "id": "0c444580-5571-4bee-8a36-812e2c62a614",
+  "id": "c5131d74-40f6-4a54-b55b-b036c3cd35cb",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -30,25 +30,25 @@
           "name": "password",
           "type": "text",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "cep": {
           "name": "cep",
           "type": "text",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "numble": {
           "name": "numble",
-          "type": "numeric",
+          "type": "text",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "phone": {
           "name": "phone",
           "type": "text",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "role": {
           "name": "role",
