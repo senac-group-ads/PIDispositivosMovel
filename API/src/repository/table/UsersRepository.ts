@@ -1,4 +1,5 @@
-import { IUSer, User } from "../../application/entities/users";
+import { eq } from "drizzle-orm";
+import { User } from "../../application/entities/users";
 import { UserRepository } from "../../application/repositories/user/user-repository";
 import { db } from '../connection';
 import { users } from "../drizzle";
@@ -9,7 +10,13 @@ import { users } from "../drizzle";
 
 
 export class DrizzleUserRepository extends UserRepository{
-    async creat(data: User): Promise<IUSer> {
+    async findByEmail(email: string): Promise<User> {
+        const [user] = await db.select().from(users).where(eq(users.email, email));
+        
+        return user
+    }
+
+    async creat(data: User): Promise<User> {
         const [user] = await db.insert(users).values([
             {
                 id: data.id,
@@ -24,7 +31,7 @@ export class DrizzleUserRepository extends UserRepository{
                 createdAt: data.createdAt
             }
         ]).returning()
-
+ 
         return user
     }
 }

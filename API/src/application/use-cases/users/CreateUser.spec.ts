@@ -1,7 +1,8 @@
 import { expect, describe, it, beforeEach } from 'vitest'
-import { User, Role } from '../../entities/users'
+import { Role } from '../../entities/users'
 import { CreateUser } from './CreateUser'
 import { DrizzleUserRepository } from '@/repository/table/UsersRepository'
+import { UserAlreadyExistsError } from '../erros/user-already-exists-error'
 
 let userRepository: DrizzleUserRepository
 let sut: CreateUser
@@ -11,21 +12,34 @@ describe('Register Use Case', () => {
     sut = new CreateUser(userRepository)
   })
   
-  it('should be able create a pet', async () => {
-    const user = new User({
-        name: 'Marcos',
-        email: 'marcos@marcos4.com',
-        cep: '26170330',
-        numero: '4365',
-        contato: '21 99999-9999',
-        password: '123456',
-        role: Role.ong
+  it('should be able create a user', async () => {
+    const created = await sut.execute({
+      name: 'Marcos',
+      email: 'marcos@marcos2.com',
+      cep: '26170330',
+      numero: '4365',
+      contato: '21 99999-9999',
+      password: '123456',
+      role: Role.ong,
+      avata: ''
     })
 
-    const created = await userRepository.creat(user)
+    expect(created.user.id).toEqual(expect.any(String))
+  })
 
-    console.log(created)
+  it('should return existing user error', async () => {
 
-    expect(created.id).toEqual(expect.any(String))
+    await expect(() =>
+      sut.execute({
+      name: 'Marcos',
+      email: 'marcos@marcos.com',
+      cep: '26170330',
+      numero: '4365',
+      contato: '21 99999-9999',
+      password: '123456',
+      role: Role.ong,
+      avata: ''
+      })
+    ).rejects.toBeInstanceOf(UserAlreadyExistsError)
   })
 })
