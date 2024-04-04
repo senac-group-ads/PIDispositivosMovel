@@ -1,26 +1,44 @@
-import { User } from "../../entities/users";
+import { hash } from "bcrypt";
+import { Role, User } from "../../entities/users";
 import { UserRepository } from "../../repositories/user/user-repository";
+import { UserAlreadyExistsError } from "../erros/user-already-exists-error";
 /*
 * Caso de uso de criação de usuario 
 */
 
 interface ICreateUserRequest {
-    data: User
+    name: string, 
+    email: string, 
+    password: string, 
+    numero: string, 
+    cep: string, 
+    role: Role, 
+    contato: string, 
+    avata: string | null
+}
+
+interface ICreateUserResponse {
+    user: User
 }
 
 export class CreateUser {
     constructor(private userRepository: UserRepository) {}
 
-    async execute(request: ICreateUserRequest) {
-        const { name, email, password, numero, cep, role, contato, avata} = request.data
+    async execute(request: ICreateUserRequest): Promise<ICreateUserResponse> {
+        const { name, email, password, numero, cep, role, contato, avata} = request
 
-        // TODO:  criar método de verificação de se o usuario ja existe no banco
-        // TODO: Criar hash de senha para salvar no banco.
+        const userAlreadyExist = await this.userRepository.findByEmail(email)
+
+        if (userAlreadyExist) {
+            throw new UserAlreadyExistsError()
+        }
+
+        const passwordHash = await hash(password, 6)
 
         const user = new User({
             name,
             email,
-            password,
+            password: passwordHash,
             cep,
             numero,
             contato,
@@ -30,8 +48,7 @@ export class CreateUser {
 
         await this.userRepository.creat(user)
 
-        return {
-            user
-        }
+        return { user }
+
     }
 }
