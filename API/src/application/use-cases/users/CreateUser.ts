@@ -1,4 +1,5 @@
 import { hash } from "bcrypt";
+
 import { Role, User } from "../../entities/users";
 import { UserRepository } from "../../repositories/user/user-repository";
 import { UserAlreadyExistsError } from "../erros/user-already-exists-error";
@@ -27,13 +28,13 @@ export class CreateUser {
     async execute(request: ICreateUserRequest): Promise<ICreateUserResponse> {
         const { name, email, password, numero, cep, role, contato, avata} = request
 
-        const userAlreadyExist = await this.userRepository.findByEmail(email)
+        const userAlreadyExist = await this.userRepository.findByEmail(email) // Verifica se o usuario já existe no banco
 
         if (userAlreadyExist) {
-            throw new UserAlreadyExistsError()
+            throw new UserAlreadyExistsError() // Retorna um erro se o usuario ja existir
         }
 
-        const passwordHash = await hash(password, 6)
+        const passwordHash = await hash(password, 6) // Faz hash da senha
 
         const user = new User({
             name,
@@ -46,7 +47,7 @@ export class CreateUser {
             avata
         })
 
-        await this.userRepository.creat(user)
+        await this.userRepository.creat(user) // Cria o usario
 
         return { user }
 
