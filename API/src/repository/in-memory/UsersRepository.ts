@@ -7,6 +7,16 @@ import { UserRepository } from "../../application/repositories/user/user-reposit
 
 export class InMemoryUserRepository extends UserRepository {
     public item: User[] = []
+
+    async findUser(): Promise<User | null> {
+        const user = this.item.find((itens) => itens)
+
+        if(!user) {
+            return null
+        }
+
+        return user
+    }
     
     async creat(user: User): Promise<User> {
         const created = new User({
