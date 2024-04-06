@@ -8,8 +8,12 @@ import { users } from "../drizzle";
 * Classe de banco de dados responsável por utilizar o drizzle para gerenciar as inserções no banco
 */
 
-
 export class DrizzleUserRepository extends UserRepository{
+    async findUser(): Promise<User | null> {
+        const user = await db.select().from(users)
+
+        return user
+    }
     async findByEmail(email: string): Promise<User> {
         const [user] = await db.select().from(users).where(eq(users.email, email));
         
