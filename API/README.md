@@ -8,6 +8,7 @@ Essa é a parte de API do projeto integrado do curso tecnologia em análise e de
 - dia 29/03/2024: Definido e iniciado o banco de dados do projeto. o banco de dados a ser utilizado será o postgreSql, e usaremos o drizzle como ORM de gerenciamento do projeto, também foi iniciando o docker-compose para criação de um banco numa máquina virtual. Marcos
 - dia 03/04/2024: Criado a entidade de usuario, criando o repositório, criando o metodo de criação de usuario e o teste de criação. Marcos
 - dia 05/04/2024: feito mais uma parte do caso de uso de cadastro de usuario, teste unitario de cadastro de usuario, e integração do caso de uso com o banco de dados. Marcos
+- dia 06/04/2024: Fetito o caso de uso do listagem de usuario, e teste unitario do modulo. Marcos
 
 ## Regras da aplicação
 - Deve ser possível cadastrar um pet
