@@ -5,7 +5,7 @@ import { UserRepository } from "../../repositories/user/user-repository";
 */
 
 interface IListUserResponse {
-    user: User
+    user: User[]
 }
 
 export class ListUser {
@@ -18,7 +18,9 @@ export class ListUser {
             throw new Error('Sem usuarios')
         }
 
-        return { user }
+        return {
+            user,
+        }
 
     }
 }
