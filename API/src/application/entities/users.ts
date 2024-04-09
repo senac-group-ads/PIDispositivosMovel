@@ -24,10 +24,10 @@ export interface IUSer {
 }
 
 export class User {
-    private _id: string
-    private props: IUSer
+    private _id: string;
+    private props: IUSer;
 
-    constructor(props: Replace<IUSer, {createdAt?: Date}>) {
+    constructor(props: Replace<IUSer, { createdAt?: Date }>) {
         this._id = createId(),
         this.props = {
             ...props,

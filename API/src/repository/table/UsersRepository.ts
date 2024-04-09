@@ -9,7 +9,7 @@ import { users } from "../drizzle";
 */
 
 export class DrizzleUserRepository extends UserRepository{
-    async findUser(): Promise<User | null> {
+    async findUser(): Promise<User[] | null> {
         const user = await db.select().from(users)
 
         return user
@@ -36,6 +36,6 @@ export class DrizzleUserRepository extends UserRepository{
             }
         ]).returning()
  
-        return user
+        return { user }
     }
 }

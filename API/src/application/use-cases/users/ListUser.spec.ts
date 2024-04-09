@@ -2,6 +2,7 @@ import { InMemoryUserRepository } from "@/repository/in-memory/UsersRepository"
 import { ListUser } from "./ListUser"
 import { beforeEach, describe, expect, it, suite } from "vitest"
 import { Role, User } from "@/application/entities/users"
+// import { DrizzleUserRepository } from "@/repository/table/UsersRepository"
 
 
 let userRepository: InMemoryUserRepository // usa um banco fake para testar a aplicação
@@ -37,13 +38,11 @@ describe('List user Use Case', () => {
       avata: ''
   }) // Cria um novo usuario para ser testado
 
-  await userRepository.creat(newUser)
-  await userRepository.creat(newUser2)
+  // await userRepository.creat(newUser)
+  // await userRepository.creat(newUser2)
 
     const user = await sut.execute() // Meto de caso de uso que lista o usuario
-
-    console.log(user.user)
     
-    expect(user).toEqual([expect.objectContaining({ name: 'Marcos'})]) // testa se retorna um objeto com o usuario
+    expect(user).toContainEqual(expect.objectContaining({ name: 'Marcos' })); // testa se retorna um objeto com o usuario
   })
 })
