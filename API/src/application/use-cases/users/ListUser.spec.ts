@@ -38,8 +38,8 @@ describe('List user Use Case', () => {
       avata: ''
   }) // Cria um novo usuario para ser testado
 
-  // await userRepository.creat(newUser)
-  // await userRepository.creat(newUser2)
+  await userRepository.creat(newUser)
+  await userRepository.creat(newUser2)
 
     const user = await sut.execute() // Meto de caso de uso que lista o usuario
     
