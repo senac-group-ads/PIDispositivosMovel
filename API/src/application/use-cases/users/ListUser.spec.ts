@@ -2,15 +2,16 @@ import { InMemoryUserRepository } from "@/repository/in-memory/UsersRepository"
 import { ListUser } from "./ListUser"
 import { beforeEach, describe, expect, it, suite } from "vitest"
 import { Role, User } from "@/application/entities/users"
+import { DrizzleUserRepository } from "@/repository/table/UsersRepository"
 // import { DrizzleUserRepository } from "@/repository/table/UsersRepository"
 
 
-let userRepository: InMemoryUserRepository // usa um banco fake para testar a aplicação
+let userRepository: DrizzleUserRepository // usa um banco fake para testar a aplicação
 let sut: ListUser // metodo de use-case
 
 describe('List user Use Case', () => {
   beforeEach(() => {
-    userRepository = new InMemoryUserRepository()
+    userRepository = new DrizzleUserRepository()
     sut = new ListUser(userRepository)
   })
   

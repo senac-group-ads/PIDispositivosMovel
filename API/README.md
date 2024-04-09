@@ -9,6 +9,7 @@ Essa é a parte de API do projeto integrado do curso tecnologia em análise e de
 - dia 03/04/2024: Criado a entidade de usuario, criando o repositório, criando o metodo de criação de usuario e o teste de criação. Marcos
 - dia 05/04/2024: feito mais uma parte do caso de uso de cadastro de usuario, teste unitario de cadastro de usuario, e integração do caso de uso com o banco de dados. Marcos
 - dia 06/04/2024: Feito o caso de uso do listagem de usuario, e teste unitario do modulo. Marcos
+- dia 08/04/2024: Resolvido problema de listagem de vários usuários
 
 ## Regras da aplicação
 - Deve ser possível cadastrar um pet

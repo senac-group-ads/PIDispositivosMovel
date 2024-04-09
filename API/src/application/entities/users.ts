@@ -28,7 +28,7 @@ export class User {
     private props: IUSer;
 
     constructor(props: Replace<IUSer, { createdAt?: Date }>) {
-        this._id = createId(),
+        this._id = createId()
         this.props = {
             ...props,
             createdAt: props.createdAt ?? new Date(),
@@ -39,7 +39,7 @@ export class User {
         return this._id
       }
     
-      public set name(name: string) {
+      public set Name(name: string) {
         this.props.name = name
       }
       public get name() {

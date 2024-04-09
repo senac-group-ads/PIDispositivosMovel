@@ -10,7 +10,9 @@ import { users } from "../drizzle";
 
 export class DrizzleUserRepository extends UserRepository{
     async findUser(): Promise<User[] | null> {
-        const user = await db.select().from(users)
+        const user = await db.select({
+            id: users.id,
+        }).from(users)
 
         return user
     }
