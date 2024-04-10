@@ -9,10 +9,27 @@ import { users } from "../drizzle";
 */
 
 export class DrizzleUserRepository extends UserRepository{
+    async findUserById(id: string): Promise<User | null> {
+        const user = await db.select().from(users).where(eq(users.id, id))
+
+        return user
+    }
+
     async findUser(): Promise<User[] | null> {
         const user = await db.select({
             id: users.id,
+            name: users.name,
+            email: users.email,
+            avata: users.avata,
+            cep: users.cep,
+            numero: users.numero,
+            contato: users.contato,
+            role: users.role
         }).from(users)
+
+        if(user.length === 0) {
+            return null
+        }
 
         return user
     }

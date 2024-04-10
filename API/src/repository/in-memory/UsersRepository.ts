@@ -8,10 +8,20 @@ import { UserRepository } from "../../application/repositories/user/user-reposit
 export class InMemoryUserRepository extends UserRepository {
     public item: User[] = []
 
+    async findUserById(id: string): Promise<User | null> {
+       const user = this.item.find((itens) => itens.id === id)
+
+       if (!user || user == undefined ) {
+            return null
+        }
+
+        return user
+    }
+
     async findUser(): Promise<User[] | null> {
         const user = this.item.map((itens) => itens)
 
-        if(!user) {
+        if(user.length === 0) {
             return null
         }
 
