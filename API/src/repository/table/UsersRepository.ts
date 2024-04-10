@@ -9,8 +9,10 @@ import { users } from "../drizzle";
 */
 
 export class DrizzleUserRepository extends UserRepository{
-    async update(user: User): Promise<User> {
-        const update = await db.update(users).set({
+    async update(user: User, id: string): Promise<User> {
+
+        const [update] = await db.update(users)
+        .set({
             name: user.name,
             password: user.password,
             cep: user.cep,
@@ -20,6 +22,8 @@ export class DrizzleUserRepository extends UserRepository{
             email: user.email,
             updatedAt: new Date()
         })
+        .where(eq(users.id, id))
+        .returning()
 
         return update
     }
@@ -70,6 +74,6 @@ export class DrizzleUserRepository extends UserRepository{
             }
         ]).returning()
  
-        return { user }
+        return user
     }
 }

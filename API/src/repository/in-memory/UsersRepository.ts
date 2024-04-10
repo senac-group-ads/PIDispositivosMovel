@@ -8,6 +8,18 @@ import { UserRepository } from "../../application/repositories/user/user-reposit
 export class InMemoryUserRepository extends UserRepository {
     public item: User[] = []
 
+    async update(user: User, id: string): Promise<User | null> {
+        const index = this.item.findIndex((itens) => itens.id === id)
+
+        if( index === undefined ) {
+            return null
+        }
+
+        const update  = this.item[index] = user
+
+        return update
+    }
+
     async findUserById(id: string): Promise<User | null> {
        const user = this.item.find((itens) => itens.id === id)
 

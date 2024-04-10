@@ -3,6 +3,7 @@ import { UserRepository } from "@/application/repositories/user/user-repository"
 import { hash } from "bcrypt";
 
 interface IUserUpdate {
+    _id: string
     user: User
 }
 
@@ -10,9 +11,16 @@ export class UpdateUser{
     constructor(private userRepository: UserRepository) {}
 
     async execute(data: IUserUpdate){
-        const { user } = data
+        const { user, _id } = data
 
-        const passwordHash = await hash(user.password, 6)
+        const id = _id
+
+        let passwordHash = ''
+
+        if (user.password !== undefined) {
+            passwordHash = await hash(user.password, 6)
+        }
+
 
         const userUpdate = new User({
             name: user.name,
@@ -25,7 +33,11 @@ export class UpdateUser{
             role: user.role
         })
 
-        const updated = this.userRepository.update(userUpdate)
+        const updated = await this.userRepository.update(userUpdate, id)
+
+        if (!updated) {
+            throw new Error('Erro ao atualizar as informações')
+        }
 
         return updated
     }
