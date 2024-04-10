@@ -9,6 +9,21 @@ import { users } from "../drizzle";
 */
 
 export class DrizzleUserRepository extends UserRepository{
+    async update(user: User): Promise<User> {
+        const update = await db.update(users).set({
+            name: user.name,
+            password: user.password,
+            cep: user.cep,
+            numero: user.numero,
+            avata: user.avata,
+            contato: user.contato,
+            email: user.email,
+            updatedAt: new Date()
+        })
+
+        return update
+    }
+
     async findUserById(id: string): Promise<User | null> {
         const user = await db.select().from(users).where(eq(users.id, id))
 

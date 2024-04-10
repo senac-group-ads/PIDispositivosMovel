@@ -39,7 +39,7 @@ export class User {
         return this._id
       }
     
-      public set Name(name: string) {
+      public set name(name: string) {
         this.props.name = name
       }
       public get name() {
