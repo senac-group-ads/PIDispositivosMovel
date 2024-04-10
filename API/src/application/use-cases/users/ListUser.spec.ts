@@ -1,17 +1,17 @@
 import { InMemoryUserRepository } from "@/repository/in-memory/UsersRepository"
 import { ListUser } from "./ListUser"
-import { beforeEach, describe, expect, it, suite } from "vitest"
+import { beforeEach, describe, expect, it } from "vitest"
 import { Role, User } from "@/application/entities/users"
 import { DrizzleUserRepository } from "@/repository/table/UsersRepository"
-// import { DrizzleUserRepository } from "@/repository/table/UsersRepository"
+import { UnexistUser } from "../erros/unexistUser"
 
 
-let userRepository: DrizzleUserRepository // usa um banco fake para testar a aplicação
+let userRepository: InMemoryUserRepository // usa um banco fake para testar a aplicação
 let sut: ListUser // metodo de use-case
 
 describe('List user Use Case', () => {
   beforeEach(() => {
-    userRepository = new DrizzleUserRepository()
+    userRepository = new InMemoryUserRepository()
     sut = new ListUser(userRepository)
   })
   
@@ -45,5 +45,11 @@ describe('List user Use Case', () => {
     const user = await sut.execute() // Meto de caso de uso que lista o usuario
     
     expect(user).toContainEqual(expect.objectContaining({ name: 'Marcos' })); // testa se retorna um objeto com o usuario
+  })
+
+  it('should return an error if there are no users', async () => { 
+    expect(() => 
+      sut.execute()
+    ).rejects.toBeInstanceOf(UnexistUser);
   })
 })

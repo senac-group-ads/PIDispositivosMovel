@@ -1,5 +1,5 @@
-import { User } from "../../entities/users";
 import { UserRepository } from "../../repositories/user/user-repository";
+import { UnexistUser } from "../erros/unexistUser";
 /*
 * Caso de uso de listagem de usuario
 */
@@ -11,7 +11,7 @@ export class ListUser {
         const user = await this.userRepository.findUser()
 
         if(!user) {
-            throw new Error('Sem usuarios')
+            throw new UnexistUser()
         }
 
         return user
