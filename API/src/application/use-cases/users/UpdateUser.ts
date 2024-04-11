@@ -1,6 +1,7 @@
 import { User } from "@/application/entities/users";
 import { UserRepository } from "@/application/repositories/user/user-repository";
 import { hash } from "bcrypt";
+import { UpdateUserError } from "../erros/UpdateUserError";
 
 interface IUserUpdate {
     _id: string
@@ -36,7 +37,7 @@ export class UpdateUser{
         const updated = await this.userRepository.update(userUpdate, id)
 
         if (!updated) {
-            throw new Error('Erro ao atualizar as informações')
+            throw new UpdateUserError()
         }
 
         return updated
