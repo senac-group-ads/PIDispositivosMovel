@@ -6,7 +6,7 @@ import { relations } from "drizzle-orm";
 export const pets = pgTable("pets", {
   id: text("id").$defaultFn(() => createId()).primaryKey(),
   name: text("name").notNull(),
-  idade: text("age").notNull().unique(),
+  idade: text("age").notNull(),
   peso: text("weight"),
   tipo: text("type"),
   descricao: text("descriptions"),

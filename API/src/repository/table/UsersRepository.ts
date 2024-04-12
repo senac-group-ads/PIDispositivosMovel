@@ -29,7 +29,7 @@ export class DrizzleUserRepository extends UserRepository{
     }
 
     async findUserById(id: string): Promise<User | null> {
-        const user = await db.select().from(users).where(eq(users.id, id))
+        const [user] = await db.select().from(users).where(eq(users.id, id))
 
         return user
     }

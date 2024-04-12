@@ -1,5 +1,5 @@
-import { User } from "@/application/entities/users";
-import { UserRepository } from "@/application/repositories/user/user-repository";
+import { User } from "../../entities/users";
+import { UserRepository } from "../../repositories/user/user-repository";
 import { hash } from "bcrypt";
 import { UpdateUserError } from "../erros/UpdateUserError";
 

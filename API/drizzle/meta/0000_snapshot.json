@@ -1,5 +1,5 @@
 {
-  "id": "c5131d74-40f6-4a54-b55b-b036c3cd35cb",
+  "id": "9df6dfdc-7c0c-44fa-bdb1-62d8a776a263",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -194,15 +194,7 @@
         }
       },
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "pets_age_unique": {
-          "name": "pets_age_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "age"
-          ]
-        }
-      }
+      "uniqueConstraints": {}
     }
   },
   "enums": {

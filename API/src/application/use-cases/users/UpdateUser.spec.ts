@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it } from "vitest"
 
 import { InMemoryUserRepository } from "@/repository/in-memory/UsersRepository"
-import { Role, User } from "@/application/entities/users"
+import { Role, User } from "../../entities/users"
 import { DrizzleUserRepository } from "@/repository/table/UsersRepository"
 import { UpdateUser } from "./UpdateUser"
 import { faker } from "@faker-js/faker"

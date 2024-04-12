@@ -32,8 +32,7 @@ CREATE TABLE IF NOT EXISTS "pets" (
 	"costumer_id" text,
 	"adopted" boolean DEFAULT false,
 	"created_at" timestamp DEFAULT now() NOT NULL,
-	"updated_at" timestamp DEFAULT now() NOT NULL,
-	CONSTRAINT "pets_age_unique" UNIQUE("age")
+	"updated_at" timestamp DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
 DO $$ BEGIN
