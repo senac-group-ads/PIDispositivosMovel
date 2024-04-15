@@ -12,6 +12,7 @@ Essa é a parte de API do projeto integrado do curso tecnologia em análise e de
 - dia 08/04/2024: Resolvido problema de listagem de vários usuários. Marcos
 - dia 10/04/2024: Criando novos casos de suso e teste unitarios. Marcos
 - dia 12/04/2024: Criando a entidade de pet, criando o reposotorio referente a pets, e criando e testado o caso de uso de criação de pets. Marcos
+- dia 15/04/2024: Criando caso de uso de listagem de pets por id. Marcos
 
 ## Regras da aplicação
 - Deve ser possível cadastrar um pet
