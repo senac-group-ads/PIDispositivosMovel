@@ -2,8 +2,18 @@ import { Pets } from "../../application/entities/pets";
 import { PetsRepository } from "../../application/repositories/pets/pets-repository";
 
 export class InMemoryPetsRepository extends PetsRepository {
-    
+        
     public item: Pets[] = []
+
+    async findById(id: string): Promise<Pets | null> {
+        const pet = this.item.find((itens) => itens.id == id)
+
+        if(!pet) {
+            return null
+        }
+
+        return pet
+    }
 
     async create(data: Pets): Promise<Pets> {
         const pet = new Pets({

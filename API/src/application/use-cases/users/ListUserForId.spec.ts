@@ -38,7 +38,7 @@ describe('List user for id', () => {
     expect(user).toEqual(expect.objectContaining({ name: 'Marcos' })); // testa se retorna um objeto com o usuario
   })
 
-  it('should return an error if there are no users', async () => { // Testa a listagem de usuario apartir de um id.
+  it('should return an error if there are no users', async () => { // Testa se a listagem de usuario apartir de um id invalido retornara um erro.
 
     const id = createId()
     
