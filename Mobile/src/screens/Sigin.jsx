@@ -1,17 +1,41 @@
-import { VStack, Box} from 'native-base'
+import { VStack, Box, Center, Text, Heading} from 'native-base'
+import { Input } from '../components/Input'
+import { Button } from '../components/Button'
 
 import LogoSvg from '../assets/Logo.svg';
 
 export function Sigin() {
     return (
         <VStack flex={1}>
-            <Box
-                width="100%"
-                height="350px"
-                bg='blue.100'
-            />
+            <Box width="100%" height={80} bg='blue.100'>
+
+                <Box my={16} mx={9}>
+                    <LogoSvg/>
+                </Box>
+
+                <Center>
+
+                    <Heading color='blue.300' fontSize='xl' fontFamily='heading'>
+                        Faça seu login
+                    </Heading>
+                    
+                </Center>
+            </Box>
+
+            <Center my={20}>
+                <Input 
+                    placeholder='E-mail'
+                    keyboardType='email-address'
+                    autoCapitalize='none'
+                />
+                <Input 
+                    placeholder='Senha'
+                    secureTextEntry
+                />
+
+                <Button title='Entra'/>
+            </Center>
                
-            <LogoSvg />
         </VStack>
     );
 }

@@ -12,8 +12,8 @@ export const THEME = extendTheme({
         }
     },
     fonts: {
-        title: 'Nunito_700Bold',
-        text: 'Nunito_400Regular'
+        heading: 'Nunito_700Bold',
+        body: 'Nunito_400Regular',
     },
     fontSizes: {
         sm: '12',
