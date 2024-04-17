@@ -3,7 +3,8 @@
 Essa é a parte de API do projeto integrado do curso tecnologia em análise e desenvolvimento de sistemas, nele será desenvolvido o back-end de um aplicativo mobile e web.
 
 ## Histórico de modificações
-- 15/04/2024: Inicio do projeto mobile: Marcos
+- 15/04/2024: Inicio do projeto mobile. Marcos
+- 16/04/2024: Tela de login parcialmente finalizada. Marcos
 
 ## Regras da aplicação
 - Deve ser possível cadastrar um pet

@@ -1,4 +1,4 @@
-import { VStack, Box, Center, Text, Heading} from 'native-base'
+import { VStack, Box, Center, Heading, Link } from 'native-base'
 import { Input } from '../components/Input'
 import { Button } from '../components/Button'
 
@@ -34,6 +34,10 @@ export function Sigin() {
                 />
 
                 <Button title='Entra'/>
+
+                <Link href='#'>
+                    Não possui cadastra
+                </Link>
             </Center>
                
         </VStack>
