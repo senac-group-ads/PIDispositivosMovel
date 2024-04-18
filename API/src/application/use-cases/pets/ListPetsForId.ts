@@ -9,7 +9,7 @@ export class ListPetsForId {
     constructor(private petsRepository: PetsRepository) {}
 
     async execut({ id }: IPetsRequest) {
-        const pet = this.petsRepository.findById(id)
+        const pet = await this.petsRepository.findById(id)
 
         if(!pet) {
             throw new UnexistPet()

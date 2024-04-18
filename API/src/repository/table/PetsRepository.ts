@@ -5,6 +5,17 @@ import { pets } from "../drizzle";
 import { eq } from "drizzle-orm";
 
 export class DrizzlePetsRepository extends PetsRepository {
+
+    async find(): Promise< Pets[] | null > {
+        const data = await db.select().from(pets)
+
+        if(data.length === 0 ) {
+            return null
+        }
+
+        return data
+    }
+
     async findById(id: string): Promise<Pets | null> {
         const [pet] = await db.select().from(pets).where(eq(pets.id, id))
 
