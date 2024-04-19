@@ -4,6 +4,16 @@ import { PetsRepository } from "../../application/repositories/pets/pets-reposit
 export class InMemoryPetsRepository extends PetsRepository {
         
     public item: Pets[] = []
+ 
+    async find() {
+        const pet = this.item.map((itens) => itens )
+
+        if(!pet) {
+            return null
+        }
+
+        return pet
+    }
 
     async findById(id: string): Promise<Pets | null> {
         const pet = this.item.find((itens) => itens.id == id)
