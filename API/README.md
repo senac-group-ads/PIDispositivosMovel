@@ -2,6 +2,19 @@
 
 Essa é a parte de API do projeto integrado do curso tecnologia em análise e desenvolvimento de sistemas, nele será desenvolvido o back-end de um aplicativo mobile e web.
 
+## Bibliotecas e ferramentas utilizadas
+Algumas das ferramentas utilizados para facilitar o desenvolvimento do nosso sistema foi
+
+- Typescript
+- Vitest
+- Drizzle
+- Postgre
+- Bcrypt
+- Axios
+- Dotenv
+- Zod
+- Paralleldrive
+
 ## Histórico de modificações
 
 - dia 28/03/2024: Criado a estrutura de pastas e iniciado o back-end do projeto. Marcos 
@@ -13,6 +26,7 @@ Essa é a parte de API do projeto integrado do curso tecnologia em análise e de
 - dia 10/04/2024: Criando novos casos de suso e teste unitarios. Marcos
 - dia 12/04/2024: Criando a entidade de pet, criando o reposotorio referente a pets, e criando e testado o caso de uso de criação de pets. Marcos
 - dia 15/04/2024: Criando caso de uso de listagem de pets por id. Marcos
+- dia 19/04/2024: Criado listagem de pets sem parâmetros, com isso é possível listar todos os pets existentes no banco de dados. Marcos
 
 ## Regras da aplicação
 - Deve ser possível cadastrar um pet
