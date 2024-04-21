@@ -15,6 +15,7 @@ Algumas das ferramentas utilizados para facilitar o desenvolvimento do nosso sis
 - 15/04/2024: Inicio do projeto mobile. Marcos
 - 16/04/2024: Tela de login parcialmente finalizada. Marcos
 - 20/04/2024: Finalizada a primeira parte da interface, pagina de login concluida: Marcos
+- 21/04/2024: Inicio da tela de cadastro: Marcos
 
 ## Regras da aplicação
 - Deve ser possível cadastrar um pet
