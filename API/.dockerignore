@@ -1,0 +1,4 @@
+node_module
+.env.example
+.gitignore
+.dockerignore
