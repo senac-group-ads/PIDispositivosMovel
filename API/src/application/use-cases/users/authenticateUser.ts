@@ -20,8 +20,6 @@ export class AutheticateUser {
             throw new UnexistUser()
         }
 
-        console.log(user)
-
         const comparete = await compare(password, user.password)
 
         if (!comparete) {
