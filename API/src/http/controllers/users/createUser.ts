@@ -48,7 +48,7 @@ export async function createUser(
             avata
         })
 
-        return reply.status(200).send({ user })
+        return reply.status(200).send( user )
     } catch( err ) {
         return reply.status(400).send({ message: err})
     }
