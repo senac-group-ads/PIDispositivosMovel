@@ -6,4 +6,6 @@ COPY package.json drizzle.config.ts vite.config.ts .env ./
 
 COPY . .
 
-CMD ["npm run generate", "npm run migrate", "npm run test"]
+RUN npm run build
+
+CMD ["npm run generate", "npm run migrate", "npm run start"]

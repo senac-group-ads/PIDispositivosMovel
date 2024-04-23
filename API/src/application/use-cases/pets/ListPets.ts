@@ -1,6 +1,6 @@
 import { PetsRepository } from "@/application/repositories/pets/pets-repository"
 
-export class ListPetsForCity{
+export class ListPets{
 
     constructor(
         private petsRepository: PetsRepository,

@@ -3,7 +3,7 @@
 Essa é a parte de API do projeto integrado do curso tecnologia em análise e desenvolvimento de sistemas, nele será desenvolvido o back-end de um aplicativo mobile e web.
 
 ## Bibliotecas e ferramentas utilizadas
-Algumas das ferramentas utilizados para facilitar o desenvolvimento do nosso sistema foi
+Algumas das ferramentas utilizados para facilitar o desenvolvimento do nosso sistema foi:
 
 - Typescript
 - Vitest
@@ -14,6 +14,9 @@ Algumas das ferramentas utilizados para facilitar o desenvolvimento do nosso sis
 - Dotenv
 - Zod
 - Paralleldrive
+- Fastiffy
+- JWT
+- Cors
 
 ## Histórico de modificações
 
@@ -27,21 +30,5 @@ Algumas das ferramentas utilizados para facilitar o desenvolvimento do nosso sis
 - dia 12/04/2024: Criando a entidade de pet, criando o reposotorio referente a pets, e criando e testado o caso de uso de criação de pets. Marcos
 - dia 15/04/2024: Criando caso de uso de listagem de pets por id. Marcos
 - dia 19/04/2024: Criado listagem de pets sem parâmetros, com isso é possível listar todos os pets existentes no banco de dados. Marcos
-
-## Regras da aplicação
-- Deve ser possível cadastrar um pet
-- Deve ser possível listar todos os pets disponíveis para adoção em uma cidade
-- Deve ser possível filtrar pets por suas características
-- Deve ser possível visualizar detalhes de um pet para adoção
-- Deve ser possível se cadastrar como uma ORG
-- Deve ser possível realizar login como uma ORG
-- Deve ser possível visualizar detalhes de um usuario
-
-## Regras de negócios
-- Para listar os pets, obrigatoriamente precisamos informar a cidade
-- Uma ORG precisa ter um endereço e um número de WhatsApp
-- Uma ORG deve poder mudar o status do pet para adotado
-- O usuário que quer adotar, entrará em contato com a ORG via WhatsApp
-- Todos os filtros, além da cidade, são opcionais
-- Para uma ORG acessar a aplicação como admin, ela precisa estar logada
-- Somente ONG podem registrar um pet
+- dia 22/04/2024: Criado o arquivo dockerfile do prrojeto: Marcos
+- dia 23/04/2024: Iniciado a parte de infra e coneção http da API, utilizaremos o fastify para controlar as rotas e redirecionar as requisições parra o destino correto: Marcos

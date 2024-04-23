@@ -5,13 +5,13 @@ import { DrizzlePetsRepository } from "@/repository/table/PetsRepository"
 import { InMemoryPetsRepository } from "@/repository/in-memory/PetsRepository"
 import { InMemoryUserRepository } from "@/repository/in-memory/UsersRepository"
 
-import { ListPetsForCity } from "./ListPetsForCity"
+import { ListPets } from "./ListPets"
 import { faker } from "@faker-js/faker"
 import { Role, User } from "@/application/entities/users"
 import { Pets } from "@/application/entities/pets"
 
 let petsRepository: InMemoryPetsRepository // usa um banco fake para testar a aplicação
-let sut: ListPetsForCity // metodo de use-case
+let sut: ListPets // metodo de use-case
 let userRepository: InMemoryUserRepository
 
 
@@ -19,7 +19,7 @@ describe('List pets', () => {
   beforeEach(() => {
     petsRepository = new InMemoryPetsRepository()
     userRepository = new InMemoryUserRepository()
-    sut = new ListPetsForCity(
+    sut = new ListPets(
         petsRepository,
     )
   })
