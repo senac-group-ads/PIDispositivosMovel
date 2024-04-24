@@ -2,7 +2,7 @@ FROM node:18-slim
 
 WORKDIR /usr/src
 
-COPY package.json drizzle.config.ts vite.config.ts .env ./
+COPY package.json drizzle.config.ts vite.config.ts .env tsconfig.json ./
 
 COPY . .
 
