@@ -9,6 +9,9 @@ import { users } from "../drizzle";
 */
 
 export class DrizzleUserRepository extends UserRepository{
+    async delete(id: string) {
+        const [test] = await db.delete(users).where(eq(users.id, id)).returning()
+    }
     async update(user: User, id: string): Promise<User> {
 
         const [update] = await db.update(users)

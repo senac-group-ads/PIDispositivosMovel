@@ -17,7 +17,14 @@ export class ListUserForId {
             throw new UnexistUser()
         }
 
-        return user
+        return { 
+            user: {
+                ...user,
+                password: undefined,
+                createdAt: undefined,
+                updatedAt: undefined
+            }
+        }
 
     }
 }

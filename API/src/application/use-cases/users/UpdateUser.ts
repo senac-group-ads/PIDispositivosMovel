@@ -2,6 +2,8 @@ import { User } from "../../entities/users";
 import { UserRepository } from "../../repositories/user/user-repository";
 import { hash } from "bcrypt";
 import { UpdateUserError } from "../erros/UpdateUserError";
+import { validPassword } from "@/lib/validPassword";
+import { InvalidPassword } from "../erros/invalidPassword";
 
 interface IUserUpdate {
     _id: string
@@ -16,9 +18,15 @@ export class UpdateUser{
 
         const id = _id
 
-        let passwordHash = ''
+        let passwordHash: string | undefined
 
         if (user.password !== undefined) {
+
+            const valid = await validPassword(user.password)
+            if (!valid) {
+                throw new InvalidPassword()
+            }
+
             passwordHash = await hash(user.password, 6)
         }
 
@@ -34,12 +42,21 @@ export class UpdateUser{
             role: user.role
         })
 
+        console.log(userUpdate.password)
+
         const updated = await this.userRepository.update(userUpdate, id)
 
         if (!updated) {
             throw new UpdateUserError()
         }
 
-        return updated
+        return {
+            updated: {
+                ...updated,
+                password: undefined,
+                createdAt: undefined,
+                updatedAt: undefined
+            }
+        }
     }
 }

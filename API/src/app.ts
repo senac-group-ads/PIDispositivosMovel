@@ -25,6 +25,8 @@ app.register(fastifyCookie)
 
 app.register(cors, {
     origin: true,
-  })
+})
 
-app.register(usersRroutes)
+app.register(usersRroutes, {
+    prefix: 'user', 
+})

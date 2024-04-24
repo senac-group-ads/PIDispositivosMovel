@@ -8,6 +8,10 @@ import { UserRepository } from "../../application/repositories/user/user-reposit
 export class InMemoryUserRepository extends UserRepository {
     public item: User[] = []
 
+    async delete(id: string) {
+        this.item = this.item.filter(item => item.id !== id);
+    }
+
     async update(user: User, id: string): Promise<User | null> {
         const index = this.item.findIndex((itens) => itens.id === id)
 

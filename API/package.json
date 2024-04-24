@@ -9,7 +9,6 @@
     "build": "tsup src --out-dir build",
     "generate": "drizzle-kit generate:pg",
     "migrate": "tsx src/repository/drizzleMigrate.ts",
-    "seed": "tsx src/repository/seed.ts",
     "test": "vitest run --dir src/application/use-cases"
   },
   "keywords": [],
@@ -18,6 +17,7 @@
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
     "@types/bcrypt": "^5.0.2",
+    "@types/fastify-cors": "^2.1.0",
     "@types/node": "^20.11.30",
     "@vitest/coverage-v8": "^1.4.0",
     "drizzle-kit": "^0.20.14",

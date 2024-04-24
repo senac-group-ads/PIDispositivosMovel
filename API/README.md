@@ -31,4 +31,5 @@ Algumas das ferramentas utilizados para facilitar o desenvolvimento do nosso sis
 - dia 15/04/2024: Criando caso de uso de listagem de pets por id. Marcos
 - dia 19/04/2024: Criado listagem de pets sem parâmetros, com isso é possível listar todos os pets existentes no banco de dados. Marcos
 - dia 22/04/2024: Criado o arquivo dockerfile do prrojeto: Marcos
-- dia 23/04/2024: Iniciado a parte de infra e coneção http da API, utilizaremos o fastify para controlar as rotas e redirecionar as requisições parra o destino correto: Marcos
+- dia 23/04/2024: Iniciado a parte de infra e coneção http da API, utilizaremos o fastify para controlar as rotas e redirecionar as requisições parra o destino correto. Marcos
+- dia 24/04/2024: Criada as rotas de listagem, criação, atualização e exclusão de usuarios no controller. Marcos

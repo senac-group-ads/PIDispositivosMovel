@@ -14,7 +14,7 @@ export class ListUser {
             throw new UnexistUser()
         }
 
-        return user
+        return { user }
 
     }
 }

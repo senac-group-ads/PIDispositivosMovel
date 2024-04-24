@@ -1,7 +1,9 @@
 import { Role } from "@/application/entities/users";
+import { InvalidPassword } from "@/application/use-cases/erros/invalidPassword";
+import { UserAlreadyExistsError } from "@/application/use-cases/erros/user-already-exists-error";
 import { makeCreateUserUseCase } from "@/application/use-cases/factories/make-createuser-use-case";
 import { FastifyReply, FastifyRequest } from "fastify";
-import { z } from "zod";
+import { undefined, z } from "zod";
 
 
 export async function createUser(
@@ -21,7 +23,7 @@ export async function createUser(
 
     const { name, email, password, cep, numero, roleBody, contato, avataBody } = createUserSchema.parse(request.body)
     let avata: string | null = ''
-    if(avataBody === undefined) {
+    if(!avataBody) {
         avata = null
     } else {
         avata = avataBody
@@ -37,7 +39,7 @@ export async function createUser(
     try {
         const makeCreateUser = makeCreateUserUseCase()
 
-        const user = await makeCreateUser.execute({
+        const { user } = await makeCreateUser.execute({
             name,
             email,
             password,
@@ -48,8 +50,21 @@ export async function createUser(
             avata
         })
 
-        return reply.status(200).send( user )
+        return reply.status(200).send({ user: {
+            ...user,
+            password: undefined,
+            createdAt: undefined,
+            updatedAt: undefined
+        } })
     } catch( err ) {
-        return reply.status(400).send({ message: err})
+        if(err instanceof UserAlreadyExistsError) {
+            return reply.status(400).send({ message: err.message})
+        }
+
+        if(err instanceof InvalidPassword) {
+            return reply.status(400).send({ message: err.message})
+        }
+
+        return reply.status(500).send(err)
     }
 }
