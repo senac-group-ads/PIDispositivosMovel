@@ -1,4 +1,4 @@
-FROM node:18-slim
+FROM node:20-alpine
 
 WORKDIR /usr/src
 
@@ -6,7 +6,9 @@ COPY package.json drizzle.config.ts vite.config.ts .env tsconfig.json ./
 
 COPY . .
 
-RUN npm i --silent
+RUN npm i
 RUN npm run build
 
-CMD npm run start
+EXPOSE 3333
+
+CMD npm run start:dev
