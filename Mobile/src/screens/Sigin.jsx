@@ -1,6 +1,7 @@
+import { useNavigation } from "@react-navigation/native";
 import { VStack, Box, Center, Heading, Link } from 'native-base'
-import { Input } from '../components/Input'
-import { Button } from '../components/Button'
+import { Input } from '../components/Input';
+import { Button } from '../components/Button';
 
 /*
 * Pagina de login
@@ -9,6 +10,13 @@ import { Button } from '../components/Button'
 import LogoSvg from '../assets/Logo.svg';
 
 export function Sigin() {
+
+    const navigation = useNavigation();
+
+    function handleNewAccount() {
+      navigation.navigate('signUp');
+    }
+
     return (
         <VStack flex={1}>
             {/* Box da tela com logo e texto de login */}
@@ -41,12 +49,8 @@ export function Sigin() {
 
                 <Button title='Entra'/>
 
-                <Link href='#' my={4} >
+                <Link onPress={handleNewAccount} my={4} >
                     Não possui cadastra
-                </Link>
-
-                <Link href='#' my={1} >
-                    Esqueci minha senha
                 </Link>
             </Center>
                

@@ -4,7 +4,7 @@ import { useFonts, Nunito_400Regular, Nunito_700Bold} from '@expo-google-fonts/n
 import { Loading } from './src/components/Loading';
 
 import { THEME } from './src/theme/index'
-import { SigUp } from './src/screens/SigUp';
+import { Routes } from './src/routes/index';
 
 export default function App() {
   const [fontsLoaded] = useFonts({Nunito_400Regular, Nunito_700Bold});
@@ -16,7 +16,7 @@ export default function App() {
         backgroundColor="transparent"
         translucent
       />
-      {fontsLoaded ? <SigUp /> : <Loading /> }
+      {fontsLoaded ? <Routes /> : <Loading /> }
     </NativeBaseProvider>
   );
 }

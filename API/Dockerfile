@@ -6,9 +6,10 @@ COPY package.json drizzle.config.ts vite.config.ts .env tsconfig.json ./
 
 COPY . .
 
-RUN npm i
-RUN npm run build
+RUN npm ci
+RUN npm install bcrypt 
+# RUN npm run build
 
 EXPOSE 3333
 
-CMD npm run start:dev
+CMD ["npm", "run", "start:dev"]

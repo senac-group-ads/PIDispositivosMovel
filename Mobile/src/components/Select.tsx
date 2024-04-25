@@ -4,8 +4,8 @@ export function Select(titulo: string) {
     return (
         <SelectNativeBase
             width={80}
-            accessibilityLabel='Escolha qual tito de usuario'
-            placeholder='Escolha qual tipo de usuario'
+            accessibilityLabel='Escolha seu tipo de usuario'
+            placeholder='Escolha seu tipo de usuario'
             borderColor='#D7D7D7'
             fontSize='md'
             _selectedItem={{
