@@ -1,11 +1,13 @@
 import { FastifyInstance } from "fastify";
+
+import { verifyJwt } from "@/lib/verify-jwt";
+
 import { authenticate } from "./authenticate";
 import { createUser } from "./createUser";
 import { listUser } from './listUser'
-import { verifyJwt } from "@/lib/verify-jwt";
-import { profile } from "./profile";
+import { profile } from "./profileUser";
 import { listUserForId } from "./listUserForId";
-import { update } from "./update";
+import { update } from "./updateUser";
 import { deleteUser } from "./DeleteUser";
 
 export async function usersRroutes(app: FastifyInstance) {

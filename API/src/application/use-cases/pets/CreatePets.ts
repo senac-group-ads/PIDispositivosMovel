@@ -14,7 +14,7 @@ interface IPetsRequest {
     porte?: string | null
     requisitos?: string | null
     fotos?: string[] | null
-    adotado: boolean
+    petAdotado?: boolean | null
 
     costumerId: string
 }
@@ -30,19 +30,26 @@ export class CreatePets {
         ){}
 
     async execut( data: IPetsRequest ): Promise<IPetsResponse> {
-        const { name, idade, peso, tipo, descricao, porte, requisitos, fotos, adotado, costumerId } = data
+        const { name, idade, peso, tipo, descricao, porte, requisitos, fotos, petAdotado, costumerId } = data
+        let adotado: boolean;
 
         const userIsOng = await this.userRepository.findUserById(costumerId)
 
         if (!userIsOng) {
             throw new UnexistUser()
         }
-
         if (userIsOng.role != Role.ong) {
             throw new YouAreNotAOngError()
         }
 
-        const pets = new Pets({
+
+        if (!petAdotado) {
+            adotado = false
+        } else {
+            adotado = petAdotado
+        }
+
+        const create = new Pets({
             name,
             idade,
             peso,
@@ -55,7 +62,7 @@ export class CreatePets {
             costumerId,
         })
 
-        await this.petsRepository.create(pets)
+        const pets = await this.petsRepository.create(create)
 
         return { pets }
     }

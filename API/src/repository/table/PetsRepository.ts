@@ -7,7 +7,19 @@ import { eq } from "drizzle-orm";
 export class DrizzlePetsRepository extends PetsRepository {
 
     async find(): Promise< Pets[] | null > {
-        const data = await db.select().from(pets)
+        const data = await db.select({
+            id: pets.id,
+            name: pets.name,
+            idade: pets.idade,
+            peso: pets.peso,
+            porte: pets.porte,
+            tipo: pets.tipo,
+            descricao: pets.descricao,
+            requisitos: pets.requisitos,
+            fotos: pets.fotos,
+            userId: pets.costumerId,
+            adotado: pets.adotado
+        }).from(pets)
 
         if(data.length === 0 ) {
             return null

@@ -6,6 +6,7 @@ import cors from "@fastify/cors"
 
 import { env } from "./lib/env";
 import { usersRroutes } from "./http/controllers/users/routes";
+import { petsRoutes } from "./http/controllers/pets/routes";
 
 
 export const app = fastify()
@@ -29,4 +30,8 @@ app.register(cors, {
 
 app.register(usersRroutes, {
     prefix: 'user', 
+})
+
+app.register(petsRoutes, {
+    prefix: 'pet'
 })
