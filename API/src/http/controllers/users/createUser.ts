@@ -1,7 +1,7 @@
 import { Role } from "@/application/entities/users";
 import { InvalidPassword } from "@/application/use-cases/erros/invalidPassword";
 import { UserAlreadyExistsError } from "@/application/use-cases/erros/user-already-exists-error";
-import { makeCreateUserUseCase } from "@/application/use-cases/factories/make-createuser-use-case";
+import { makeCreateUserUseCase } from "@/application/use-cases/factories/users/make-createuser-use-case";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { undefined, z } from "zod";
 

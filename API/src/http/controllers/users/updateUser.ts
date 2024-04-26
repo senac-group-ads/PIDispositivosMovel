@@ -1,5 +1,5 @@
 import { User } from "@/application/entities/users";
-import { makeUpdateUseCase } from "@/application/use-cases/factories/make-update-use-case";
+import { makeUpdateUseCase } from "@/application/use-cases/factories/users/make-update-use-case";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 

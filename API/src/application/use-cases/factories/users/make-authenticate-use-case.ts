@@ -1,5 +1,5 @@
 import { DrizzleUserRepository } from "@/repository/table/UsersRepository";
-import { AutheticateUser } from "../users/authenticateUser";
+import { AutheticateUser } from "../../users/authenticateUser";
 
 
 export function makeAuthenticateUseCase() {

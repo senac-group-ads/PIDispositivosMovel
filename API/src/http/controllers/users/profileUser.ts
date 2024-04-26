@@ -1,6 +1,5 @@
-import { makeListUserForIdUseCase } from "@/application/use-cases/factories/make-list-user-for-id-use-case";
+import { makeListUserForIdUseCase } from "@/application/use-cases/factories/users/make-list-user-for-id-use-case";
 import { FastifyReply, FastifyRequest } from "fastify";
-
 
 export async function profile(
     request: FastifyRequest,

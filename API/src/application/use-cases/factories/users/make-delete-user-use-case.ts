@@ -1,5 +1,5 @@
 import { DrizzleUserRepository } from "@/repository/table/UsersRepository";
-import { DeleteUser } from "../users/DeleteUser";
+import { DeleteUser } from "../../users/DeleteUser";
 
 
 export function makeDeleteUserUseCase() {

@@ -1,5 +1,5 @@
 import { DrizzleUserRepository } from "@/repository/table/UsersRepository";
-import { ListUser } from "../users/ListUser";
+import { ListUser } from "../../users/ListUser";
 
 export function makeListUserUseCase() {
     const repository = new DrizzleUserRepository()

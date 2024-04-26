@@ -1,6 +1,6 @@
 import { IncorrectUserPassword } from "@/application/use-cases/erros/incorrectPassword";
 import { UnexistUser } from "@/application/use-cases/erros/unexistUser";
-import { makeAuthenticateUseCase } from "@/application/use-cases/factories/make-authenticate-use-case";
+import { makeAuthenticateUseCase } from "@/application/use-cases/factories/users/make-authenticate-use-case";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 
