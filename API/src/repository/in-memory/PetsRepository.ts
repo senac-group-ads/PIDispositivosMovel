@@ -2,8 +2,13 @@ import { Pets } from "../../application/entities/pets";
 import { PetsRepository } from "../../application/repositories/pets/pets-repository";
 
 export class InMemoryPetsRepository extends PetsRepository {
-        
+     
     public item: Pets[] = []
+
+    async adopted(id: string, adotado: boolean): Promise<void> {
+        const index = this.item.findIndex((itens) => itens.id === id)
+        this.item[index].adotado = adotado
+    }
  
     async find() {
         const pet = this.item.map((itens) => itens )

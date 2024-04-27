@@ -6,6 +6,12 @@ import { eq } from "drizzle-orm";
 
 export class DrizzlePetsRepository extends PetsRepository {
 
+    async adopted(id: string, adotado: boolean): Promise<void> {
+        await db.update(pets).set({
+            adotado
+        }).where(eq(pets.id, id))
+    }
+
     async find(): Promise< Pets[] | null > {
         const data = await db.select({
             id: pets.id,
@@ -19,7 +25,7 @@ export class DrizzlePetsRepository extends PetsRepository {
             fotos: pets.fotos,
             userId: pets.costumerId,
             adotado: pets.adotado
-        }).from(pets)
+        }).from(pets).where(eq(pets.adotado, false))
 
         if(data.length === 0 ) {
             return null
