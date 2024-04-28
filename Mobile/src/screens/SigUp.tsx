@@ -5,10 +5,11 @@ import { Select } from '../components/Select'
 import { Button } from '../components/Button'
 
 import LogoSvg from '../assets/Logo.svg';
+import { AuthNavigatorRoutesProps } from '../routes/auth.routes';
 
 export function SigUp() {
 
-    const navigation = useNavigation();
+    const navigation = useNavigation<AuthNavigatorRoutesProps>();
 
     function handleGoBack() {
       navigation.navigate('signIn');
@@ -55,7 +56,7 @@ export function SigUp() {
                     autoCapitalize='none'
                 />
 
-                <Button title='Criar'/>
+                <Button variant={'solid'} title='Criar'/>
 
                 <Button 
                     title='Retornar'

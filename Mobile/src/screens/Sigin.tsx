@@ -8,10 +8,11 @@ import { Button } from '../components/Button';
 */
 
 import LogoSvg from '../assets/Logo.svg';
+import { AuthNavigatorRoutesProps } from '../routes/auth.routes'
 
 export function Sigin() {
 
-    const navigation = useNavigation();
+    const navigation = useNavigation<AuthNavigatorRoutesProps>();
 
     function handleNewAccount() {
       navigation.navigate('signUp');
@@ -47,7 +48,7 @@ export function Sigin() {
                     secureTextEntry
                 />
 
-                <Button title='Entra'/>
+                <Button variant={"solid"} title='Entra'/>
 
                 <Link onPress={handleNewAccount} my={4} >
                     Não possui cadastra
