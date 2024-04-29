@@ -2,7 +2,7 @@ FROM node:20-alpine AS build
 
 WORKDIR /usr/src
 
-COPY package.json drizzle.config.ts vite.config.ts .env tsconfig.json ./
+COPY package.json drizzle.config.ts vite.config.ts start.sh .env tsconfig.json ./
 
 COPY . .
 
@@ -20,8 +20,11 @@ COPY --from=build /usr/src/.env ./.env
 COPY --from=build /usr/src/build ./build
 COPY --from=build /usr/src/node_modules ./node_modules
 COPY --from=build /usr/src/drizzle.config.ts ./drizzle.config.ts
+COPY --from=build /usr/src/start.sh ./start.sh
+
+RUN chmod +x ./start.sh
 RUN npm run generate
 
 EXPOSE 3333
 
-CMD ["npm", "run", "start"]
+CMD ["start.sh"]
