@@ -10,7 +10,6 @@ RUN npm ci
 RUN npm install bcrypt
 
 RUN npm run build
-RUN npm install --production && npm cache clean --force
 
 FROM node:20-alpine
 
@@ -20,6 +19,8 @@ COPY --from=build /usr/src/package.json ./package.json
 COPY --from=build /usr/src/.env ./.env
 COPY --from=build /usr/src/build ./build
 COPY --from=build /usr/src/node_modules ./node_modules
+COPY --from=build /usr/src/drizzle.config.ts ./drizzle.config.ts
+RUN npm run generate
 
 EXPOSE 3333
 

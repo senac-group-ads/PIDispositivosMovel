@@ -9,6 +9,7 @@
     "build": "tsup src --out-dir build",
     "generate": "drizzle-kit generate:pg",
     "migrate": "tsx src/repository/drizzleMigrate.ts",
+    "migrateDocker": "node build/repository/drizzleMigrate.js",
     "test": "vitest run --dir src/application/use-cases"
   },
   "keywords": [],

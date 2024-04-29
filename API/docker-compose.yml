@@ -1,11 +1,32 @@
 version: '3'
 
 services:
-  api-solid-pg:
+  pi_mobile:
     image: postgres:14-alpine
     ports:
       - 3339:5432
+    container_name: pi_mobile_bd
     environment:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: abc.123
-          POSTGRES_DB: find-a-friend
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: abc.123
+      POSTGRES_DB: find-a-friend
+    networks:
+      - pi_mobile_network
+  
+  api:
+    build:
+      context: .
+    ports:
+      - 3333:3333
+    container_name: pi_mobile_api
+    environment:
+      DATABASE_URL: 'postgres://postgres:abc.123@localhost:5432/find-a-friend'
+      JWT_SECRET: '1797573924E6B9EA99BFF9C1F88A0CD294FF1ADF2A0897EA931992A0'
+    depends_on: 
+      - pi_mobile
+    networks:
+      - pi_mobile_network
+
+networks:
+  pi_mobile_network:
+    driver: bridge
