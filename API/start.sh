@@ -1,2 +1,2 @@
-npm rum migrateDocker
-npm rum start
+# npm run migrateDocker
+npm run start

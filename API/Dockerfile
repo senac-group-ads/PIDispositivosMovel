@@ -27,4 +27,4 @@ RUN npm run generate
 
 EXPOSE 3333
 
-CMD ["start.sh"]
+CMD ["./start.sh"]
