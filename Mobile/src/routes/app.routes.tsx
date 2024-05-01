@@ -42,7 +42,7 @@ export function AppRoutes(){
                 borderTopWidth: 0,
                 height: Platform.OS === 'android' ? 'auto' : 96,
                 paddingBottom: sizes[10],
-                paddingTop: sizes[6]
+                paddingTop: sizes[6],
             },
             tabBarShowLabel: false,
         }}>

@@ -40,7 +40,7 @@ export function SigUp() {
                     secureTextEntry
                 />
 
-                <Select />
+                <Select/>
 
                 <Input
                     mt={4}

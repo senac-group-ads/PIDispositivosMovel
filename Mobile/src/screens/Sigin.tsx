@@ -24,7 +24,7 @@ export function Sigin() {
             <Box width="100%" height={80} bg='blue.100'> 
 
                 <Box my={16} mx={9}>
-                    <LogoSvg/>
+                    <LogoSvg width={48} height={48}/>
                 </Box>
 
                 <Center>
