@@ -17,7 +17,7 @@ export function Card({ img, descricao, idade, name, ...rest }: props) {
                     <VStack ml={5}>
                         <Text mt={2}>Nome: {name}</Text>
                         <Text mt={2}>Idade:  {idade}</Text>
-                        <Text mt={2}>descrição:  {descricao}</Text>
+                        <Text mt={2} w='50%'>descrição:  {descricao}</Text>
                     </VStack>
                 </HStack>
         </Pressable>
