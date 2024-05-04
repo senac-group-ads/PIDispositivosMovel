@@ -1,8 +1,9 @@
-import { HStack, VStack, Text, ScrollView } from "native-base";
+import { HStack, VStack, Text, ScrollView, FlatList } from "native-base";
+import { useState } from "react";
 
 // Componentes
 import { HomeHeader } from "../components/HomeHeader";
-import { Card } from "../components/Card";
+import { PetsCard } from "../components/PetsCard";
 import { Filter } from "../components/Filter";
 
 // imagens para o botao de filtro e para os cardes (para os cardes serão temporarios)
@@ -10,8 +11,9 @@ import GatoPNG from '../assets/gato.png'
 import CachorroPNG from '../assets/cachorro.png'
 
 export function Home() {
+    const [pets, setPets] = useState(['gato', 'cachorro'])
     return(
-        <ScrollView _contentContainerStyle={{ pb: 4 }}>
+        <ScrollView _contentContainerStyle={{ pb: 8 }}>
             <VStack flex={1} >
                 <HStack width='100%' alignItems={"center"} height={32} background={"blue.100"}>
                     <HomeHeader />
@@ -25,11 +27,13 @@ export function Home() {
                 <VStack>
                     <Text color={"blue.500"} fontSize={20} marginLeft={10}>Destaque</Text>
 
-                    <Card img={GatoPNG} descricao="Gato" idade="2 anos" name="Batada" ></Card>
-                    <Card img={GatoPNG} descricao="Gato" idade="2 anos" name="Batada"></Card>
-                    <Card img={GatoPNG} descricao="Gato" idade="2 anos" name="Batada"></Card>
-                    <Card img={GatoPNG} descricao="Gato Gato Gato Gato Gato Gato Gato Gato Gato Gato Gato Gato Gato  Gato" idade="2 anos" name="Batada"></Card>
-                    <Card img={GatoPNG} descricao="Gato" idade="2 anos" name="Batada"></Card>
+                    <FlatList
+                        data={pets}
+                        keyExtractor={item => item}
+                        renderItem={({item}) => (
+                            <PetsCard img={GatoPNG} descricao="Gato" idade="2 anos" name="Batada" ></PetsCard>
+                        )}
+                     />
                 </VStack>
             </VStack>
         </ScrollView>
