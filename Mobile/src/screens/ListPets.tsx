@@ -17,7 +17,7 @@ export function ListPets() {
                 <VStack>
                     <Text color={"blue.500"} fontSize={20} marginLeft={10}>Pets</Text>
 
-                    <PetsCard img={GatoPNG} descricao="" idade="2 anos" name="Batada" ></PetsCard>
+                    <PetsCard id="1234" img={GatoPNG} descricao="" idade="2 anos" name="Batada" ></PetsCard>
                     
                 </VStack>
             </VStack>

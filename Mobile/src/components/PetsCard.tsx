@@ -2,17 +2,29 @@ import { HStack, VStack, Image, Text, Icon } from "native-base";
 import { TouchableOpacity, TouchableOpacityProps } from "react-native";
 
 import { Entypo } from '@expo/vector-icons'
+import { useNavigation } from "@react-navigation/native";
+
+import { AppNavigatorRoutesProps } from "../routes/app.routes";
 
 type props = TouchableOpacityProps & {
     img: undefined
     name: string
     idade: string
     descricao: string
+    id: string
 }
 
-export function PetsCard({ img, descricao, idade, name, ...rest }: props) {
+export function PetsCard({ img, descricao, idade, name, id, ...rest }: props) {
+    const navigation = useNavigation<AppNavigatorRoutesProps>()
+
+    // Função que leva o card do pet para o perfil do pet
+    function petProfile(id: string){
+        navigation.navigate("petDescription")
+    }
     return (
         <TouchableOpacity
+            onPress={() => petProfile(id)}
+            id={id}
             {...rest}
         >
             <HStack ml={10} mt={2} background={"blue.50"} w='75%' borderRadius={10} alignItems="center">

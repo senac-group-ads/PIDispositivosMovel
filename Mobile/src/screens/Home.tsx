@@ -31,7 +31,7 @@ export function Home() {
                         data={pets}
                         keyExtractor={item => item}
                         renderItem={({item}) => (
-                            <PetsCard img={GatoPNG} descricao="Gato" idade="2 anos" name="Batada" ></PetsCard>
+                            <PetsCard id="12345" img={GatoPNG} descricao="Gato" idade="2 anos" name="Batada" ></PetsCard>
                         )}
                      />
                 </VStack>
