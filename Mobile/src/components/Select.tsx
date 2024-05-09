@@ -1,8 +1,11 @@
-import { CheckIcon, Select as SelectNativeBase } from 'native-base'
+import { CheckIcon, Select as SelectNativeBase, ISelectProps } from 'native-base'
 
-export function Select(titulo: string) {
+type props = ISelectProps
+
+export function Select( {...rest }:props) {
     return (
         <SelectNativeBase
+            {...rest}
             width={80}
             accessibilityLabel='Escolha seu tipo de usuario'
             placeholder='Escolha seu tipo de usuario'
@@ -13,8 +16,8 @@ export function Select(titulo: string) {
                 endIcon: <CheckIcon size="5" />
             }}
          >
-            <SelectNativeBase.Item label='Ong' value='Ong'/>
-            <SelectNativeBase.Item label='Tutor' value='Tutor'/>
+            <SelectNativeBase.Item label='Ong' value={'Ong'} />
+            <SelectNativeBase.Item label='Tutor' value={'Tutor'}/>
         </SelectNativeBase>
 
     );

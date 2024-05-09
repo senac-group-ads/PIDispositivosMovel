@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { TouchableOpacity } from "react-native";
-import { ScrollView, VStack, Image, Skeleton, Text, Center, Heading } from "native-base";
+import { ScrollView, VStack, Image, Skeleton, Text, Center, Heading, useToast } from "native-base";
 import * as ImagePicker from 'expo-image-picker'
+import * as FileSystem from 'expo-file-system'
 
 import { Button } from "../components/Button";
 import { Input } from "../components/Input";
@@ -12,6 +13,8 @@ const userRole = 'ong'
 export function Profile() {
     const [photoIsloading, setPhotoIsLoading] = useState(false)
     const [photoURI, setPhotoURI] = useState('https://github.com/MarcosMOliveiradev.png')
+
+    const toast = useToast()
     
     async function handleUserPhotoSelect() {
         setPhotoIsLoading(true)
@@ -25,7 +28,17 @@ export function Profile() {
             if(photoSelected.canceled) {
                 return;
             }
-            setPhotoURI(photoSelected.assets[0].uri)
+            if (photoSelected.assets[0].uri){
+                const photoInfo = await FileSystem.getInfoAsync(photoSelected.assets[0].uri)
+
+                if (photoInfo.exists && (photoInfo.size / 1024 / 1024) > 5) {
+                    return toast.show({
+                        title: 'A foto ultrapassa os limites de tamanho, escolha uma foto menor',
+                        placement: "top",
+                    })
+                }
+                setPhotoURI(photoSelected.assets[0].uri)
+            }
         } catch(err) {
             console.log(err)
         } finally {
