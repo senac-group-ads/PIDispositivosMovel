@@ -6,6 +6,8 @@ import * as FileSystem from 'expo-file-system'
 
 import { Button } from "../components/Button";
 import { Input } from "../components/Input";
+import { useNavigation } from "@react-navigation/native";
+import { AppNavigatorRoutesProps } from "../routes/app.routes";
 
 const PHOTO_SIZE = 32;
 const userRole = 'ong'
@@ -15,6 +17,11 @@ export function Profile() {
     const [photoURI, setPhotoURI] = useState('https://github.com/MarcosMOliveiradev.png')
 
     const toast = useToast()
+
+    const navigator = useNavigation<AppNavigatorRoutesProps>()
+    function createAPet() {
+        navigator.navigate("createPet")
+    }
     
     async function handleUserPhotoSelect() {
         setPhotoIsLoading(true)
@@ -81,6 +88,7 @@ export function Profile() {
                         bg={"blue.100"}
                         placeholder="E-mail"
                         isDisabled
+                        isReadOnly
                     />
                     <Input 
                         bg={"blue.100"}
@@ -119,7 +127,7 @@ export function Profile() {
 
 
                     <Button title="Editar" variant={"solid"} mt={10}></Button>
-                    {userRole === 'ong' ? <Button title="Cadastrar novo pet" variant={"outline"}></Button> : ''}
+                    {userRole === 'ong' ? <Button title="Cadastrar novo pet" variant={"outline"} onPress={createAPet}></Button> : ''}
                 </VStack>
             </VStack>
         </ScrollView>

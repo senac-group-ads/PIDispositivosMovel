@@ -1,7 +1,6 @@
-import { HStack, VStack, Image, Text, Icon } from "native-base";
+import { HStack, VStack, Image, Text } from "native-base";
 import { TouchableOpacity, TouchableOpacityProps } from "react-native";
 
-import { Entypo } from '@expo/vector-icons'
 
 type props = TouchableOpacityProps & {
     img: undefined
@@ -20,7 +19,6 @@ export function OngCard({ img, descricao, name, ...rest }: props) {
                     <Text fontSize="10px" mt={2}>Nome: {name}</Text>
                     <Text fontSize="10px" mt={2} numberOfLines={3}>descrição: {descricao}</Text>
                 </VStack>
-                <Icon as={Entypo} name="chevron-thin-right" />
             </HStack>
         </TouchableOpacity>
     );

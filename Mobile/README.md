@@ -18,3 +18,4 @@ Algumas das ferramentas utilizados para facilitar o desenvolvimento do nosso sis
 - 21/04/2024: Inicio da tela de cadastro: Marcos
 - 28/04/2024: Criado as rotas das paginas principais, com botões de navegação, criadas as paginas: home, listagem de pet, listagem de ong, profile, descrição do pet, descrição da ong e criação do pet. Marcos
 - 01/05/2024: Criando a pagina Home e os componetes dela: Marcos
+- 10/05/2024: Iniciado o controle dos formulario: Marcos

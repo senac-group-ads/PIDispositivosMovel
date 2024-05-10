@@ -1,7 +1,6 @@
-import { HStack, VStack, Image, Text, Icon } from "native-base";
+import { HStack, VStack, Image, Text } from "native-base";
 import { TouchableOpacity, TouchableOpacityProps } from "react-native";
 
-import { Entypo } from '@expo/vector-icons'
 import { useNavigation } from "@react-navigation/native";
 
 import { AppNavigatorRoutesProps } from "../routes/app.routes";
@@ -34,7 +33,6 @@ export function PetsCard({ img, descricao, idade, name, id, ...rest }: props) {
                     <Text fontSize="10px" mt={2}>Idade: {idade}</Text>
                     <Text fontSize="10px" mt={2} numberOfLines={3}>descrição: {descricao}</Text>
                 </VStack>
-                <Icon as={Entypo} name="chevron-thin-right" />
             </HStack>
         </TouchableOpacity>
     );

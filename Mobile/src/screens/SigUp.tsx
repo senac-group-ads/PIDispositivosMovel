@@ -1,6 +1,8 @@
 import { useNavigation } from '@react-navigation/native';
-import { VStack,  Center, Box, ScrollView} from 'native-base'
+import { VStack,  Center, Box, ScrollView, Text } from 'native-base'
 import { useForm, Controller } from 'react-hook-form'
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 import { Input } from '../components/Input'
 import { Select } from '../components/Select'
@@ -9,11 +11,35 @@ import { Button } from '../components/Button'
 import LogoSvg from '../assets/Logo.svg';
 import { AuthNavigatorRoutesProps } from '../routes/auth.routes';
 
+type formDataProps = {
+    name: string
+    email: string
+    password: string
+    passwordConfirm: string
+    numero: string
+    cep: string
+    contato: string
+    roleBody: string
+}
+
+const sigUpSchema = yup.object({
+    name: yup.string().required('Informe o nome.'),
+    email: yup.string().required('Informe o e-mai').email('E-mail inválido.'),
+    password:  yup.string().required('Informe o e-mai'),
+    passwordConfirm: yup.string().required('Confirme a senha').oneOf([yup.ref('password')], 'A confirmação da senha não confere'),
+    cep: yup.string().required('Informe o Cep'),
+    numero: yup.string().required('Informe o numero ou complemento da casa'),
+    contato: yup.string().required('Informe qual o seu numero de contato'),
+    roleBody: yup.string().required('Selecione um tipo de usuario')
+})
+
 
 export function SigUp() {
-    const { control, handleSubmit } = useForm()
-    function handleSignUp(data: any) {
-       console.log(data)
+    const { control, handleSubmit, formState: { errors } } = useForm<formDataProps>({
+        resolver: yupResolver(sigUpSchema),
+    })
+    function handleSignUp({ name, email, password, passwordConfirm, cep, numero, contato, roleBody }: formDataProps) {
+       console.log(name, email, password, passwordConfirm, cep, numero, contato, roleBody)
     }
 
     const navigation = useNavigation<AuthNavigatorRoutesProps>();
@@ -38,9 +64,11 @@ export function SigUp() {
                             autoCapitalize='none'
                             onChangeText={onChange}
                             value={value}
+                            errorMessage={errors.name?.message}
                         />
                         )}
                     />
+
                     <Controller
                         control={control}
                         name='email'
@@ -49,8 +77,9 @@ export function SigUp() {
                                 placeholder='E-mail'
                                 keyboardType='email-address'
                                 autoCapitalize='none'
-                                onChange={onChange}
+                                onChangeText={onChange}
                                 value={value}
+                                errorMessage={errors.email?.message}
                             />
                         )}
                     />
@@ -58,12 +87,19 @@ export function SigUp() {
                     <Controller
                         control={control}
                         name='password'
+                        rules={{
+                            pattern: {
+                                value: /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+])(?!.*\s).{8,}$/,
+                                message: 'A senha não corresponde aos requisitos do sistema'
+                            }
+                        }}
                         render={( {field: { onChange, value }}) => (
                             <Input 
                                 placeholder='Senha'
                                 secureTextEntry
-                                onChange={onChange}
+                                onChangeText={onChange}
                                 value={value}
+                                errorMessage={errors.password?.message}
                             />
                         )}
                     />
@@ -75,19 +111,24 @@ export function SigUp() {
                             <Input 
                                 placeholder='Confirme a senha'
                                 secureTextEntry
-                                onChange={onChange}
+                                onChangeText={onChange}
                                 value={value}
+                                errorMessage={errors.passwordConfirm?.message}
                             />
                         )}
                     />
 
                     <Controller
                         control={control}
-                        name='select'
+                        name='roleBody'
                         render={( {field: { onChange, value }}) => (
-                            <Select onValueChange={intemValue => onChange(intemValue)}/>
+                            <Select 
+                                onValueChange={intemValue => onChange(intemValue)}
+                            />
                         )}
                     />
+
+                    <Text color={'red.400'}>{errors.roleBody?.message}</Text>
 
                     <Controller
                         control={control}
@@ -97,8 +138,9 @@ export function SigUp() {
                                 mt={4}
                                 placeholder='Cep'
                                 autoCapitalize='none'
-                                onChange={onChange}
+                                onChangeText={onChange}
                                 value={value}
+                                errorMessage={errors.cep?.message}
                             />
                         )}
                     />
@@ -110,11 +152,13 @@ export function SigUp() {
                             <Input 
                                 placeholder='Nº'
                                 autoCapitalize='none'
-                                onChange={onChange}
+                                onChangeText={onChange}
                                 value={value}
+                                errorMessage={errors.numero?.message}
                             />
                         )}
                     />
+
                     <Controller
                         control={control}
                         name='contato'
@@ -122,9 +166,10 @@ export function SigUp() {
                             <Input 
                                 placeholder='contato'
                                 autoCapitalize='none'
-                                onChange={onChange}
+                                onChangeText={onChange}
                                 value={value}
                                 onSubmitEditing={handleSubmit(handleSignUp)}
+                                errorMessage={errors.contato?.message}
                                 returnKeyType='send'
                             />
                         )}
