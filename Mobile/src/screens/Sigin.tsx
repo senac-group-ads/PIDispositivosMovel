@@ -1,16 +1,38 @@
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigation } from "@react-navigation/native";
 import { VStack, Box, Center, Heading, Link } from 'native-base'
+import * as yup from 'yup'
+
+
 import { Input } from '../components/Input';
 import { Button } from '../components/Button';
+
+import LogoSvg from '../assets/Logo.svg';
+import { AuthNavigatorRoutesProps } from '../routes/auth.routes'
 
 /*
 * Pagina de login
 */
 
-import LogoSvg from '../assets/Logo.svg';
-import { AuthNavigatorRoutesProps } from '../routes/auth.routes'
+type formDataProps = {
+    email: string
+    password: string
+}
+
+const logInSchema = yup.object({
+    email: yup.string().required('E-mail é obrigatório').email('E-mail invalido'),
+    password: yup.string().required('Senha é obrigatória')
+}) // tipagem dos dados do formulario
 
 export function Sigin() {
+    const { control, handleSubmit, formState: { errors }} = useForm<formDataProps>({
+        resolver: yupResolver(logInSchema)
+    }) // Controle do formulario
+
+    function handleSigIn({ email, password }: formDataProps) {
+        console.log(email, password)
+    } // função que pega o que esta no formulario para repassar para a api
 
     const navigation = useNavigation<AuthNavigatorRoutesProps>();
 
@@ -38,17 +60,36 @@ export function Sigin() {
 
             {/* Parte dos inpunts para login e senha */}
             <Center my={20}>
-                <Input 
-                    placeholder='E-mail'
-                    keyboardType='email-address'
-                    autoCapitalize='none'
-                />
-                <Input 
-                    placeholder='Senha'
-                    secureTextEntry
+                <Controller
+                    control={control}
+                    name="email"
+                    render={( {field: {onChange, value}}) => (
+                        <Input 
+                            placeholder='E-mail'
+                            keyboardType='email-address'
+                            autoCapitalize='none'
+                            onChangeText={onChange}
+                            value={value}
+                            errorMessage={errors.email?.message}
+                        />
+                    ) }
                 />
 
-                <Button variant={"solid"} title='Entra'/>
+                <Controller
+                    control={control}
+                    name="password"
+                    render={( {field: {onChange, value}}) => (
+                        <Input 
+                            placeholder='Senha'
+                            secureTextEntry
+                            onChangeText={onChange}
+                            value={value}
+                            errorMessage={errors.email?.message}
+                        />
+                    ) }
+                />
+
+                <Button variant={"solid"} title='Entra' onPress={handleSubmit(handleSigIn)}/>
 
                 <Link onPress={handleNewAccount} my={4} >
                     Não possui cadastra

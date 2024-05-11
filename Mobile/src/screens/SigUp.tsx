@@ -31,21 +31,23 @@ const sigUpSchema = yup.object({
     numero: yup.string().required('Informe o numero ou complemento da casa'),
     contato: yup.string().required('Informe qual o seu numero de contato'),
     roleBody: yup.string().required('Selecione um tipo de usuario')
-})
+}) // tipagem dos dados do formulario
 
 
 export function SigUp() {
     const { control, handleSubmit, formState: { errors } } = useForm<formDataProps>({
         resolver: yupResolver(sigUpSchema),
-    })
+    }) // Controle do formulario
+
     function handleSignUp({ name, email, password, passwordConfirm, cep, numero, contato, roleBody }: formDataProps) {
        console.log(name, email, password, passwordConfirm, cep, numero, contato, roleBody)
-    }
+    } // função que pega o que esta no formulario para repassar para a api
 
     const navigation = useNavigation<AuthNavigatorRoutesProps>();
     function handleGoBack() {
       navigation.navigate('signIn');
-    }
+    } // função que retona para o login
+    
     return (
         <ScrollView> 
             <VStack flex={1}>
