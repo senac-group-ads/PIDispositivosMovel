@@ -3,6 +3,9 @@ import { TouchableOpacity } from "react-native";
 import { ScrollView, VStack, Image, Skeleton, Text, Center, Heading, useToast } from "native-base";
 import * as ImagePicker from 'expo-image-picker'
 import * as FileSystem from 'expo-file-system'
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from 'yup'
 
 import { Button } from "../components/Button";
 import { Input } from "../components/Input";
@@ -12,7 +15,33 @@ import { AppNavigatorRoutesProps } from "../routes/app.routes";
 const PHOTO_SIZE = 32;
 const userRole = 'ong'
 
+type formDataProps = {
+    name?: string
+    email?: string
+    password?: string
+    newPassword?: string
+    passwordConfirm?: string
+    numero?: string
+    cep?: string
+    contato?: string
+}
+
+const updateSchema = yup.object({
+    name: yup.string(),
+    email: yup.string().email('E-mail inválido.'),
+    password:  yup.string(),
+    newPassword: yup.string(),
+    passwordConfirm: yup.string().oneOf([yup.ref('newPassword')], 'A confirmação da senha não confere'),
+    cep: yup.string(),
+    numero: yup.string(),
+    contato: yup.string()
+})
+
 export function Profile() {
+    const { control, handleSubmit, formState: { errors } } = useForm<formDataProps>({
+        resolver: yupResolver(updateSchema),
+    })
+
     const [photoIsloading, setPhotoIsLoading] = useState(false)
     const [photoURI, setPhotoURI] = useState('https://github.com/MarcosMOliveiradev.png')
 
@@ -22,6 +51,10 @@ export function Profile() {
     function createAPet() {
         navigator.navigate("createPet")
     }
+
+    function handleUpdate({ name, email, password, passwordConfirm, cep, numero, contato, newPassword }: formDataProps) {
+        console.log(name, email, password, passwordConfirm, cep, numero, contato, newPassword)
+     }
     
     async function handleUserPhotoSelect() {
         setPhotoIsLoading(true)
@@ -80,53 +113,133 @@ export function Profile() {
                         </Text>
                     </TouchableOpacity>
 
-                    <Input 
-                        bg={"blue.100"}
-                        placeholder="Nome"
+                    <Controller
+                        control={control}
+                        name='name'
+                        render={( {field: { onChange, value }}) => (
+                            <Input 
+                                bg={"blue.100"}
+                                placeholder="Nome"
+                                onChangeText={onChange}
+                                value={value}
+                                errorMessage={errors.email?.message}
+                            />
+                        )}
                     />
-                    <Input 
-                        bg={"blue.100"}
-                        placeholder="E-mail"
-                        isDisabled
-                        isReadOnly
+
+                    <Controller
+                        control={control}
+                        name='email'
+                        render={( {field: { onChange, value }}) => (
+                            <Input 
+                                bg={"blue.100"}
+                                placeholder="E-mail"
+                                isDisabled
+                                isReadOnly
+                            />
+                        )}
                     />
-                    <Input 
-                        bg={"blue.100"}
-                        placeholder="Cep"
+
+                    <Controller
+                        control={control}
+                        name='cep'
+                        render={( {field: { onChange, value }}) => (
+                            <Input 
+                                bg={"blue.100"}
+                                placeholder="Cep"
+                                onChangeText={onChange}
+                                value={value}
+                                errorMessage={errors.email?.message}
+                            />
+                        )}
                     />
-                    <Input 
-                        bg={"blue.100"}
-                        placeholder="nº"
+
+                    <Controller
+                        control={control}
+                        name='numero'
+                        render={( {field: { onChange, value }}) => (
+                            <Input 
+                                bg={"blue.100"}
+                                placeholder="nº"
+                                onChangeText={onChange}
+                                value={value}
+                                errorMessage={errors.email?.message}
+                            />
+                        )}
                     />
-                    <Input 
-                        bg={"blue.100"}
-                        placeholder="Telefone"
-                    />
-                    
+
+                    <Controller
+                        control={control}
+                        name='contato'
+                        render={( {field: { onChange, value }}) => (
+                            <Input 
+                                bg={"blue.100"}
+                                placeholder="Telefone"
+                                onChangeText={onChange}
+                                value={value}
+                                errorMessage={errors.email?.message}
+                            />
+                        )}
+                    />  
                 </Center>
+
                 <VStack px={6} mt={12} mb={9}>
                     <Heading fontSize={16} mb={4}>
                         Alterar senha
                     </Heading>
 
-                    <Input 
-                        bg={"blue.100"}
-                        placeholder="Senha antiga"
-                        secureTextEntry
-                    />
-                    <Input 
-                        bg={"blue.100"}
-                        placeholder="Nova senha"
-                        secureTextEntry
-                    />
-                    <Input 
-                        bg={"blue.100"}
-                        placeholder="Confirme a nova senha"
-                        secureTextEntry
+                    <Controller
+                        control={control}
+                        name='password'
+                        render={( {field: { onChange, value }}) => (
+                            <Input
+                                bg={"blue.100"}
+                                placeholder='Senha antiga'
+                                secureTextEntry
+                                onChangeText={onChange}
+                                value={value}
+                                errorMessage={errors.password?.message}
+                            />
+                        )}
                     />
 
+                    <Controller
+                        control={control}
+                        name='newPassword'
+                        rules={{
+                            pattern: {
+                                value: /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+])(?!.*\s).{8,}$/,
+                                message: 'A senha não corresponde aos requisitos do sistema'
+                            }
+                        }}
+                        render={( {field: { onChange, value }}) => (
+                            <Input
+                                bg={"blue.100"}
+                                placeholder='Nova senha'
+                                secureTextEntry
+                                onChangeText={onChange}
+                                value={value}
+                                errorMessage={errors.password?.message}
+                            />
+                        )}
+                    />
 
-                    <Button title="Editar" variant={"solid"} mt={10}></Button>
+                    <Controller
+                        control={control}
+                        name='passwordConfirm'
+                        render={( {field: { onChange, value }}) => (
+                            <Input
+                                bg={"blue.100"}
+                                placeholder='Confirme a nova senha'
+                                secureTextEntry
+                                onChangeText={onChange}
+                                value={value}
+                                errorMessage={errors.password?.message}
+                            />
+                        )}
+                    />
+                    
+                    <Button title="Editar" variant={"solid"} mt={10} onPress={handleSubmit(handleUpdate)}></Button>
                     {userRole === 'ong' ? <Button title="Cadastrar novo pet" variant={"outline"} onPress={createAPet}></Button> : ''}
                 </VStack>
             </VStack>

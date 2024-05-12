@@ -25,7 +25,7 @@ type formDataProps = {
 const sigUpSchema = yup.object({
     name: yup.string().required('Informe o nome.'),
     email: yup.string().required('Informe o e-mai').email('E-mail inválido.'),
-    password:  yup.string().required('Informe o e-mai'),
+    password:  yup.string().required('Informe a senha'),
     passwordConfirm: yup.string().required('Confirme a senha').oneOf([yup.ref('password')], 'A confirmação da senha não confere'),
     cep: yup.string().required('Informe o Cep'),
     numero: yup.string().required('Informe o numero ou complemento da casa'),

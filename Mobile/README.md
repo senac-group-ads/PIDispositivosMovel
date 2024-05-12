@@ -19,3 +19,4 @@ Algumas das ferramentas utilizados para facilitar o desenvolvimento do nosso sis
 - 28/04/2024: Criado as rotas das paginas principais, com botões de navegação, criadas as paginas: home, listagem de pet, listagem de ong, profile, descrição do pet, descrição da ong e criação do pet. Marcos
 - 01/05/2024: Criando a pagina Home e os componetes dela: Marcos
 - 10/05/2024: Iniciado o controle dos formulario: Marcos
+- 12/05/2024: Finalização do controle dos formulários, já é possível identificar tudo que vem nos inputs da aplicação e repassar para a chamada da api, também foi criado a navegação para a descrição da ong, o próximo passo é integrar com a API do back-end e fazer os ajustes. Marcos
