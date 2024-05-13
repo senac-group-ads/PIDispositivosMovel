@@ -4,12 +4,15 @@ import { useForm, Controller } from 'react-hook-form'
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
+import { api } from '../services/api'
+
 import { Input } from '../components/Input'
 import { Select } from '../components/Select'
 import { Button } from '../components/Button'
 
 import LogoSvg from '../assets/Logo.svg';
 import { AuthNavigatorRoutesProps } from '../routes/auth.routes';
+import { Alert } from 'react-native';
 
 type formDataProps = {
     name: string
@@ -39,8 +42,27 @@ export function SigUp() {
         resolver: yupResolver(sigUpSchema),
     }) // Controle do formulario
 
-    function handleSignUp({ name, email, password, passwordConfirm, cep, numero, contato, roleBody }: formDataProps) {
-       console.log(name, email, password, passwordConfirm, cep, numero, contato, roleBody)
+    async function handleSignUp({ name, email, password, passwordConfirm, cep, numero, contato, roleBody }: formDataProps) {
+        if ( password !== passwordConfirm ) {
+            Alert.alert('A confirmação da senha não confere')
+            return;
+        }
+       try {
+        // AVISO: No arquivo api.ts é preciso mudar o ip conforme ip da maquina utilizada!!!
+        const resposta = await api.post('/user/create', {
+            name,
+            email,
+            password,
+            cep,
+            numero,
+            contato,
+            roleBody
+        })
+        console.log(resposta.data)
+
+       } catch(err) {
+            console.log({message: err})
+       }
     } // função que pega o que esta no formulario para repassar para a api
 
     const navigation = useNavigation<AuthNavigatorRoutesProps>();

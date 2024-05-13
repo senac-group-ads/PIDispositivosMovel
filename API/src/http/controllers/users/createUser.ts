@@ -3,7 +3,7 @@ import { InvalidPassword } from "@/application/use-cases/erros/invalidPassword";
 import { UserAlreadyExistsError } from "@/application/use-cases/erros/user-already-exists-error";
 import { makeCreateUserUseCase } from "@/application/use-cases/factories/users/make-createuser-use-case";
 import { FastifyReply, FastifyRequest } from "fastify";
-import { undefined, z } from "zod";
+import { z } from "zod";
 
 
 export async function createUser(
@@ -30,7 +30,7 @@ export async function createUser(
     }
 
     let role: Role
-    if (roleBody === 'ong') {
+    if (roleBody === 'Ong') {
         role = Role.ong
     } else {
         role = Role.costumer
@@ -50,12 +50,12 @@ export async function createUser(
             avata
         })
 
-        return reply.status(200).send({ user: {
+        return reply.status(200).send(JSON.stringify({ user: {
             ...user,
             password: undefined,
             createdAt: undefined,
             updatedAt: undefined
-        } })
+        } }))
     } catch( err ) {
         if(err instanceof UserAlreadyExistsError) {
             return reply.status(400).send({ message: err.message})
