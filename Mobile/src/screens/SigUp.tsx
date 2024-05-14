@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import { VStack,  Center, Box, ScrollView, Text } from 'native-base'
+import { VStack,  Center, Box, ScrollView, Text, useToast } from 'native-base'
 import { useForm, Controller } from 'react-hook-form'
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -13,6 +13,7 @@ import { Button } from '../components/Button'
 import LogoSvg from '../assets/Logo.svg';
 import { AuthNavigatorRoutesProps } from '../routes/auth.routes';
 import { Alert } from 'react-native';
+import { AppErrors } from '../utils/appErrors';
 
 type formDataProps = {
     name: string
@@ -38,6 +39,7 @@ const sigUpSchema = yup.object({
 
 
 export function SigUp() {
+    const toast = useToast()
     const { control, handleSubmit, formState: { errors } } = useForm<formDataProps>({
         resolver: yupResolver(sigUpSchema),
     }) // Controle do formulario
@@ -61,7 +63,13 @@ export function SigUp() {
         console.log(resposta.data)
 
        } catch(err) {
-            console.log({message: err})
+        const isAppError = err instanceof AppErrors;
+        const title = isAppError ? err.message : 'Não foi possivel criar a conta.'
+        toast.show({
+            title,
+            placement: 'top',
+            bgColor: 'red.500'
+        })
        }
     } // função que pega o que esta no formulario para repassar para a api
 
