@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { VStack, Box, Center, Heading, Link } from 'native-base'
+import { VStack, Box, Center, Heading, Link, useToast } from 'native-base'
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from 'yup'
@@ -10,6 +11,9 @@ import { Button } from '../components/Button';
 
 import LogoSvg from '../assets/Logo.svg';
 import { AuthNavigatorRoutesProps } from '../routes/auth.routes'
+
+import { useAuth } from "../hooks/useAuth";
+import { AppErrors } from "../utils/appErrors";
 
 /*
 * Pagina de login
@@ -26,12 +30,30 @@ const logInSchema = yup.object({
 }) // tipagem dos dados do formulario
 
 export function Sigin() {
+    const [isLoading, setIsLoading] = useState(false)
+    const toast = useToast()
+    const { signIn } = useAuth()
+
     const { control, handleSubmit, formState: { errors }} = useForm<formDataProps>({
         resolver: yupResolver(logInSchema)
     }) // Controle do formulario
 
-    function handleSigIn({ email, password }: formDataProps) {
-        console.log(email, password)
+    async function handleSigIn({ email, password }: formDataProps) {
+        try {
+            setIsLoading(true)
+            await signIn(email, password)
+        } catch(err) {
+            const isAppError = err instanceof AppErrors;
+            const title = isAppError ? err.message : 'Não foi possível entrar. Tente novamente mais tarde'
+
+            setIsLoading(false)
+
+            toast.show({
+                title,
+                placement: "top",
+                bg: 'red.500'
+            })
+        }
     } // função que pega o que esta no formulario para repassar para a api
 
     const navigation = useNavigation<AuthNavigatorRoutesProps>();
@@ -89,7 +111,7 @@ export function Sigin() {
                     ) }
                 />
 
-                <Button variant={"solid"} title='Entra' onPress={handleSubmit(handleSigIn)}/>
+                <Button variant={"solid"} title='Entra' onPress={handleSubmit(handleSigIn)} isLoading={isLoading} />
 
                 <Link onPress={handleNewAccount} my={4} >
                     Não possui cadastra
