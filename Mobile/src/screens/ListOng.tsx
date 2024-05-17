@@ -17,9 +17,7 @@ export function ListOng() {
                 <VStack>
                     <Text color={"blue.500"} fontSize={20} marginLeft={10}>ONGs</Text>
 
-                    <OngCard id="123" img={OngPNG} descricao="Descrição da ONG 1" name="ONG 1" ></OngCard>
-                    <OngCard id="123" img={OngPNG} descricao="Descrição da ONG 2" name="ONG 2"></OngCard>
-                    <OngCard id="123" img={OngPNG} descricao="Descrição da ONG 3" name="ONG 3"></OngCard>
+                    <OngCard id="123456" img={OngPNG} descricao="Descrição da ONG 1" name="ONG 1" ></OngCard>
                     {/* Adicione mais cartões conforme necessário para listar mais ONGs */}
                 </VStack>
             </VStack>
