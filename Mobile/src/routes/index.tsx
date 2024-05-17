@@ -6,17 +6,10 @@ import { AppRoutes } from "./app.routes"
 
 export function Routes() {
     const { user } = useAuth()
-    console.log(user)
-    
-    return (
-        <NavigationContainer>
-            <AppRoutes />
-        </NavigationContainer>
-    )
 
     return (
         <NavigationContainer>
-            <AuthRoutes />
+            {user.id ? <AppRoutes /> : <AppRoutes/>}
         </NavigationContainer>
     )
 }
