@@ -14,6 +14,8 @@ import LogoSvg from '../assets/Logo.svg';
 import { AuthNavigatorRoutesProps } from '../routes/auth.routes';
 import { Alert } from 'react-native';
 import { AppErrors } from '../utils/appErrors';
+import { useState } from 'react';
+import { useAuth } from '../hooks/useAuth';
 
 type formDataProps = {
     name: string
@@ -39,6 +41,8 @@ const sigUpSchema = yup.object({
 
 
 export function SigUp() {
+    const [isLoading, setIsLoading] = useState(false)
+    const { signIn } = useAuth()
     const toast = useToast()
     const { control, handleSubmit, formState: { errors } } = useForm<formDataProps>({
         resolver: yupResolver(sigUpSchema),
@@ -51,6 +55,7 @@ export function SigUp() {
         }
        try {
         // AVISO: No arquivo api.ts é preciso mudar o ip conforme ip da maquina utilizada!!!
+        setIsLoading(true)
         const resposta = await api.post('/user/create', {
             name,
             email,
@@ -60,9 +65,15 @@ export function SigUp() {
             contato,
             roleBody
         })
-        console.log(resposta.data)
+        console.log(resposta.status)
+
+        if (resposta.status === 200) {
+            await signIn(email, password)
+        }
 
        } catch(err) {
+        setIsLoading(false)
+        
         const isAppError = err instanceof AppErrors;
         const title = isAppError ? err.message : 'Não foi possivel criar a conta.'
         toast.show({
@@ -207,7 +218,12 @@ export function SigUp() {
                         )}
                     />
 
-                    <Button variant={'solid'} title='Criar' onPress={handleSubmit(handleSignUp)}/>
+                    <Button 
+                        variant={'solid'} 
+                        isLoading={isLoading}
+                        title='Criar' 
+                        onPress={handleSubmit(handleSignUp)}
+                    />
 
                     <Button 
                         title='Retornar'

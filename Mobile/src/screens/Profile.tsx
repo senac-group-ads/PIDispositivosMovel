@@ -11,6 +11,9 @@ import { Button } from "../components/Button";
 import { Input } from "../components/Input";
 import { useNavigation } from "@react-navigation/native";
 import { AppNavigatorRoutesProps } from "../routes/app.routes";
+import { useAuth } from "../hooks/useAuth";
+
+import avataUserDefault from '../assets/userPhotoDefault.png'
 
 const PHOTO_SIZE = 32;
 const userRole = 'ong'
@@ -38,12 +41,13 @@ const updateSchema = yup.object({
 })
 
 export function Profile() {
+    const { user } = useAuth()
     const { control, handleSubmit, formState: { errors } } = useForm<formDataProps>({
         resolver: yupResolver(updateSchema),
     })
 
     const [photoIsloading, setPhotoIsLoading] = useState(false)
-    const [photoURI, setPhotoURI] = useState('https://github.com/MarcosMOliveiradev.png')
+    const [photoURI, setPhotoURI] = useState(avataUserDefault)
 
     const toast = useToast()
 
@@ -101,7 +105,7 @@ export function Profile() {
                         <Image
                             size={PHOTO_SIZE}
                             rounded={"full"}
-                            source={{ uri: photoURI}} 
+                            source={user.avata ? {uri: user.avata} : photoURI} 
                             alt="UserProfile"
                         />
                     }
