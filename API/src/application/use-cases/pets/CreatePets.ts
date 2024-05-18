@@ -13,7 +13,7 @@ interface IPetsRequest {
     descricao?: string | null
     porte?: string | null
     requisitos?: string | null
-    fotos?: string[] | null
+    fotos?: string | null
     petAdotado?: boolean | null
 
     costumerId: string

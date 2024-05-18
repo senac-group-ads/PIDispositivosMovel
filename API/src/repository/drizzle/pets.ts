@@ -12,7 +12,7 @@ export const pets = pgTable("pets", {
   descricao: text("descriptions"),
   porte: text("poise"),
   requisitos: text("requirements"),
-  fotos: text("Pictures").array(),
+  fotos: text("Pictures"),
   costumerId: text("costumer_id").references(() => users.id, {
     onDelete: "set null"
   }),

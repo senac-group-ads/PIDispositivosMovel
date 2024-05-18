@@ -6,8 +6,8 @@ export class ListPets{
         private petsRepository: PetsRepository,
     ) {}
 
-    async execut() {
-        const pet = await this.petsRepository.find()
+    async execut(pg: number) {
+        const pet = await this.petsRepository.find(pg)
 
         if(!pet) {
             throw new Error('Lista vazia')

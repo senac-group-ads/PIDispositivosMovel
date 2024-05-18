@@ -1,5 +1,6 @@
-import { HStack, VStack, Text, ScrollView, FlatList } from "native-base";
-import { useState } from "react";
+import { HStack, VStack, Text, ScrollView, FlatList, useToast } from "native-base";
+import { useCallback, useState } from "react";
+import { useFocusEffect } from "@react-navigation/native";
 
 // Componentes
 import { HomeHeader } from "../components/HomeHeader";
@@ -9,9 +10,36 @@ import { Filter } from "../components/Filter";
 // imagens para o botao de filtro e para os cardes (para os cardes serão temporarios)
 import GatoPNG from '../assets/gato.png'
 import CachorroPNG from '../assets/cachorro.png'
+import { AppErrors } from "../utils/appErrors";
+import { api } from "../services/api";
+import { PetsDTO } from "../dtos/PetsDTO";
 
 export function Home() {
-    const [pets, setPets] = useState(['gato', 'cachorro'])
+    const toast = useToast()
+    const [pets, setPets] = useState<PetsDTO[]>([])
+    
+    async function findPets(){
+        try {
+            const response = await api.get('/pet/list', { params: {page: '1'}})
+            setPets(response.data.pet)
+        } catch (err) {
+            const isAppError = err instanceof AppErrors;
+            const title = isAppError ? err.message : 'Não foi possível carregar os exercícios';
+    
+            toast.show({
+                title,
+                placement: 'top',
+                bgColor: 'red.500'
+            })
+        }
+    }
+
+    useFocusEffect(
+        useCallback(() => {
+            findPets()
+        }, [])
+    )
+
     return(
         <ScrollView _contentContainerStyle={{ pb: 8 }}>
             <VStack flex={1} >
@@ -29,9 +57,9 @@ export function Home() {
 
                     <FlatList
                         data={pets}
-                        keyExtractor={item => item}
+                        keyExtractor={item => item.id}
                         renderItem={({item}) => (
-                            <PetsCard id="12345" img={GatoPNG} descricao="Gato" idade="2 anos" name="Batada" ></PetsCard>
+                            <PetsCard data={item} ></PetsCard>
                         )}
                      />
                 </VStack>
