@@ -9,6 +9,21 @@ import { users } from "../drizzle";
 */
 
 export class DrizzleUserRepository extends UserRepository{
+
+    async findUserOng(): Promise<User[] | null> {
+        const ong = await db.select({
+            id: users.id,
+            name: users.name,
+            email: users.email,
+            avata: users.avata,
+            cep: users.cep,
+            numero: users.numero,
+            contato: users.contato,
+            role: users.role
+        }).from(users).where(eq(users.role, 'ong'))
+
+        return ong
+    }
     async delete(id: string) {
         const [test] = await db.delete(users).where(eq(users.id, id)).returning()
     }

@@ -1,4 +1,4 @@
-import { HStack, VStack, Text, ScrollView, Card, FlatList, useToast } from "native-base";
+import { HStack, VStack, Text, ScrollView, FlatList, useToast } from "native-base";
 
 import { HomeHeader } from "../components/HomeHeader";
 import { PetsCard } from "../components/PetsCard";
@@ -20,7 +20,7 @@ export function ListPets() {
             setPets(response.data.pet)
         } catch (err) {
             const isAppError = err instanceof AppErrors;
-            const title = isAppError ? err.message : 'Não foi possível carregar os exercícios';
+            const title = isAppError ? err.message : 'Não foi possível carregar as informações';
     
             toast.show({
                 title,

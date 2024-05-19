@@ -57,6 +57,12 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
 
             const userLogged = await storageUserGet()
             const token = await storageAuthTokenGet()
+
+            if (token) {
+                const teste = decodeJwt(token)
+                console.log(new Date())
+            }
+
     
             if(token && userLogged) {
                 UserAndTokenUpdate(userLogged, token)
