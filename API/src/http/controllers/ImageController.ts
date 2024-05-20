@@ -3,7 +3,7 @@ import admin from 'firebase-admin'
 
 const  serviceAccount = require('../../../firebase-key.json')
 
-const BUCKET = 'gs://pjasistarefas.appspot.com'
+const BUCKET = 'pjasistarefas.appspot.com'
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
@@ -42,11 +42,10 @@ export async function ImageController(request: FastifyRequest, reply: FastifyRep
 
     stream.on("finish", async () => {
         await arquivo.makePublic()
-
-        const firevaseURL = `https://storage.googleapis.com/${BUCKET}/${name}`
-
-        return reply.status(200).send(firevaseURL)
     })
-
+    const firebaseURL = `https://storage.googleapis.com/${BUCKET}/${name}`
+    
     stream.end(await file.toBuffer())
+    
+    return reply.status(200).send(firebaseURL)
 }
