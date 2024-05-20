@@ -36,6 +36,7 @@ Algumas das ferramentas utilizados para facilitar o desenvolvimento do nosso sis
 - dia 23/04/2024: Iniciado a parte de infra e coneção http da API, utilizaremos o fastify para controlar as rotas e redirecionar as requisições parra o destino correto. Marcos
 - dia 24/04/2024: Criada as rotas de listagem, criação, atualização e exclusão de usuarios no controller. Marcos
 - dia 27/04/2024: Criada as rotas de litagem de pet, descrição de pet, atualização para pets adotados. Marcos
+- dia 19/04/2024: Criado rota de listagen de ongs: Marcos
 
 ## Uso da API
 Para utilizar a API existem duas maneiras:

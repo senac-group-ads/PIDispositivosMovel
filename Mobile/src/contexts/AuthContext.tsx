@@ -3,7 +3,7 @@ import { api } from "../services/api";
 import { userDTO } from "../dtos/UserDTO";
 
 import { storageUserSave, storageUserGet, storageUserRemove } from "../storage/StorageUser";
-import { storageAuthTokenSave, storageAuthTokenGet } from "../storage/StorageAuthToken";
+import { storageAuthTokenSave, storageAuthTokenGet, storageAuthTokenRemove } from "../storage/StorageAuthToken";
 
 import { decodeJwt } from "../utils/decodeJwt";
 
@@ -57,6 +57,12 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
 
             const userLogged = await storageUserGet()
             const token = await storageAuthTokenGet()
+
+            if (token) {
+                const teste = decodeJwt(token)
+                console.log(new Date())
+            }
+
     
             if(token && userLogged) {
                 UserAndTokenUpdate(userLogged, token)
@@ -73,6 +79,7 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
             setIsLoadingUserStorageData(true)
             setUser({} as userDTO)
             await storageUserRemove()
+            await storageAuthTokenRemove()
         } catch (err) {
             throw err;
         } finally {

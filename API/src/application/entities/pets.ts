@@ -9,7 +9,7 @@ export interface IPts {
     descricao?: string | null
     porte?: string | null
     requisitos?: string | null
-    fotos?: string[] | null
+    fotos?: string | null
     costumerId: string
     adotado: boolean
     createdAt: Date
@@ -88,11 +88,11 @@ export class Pets {
         return this.props.requisitos
     }
 
-    public set fotos(fotos: string[] | null) {
+    public set fotos(fotos: string | null) {
         this.props.fotos = fotos
     }
 
-    public get fotos() : string[] | null | undefined {
+    public get fotos() : string | null | undefined {
         return this.props.fotos
     }
 

@@ -105,7 +105,7 @@ export function Profile() {
                         <Image
                             size={PHOTO_SIZE}
                             rounded={"full"}
-                            source={user.avata ? {uri: user.avata} : photoURI} 
+                            source={user.avata ? {uri: user.avata} : photoURI}
                             alt="UserProfile"
                         />
                     }

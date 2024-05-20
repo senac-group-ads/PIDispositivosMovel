@@ -16,7 +16,7 @@ export async function createPets(
         descricao: z.string().optional(),
         porte: z.string().optional(),
         requisitos: z.string().optional(),
-        fotos: z.array(z.string()).optional(),
+        fotos: z.string().optional(),
         petAdotado: z.boolean().optional()
     })
 

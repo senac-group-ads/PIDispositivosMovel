@@ -1,35 +1,72 @@
-import { VStack, Text, Image } from "native-base";
-import React from "react";
-import ongImage from '../assets/ong.png';
+import { VStack, Image, useToast, Center } from "native-base";
+import React, { useCallback, useEffect, useState } from "react";
+
+import ongImage from '../assets/userPhotoDefault.png';
+import { useRoute } from "@react-navigation/native";
+import { api } from "../services/api";
+import { AppErrors } from "../utils/appErrors";
+import { TextImputDetails } from "../components/TextInputDetails";
+import { userDTO } from "../dtos/UserDTO";
+import { Loading } from "../components/Loading";
 
 type OngDescriptionHeaderProps = {
-  ongName: string;
-  address: string;
-  cep: string;
-  number: string;
-  phone: string;
+  listOngId: string
 };
 
-export function OngDescription({ ongName, address, cep, number, phone }: OngDescriptionHeaderProps) {
+export function OngDescription() {
+  const [isLoading, setIsLoading] = useState(true)
+
+  const [ongDescription, setOngDescription] = useState<userDTO>({} as userDTO)
+
+  const toast = useToast()
+  const routes = useRoute()
+
+  const {listOngId} = routes.params as OngDescriptionHeaderProps
+
+  async function findOngDescription() {
+    try {
+      setIsLoading(true)
+
+      const respose = await api.get(`/user/list/${listOngId}`)
+      setOngDescription(respose.data)
+    } catch (err) {
+      const isAppError = err instanceof AppErrors;
+        const title = isAppError ? err.message : 'Não foi possível carregar as informações';
+    
+        toast.show({
+          title,
+          placement: 'top',
+          bgColor: 'red.500'
+        })
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  useEffect(
+    useCallback(() => {
+      findOngDescription()
+    }, [listOngId])
+)
+
   return (
-    <VStack alignItems="center">
-      <Image source={ongImage} alt="Foto da ONG" width="100%" height={100} resizeMode="contain" style={{ alignSelf: 'flex-start' }}/>
-      <VStack mt={4} space={12} alignItems="flex-start" ml={-269}>
-        <Text fontSize="lg">{ongName}</Text>
-        <Text fontSize="md">Nome:</Text>
-        <Text fontSize="md">Endereço:</Text>
-        <Text fontSize="md">Cep:</Text>
-        <Text fontSize="md">Número:</Text>
-        <Text fontSize="md">Telefone:</Text>
-      </VStack>
-      <VStack mt={-320} ml={110} space={10} alignItems="flex-start">
-        <Text bg="blue.100" p={2} borderRadius={5} color="black" width={250}>{address}</Text>
-        <Text bg="blue.100" p={2} borderRadius={5} color="black" width={250}>{cep}</Text>
-        <Text bg="blue.100" p={2} borderRadius={5} color="black" width={250}>{number}</Text>
-        <Text bg="blue.100" p={2} borderRadius={5} color="black" width={250}>{phone}</Text>
-        <Text bg="blue.100" p={2} borderRadius={5} color="black" width={250}>{phone}</Text>
-      </VStack>
-    </VStack>
+    <Center mt={16} mb={16}>
+          <Image 
+            source={ongDescription.avata ? {uri: ongDescription.avata} : ongImage}
+            alt="Foto da ONG"
+            width="100%"
+            height={100}
+            resizeMode="contain"
+            style={{ alignSelf: 'flex-start' }}
+          />
+            <VStack>
+                <TextImputDetails details={ongDescription.name} info={'Nome'}/>
+                <TextImputDetails details={ongDescription.email} info={'Email'}/>
+                <TextImputDetails details={ongDescription.cep} info={'Cep'}/>
+                <TextImputDetails details={ongDescription.numero} info={'Nº'}/>
+                <TextImputDetails details={ongDescription.contato} info={'Contato'}/>
+            </VStack>
+        </Center>
   );
 }
 

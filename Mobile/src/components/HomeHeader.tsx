@@ -1,5 +1,4 @@
 import { HStack, Icon } from "native-base";
-import { MaterialIcons } from '@expo/vector-icons';
 
 import teste from '../assets/logout.svg'
 

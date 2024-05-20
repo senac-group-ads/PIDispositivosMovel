@@ -12,7 +12,7 @@ export class DrizzlePetsRepository extends PetsRepository {
         }).where(eq(pets.id, id))
     }
 
-    async find(): Promise< Pets[] | null > {
+    async find(pg: number): Promise< Pets[] | null > {
         const data = await db.select({
             id: pets.id,
             name: pets.name,
@@ -25,7 +25,7 @@ export class DrizzlePetsRepository extends PetsRepository {
             fotos: pets.fotos,
             userId: pets.costumerId,
             adotado: pets.adotado
-        }).from(pets).where(eq(pets.adotado, false))
+        }).from(pets).where(eq(pets.adotado, false)).limit(10).offset((pg - 1) * 10)
 
         if(data.length === 0 ) {
             return null

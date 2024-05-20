@@ -14,7 +14,7 @@ type AppRoutes = {
     profile: undefined;
     createPet: undefined;
     petDescription: undefined;
-    ongDescription: undefined;
+    ongDescription: {listOngId: string};
 }
 
 export type AppNavigatorRoutesProps = BottomTabNavigationProp<AppRoutes>;

@@ -10,6 +10,7 @@ import { listUserForId } from "./listUserForId";
 import { update } from "./updateUser";
 import { deleteUser } from "./DeleteUser";
 import { ImageController } from "../ImageController";
+import { listUserOng } from "./listOng";
 
 export async function usersRroutes(app: FastifyInstance) {
     app.post('/create', createUser) // criar usuario
@@ -22,4 +23,5 @@ export async function usersRroutes(app: FastifyInstance) {
     app.get('/list', { onRequest: [verifyJwt]} , listUser) // lista todos os usuarios
     app.get('/list/:id', { onRequest: [verifyJwt]} , listUserForId) // lista usuario por id
     app.get('/me', { onRequest: [verifyJwt]} , profile) // lista o perfil do usuario logado
+    app.get('/list/ong', { onRequest: [verifyJwt]}, listUserOng)
 }

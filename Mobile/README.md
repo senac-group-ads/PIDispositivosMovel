@@ -26,3 +26,4 @@ Algumas das ferramentas utilizados para facilitar o desenvolvimento do nosso sis
 - 10/05/2024: Iniciado o controle dos formulario: Marcos
 - 12/05/2024: Finalização do controle dos formulários, já é possível identificar tudo que vem nos inputs da aplicação e repassar para a chamada da api, também foi criado a navegação para a descrição da ong, o próximo passo é integrar com a API do back-end e fazer os ajustes. Marcos
 - 13/05/2024: integração com a API de cadastro de usuario: Marcos
+- 19/05/2024: Feita as implementações do back-end nas rotas, Home, ListPet, ListOng e ongDescription. Já é possivel listar as informações vindas do banco de dados: Marcos
