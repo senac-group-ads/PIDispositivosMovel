@@ -1,6 +1,7 @@
 //  Todos os registros de rotas http deveram ser crriados aqui
 import fastify from "fastify";
 import fastifyJwt from "@fastify/jwt"
+import multipart from '@fastify/multipart'
 import fastifyCookie from "@fastify/cookie";
 import cors from "@fastify/cors"
 
@@ -21,6 +22,8 @@ app.register(fastifyJwt, {
         expiresIn: '60m'
     },
 })
+
+app.register(multipart)
 
 app.register(fastifyCookie)
 

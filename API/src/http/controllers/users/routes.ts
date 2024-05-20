@@ -9,10 +9,12 @@ import { profile } from "./profileUser";
 import { listUserForId } from "./listUserForId";
 import { update } from "./updateUser";
 import { deleteUser } from "./DeleteUser";
+import { ImageController } from "../ImageController";
 
 export async function usersRroutes(app: FastifyInstance) {
     app.post('/create', createUser) // criar usuario
     app.post('/sessions', authenticate) // login
+    app.post('/img', ImageController)
 
     app.put('/update', { onRequest: [verifyJwt]}, update) // update do usuario
     app.delete('/delete', { onRequest: [verifyJwt]}, deleteUser) //Delete o perfil do usuario
