@@ -1,7 +1,6 @@
 import { HStack, VStack, Image, Text, Icon } from "native-base";
 import { TouchableOpacity, TouchableOpacityProps } from "react-native";
 
-import { Entypo } from '@expo/vector-icons'
 import { useNavigation } from "@react-navigation/native";
 
 import { AppNavigatorRoutesProps } from "../routes/app.routes";
@@ -34,7 +33,6 @@ export function OngCard({ data, ...rest }: props) {
                     <Text fontSize="10px" mt={2} numberOfLines={1}>Contato: {data.contato}</Text>
                     <Text fontSize="10px" mt={2} numberOfLines={1}>Endereço: {data.cep}</Text>
                 </VStack>
-                <Icon as={Entypo} name="chevron-thin-right" />
             </HStack>
         </TouchableOpacity>
     );

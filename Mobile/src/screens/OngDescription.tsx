@@ -7,7 +7,6 @@ import { api } from "../services/api";
 import { AppErrors } from "../utils/appErrors";
 import { TextImputDetails } from "../components/TextInputDetails";
 import { userDTO } from "../dtos/UserDTO";
-import { Loading } from "../components/Loading";
 
 type OngDescriptionHeaderProps = {
   listOngId: string
