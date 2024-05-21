@@ -16,7 +16,6 @@ import { useAuth } from "../hooks/useAuth";
 import avataUserDefault from '../assets/userPhotoDefault.png'
 
 const PHOTO_SIZE = 32;
-const userRole = 'ong'
 
 type formDataProps = {
     name?: string
@@ -123,7 +122,7 @@ export function Profile() {
                         render={( {field: { onChange, value }}) => (
                             <Input 
                                 bg={"blue.100"}
-                                placeholder="Nome"
+                                placeholder={user.name}
                                 onChangeText={onChange}
                                 value={value}
                                 errorMessage={errors.email?.message}
@@ -137,7 +136,7 @@ export function Profile() {
                         render={( {field: { onChange, value }}) => (
                             <Input 
                                 bg={"blue.100"}
-                                placeholder="E-mail"
+                                placeholder={user.email}
                                 isDisabled
                                 isReadOnly
                             />
@@ -150,7 +149,7 @@ export function Profile() {
                         render={( {field: { onChange, value }}) => (
                             <Input 
                                 bg={"blue.100"}
-                                placeholder="Cep"
+                                placeholder={user.cep}
                                 onChangeText={onChange}
                                 value={value}
                                 errorMessage={errors.email?.message}
@@ -164,7 +163,7 @@ export function Profile() {
                         render={( {field: { onChange, value }}) => (
                             <Input 
                                 bg={"blue.100"}
-                                placeholder="nº"
+                                placeholder={user.numero}
                                 onChangeText={onChange}
                                 value={value}
                                 errorMessage={errors.email?.message}
@@ -178,7 +177,7 @@ export function Profile() {
                         render={( {field: { onChange, value }}) => (
                             <Input 
                                 bg={"blue.100"}
-                                placeholder="Telefone"
+                                placeholder={user.contato}
                                 onChangeText={onChange}
                                 value={value}
                                 errorMessage={errors.email?.message}
@@ -244,7 +243,7 @@ export function Profile() {
                     />
                     
                     <Button title="Editar" variant={"solid"} mt={10} onPress={handleSubmit(handleUpdate)}></Button>
-                    {userRole === 'ong' ? <Button title="Cadastrar novo pet" variant={"outline"} onPress={createAPet}></Button> : ''}
+                    {user.role == 'ong' ? <Button title="Cadastrar novo pet" variant={"outline"} onPress={createAPet}></Button> : ''}
                 </VStack>
             </VStack>
         </ScrollView>

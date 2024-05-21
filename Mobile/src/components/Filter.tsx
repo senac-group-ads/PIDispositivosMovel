@@ -11,11 +11,8 @@ type props = {
 export function Filter({ img, name }: props){
     const navigation = useNavigation<AppNavigatorRoutesProps>();
 
-    function ListPet(name: string) {
-        if(name === 'dog') {
-            alert('gato') //TODO: user para criar o filtro de listagem de pet
-        }
-        navigation.navigate('listPets')
+    function ListPet(listPetType: string) {
+        navigation.navigate('listPets', { listPetType })
     }
 
     return (

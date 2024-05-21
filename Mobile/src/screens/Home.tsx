@@ -53,8 +53,8 @@ export function Home() {
                 </HStack>
                 {/* Bpotão de ffiltro */}
                 <HStack justifyContent={"center"} m={5}>
-                    <Filter img={GatoPNG} name="gato"/>
-                    <Filter img={CachorroPNG} name="dog"/>
+                    <Filter img={GatoPNG} name="Gato"/>
+                    <Filter img={CachorroPNG} name="Cachorro"/>
                 </HStack>
                 {/* Card com imagens e descrição de alguns pets */}
                 { isLoading ? <Loading /> :

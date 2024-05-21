@@ -3,10 +3,13 @@ import { HStack, VStack, Text, ScrollView, FlatList, useToast } from "native-bas
 import { HomeHeader } from "../components/HomeHeader";
 import { PetsCard } from "../components/PetsCard";
 
-import GatoPNG from '../assets/gato.png'
+type petType = {
+    listPetType?: string | null
+}
+
 import { useCallback, useState } from "react";
 import { PetsDTO } from "../dtos/PetsDTO";
-import { useFocusEffect } from "@react-navigation/native";
+import { useFocusEffect, useRoute } from "@react-navigation/native";
 import { AppErrors } from "../utils/appErrors";
 import { api } from "../services/api";
 
@@ -32,7 +35,7 @@ export function ListPets() {
 
     useFocusEffect(
         useCallback(() => {
-            findPets()
+                findPets()
         }, [])
     )
 

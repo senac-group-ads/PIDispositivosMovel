@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS "pets" (
 	"descriptions" text,
 	"poise" text,
 	"requirements" text,
-	"Pictures" text[],
+	"Pictures" text,
 	"costumer_id" text,
 	"adopted" boolean DEFAULT false,
 	"created_at" timestamp DEFAULT now() NOT NULL,
