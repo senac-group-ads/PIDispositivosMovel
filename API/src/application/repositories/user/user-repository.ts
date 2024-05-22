@@ -9,5 +9,6 @@ export abstract class UserRepository {
     abstract findUserOng(): Promise<User[] | null>
     abstract findUserById(id: string): Promise<User | null>
     abstract update(user: User, id: string): Promise<User | null>
+    abstract PetchAvataPicture(id: string, avata: string): Promise<User | null>
     abstract delete(id: string): Promise<void>
 }

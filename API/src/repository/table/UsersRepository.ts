@@ -9,6 +9,11 @@ import { users } from "../drizzle";
 */
 
 export class DrizzleUserRepository extends UserRepository{
+    async PetchAvataPicture(id: string, avata: string): Promise<User | null> {
+        const [user] = await db.update(users).set({avata}).where(eq(users.id, id)).returning()
+
+        return user
+    }
 
     async findUserOng(): Promise<User[] | null> {
         const ong = await db.select({

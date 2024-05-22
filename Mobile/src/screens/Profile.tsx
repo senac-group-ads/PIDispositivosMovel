@@ -14,6 +14,7 @@ import { AppNavigatorRoutesProps } from "../routes/app.routes";
 import { useAuth } from "../hooks/useAuth";
 
 import avataUserDefault from '../assets/userPhotoDefault.png'
+import { api } from "../services/api";
 
 const PHOTO_SIZE = 32;
 
@@ -40,7 +41,7 @@ const updateSchema = yup.object({
 })
 
 export function Profile() {
-    const { user } = useAuth()
+    const { user,  updateUserProfile} = useAuth()
     const { control, handleSubmit, formState: { errors } } = useForm<formDataProps>({
         resolver: yupResolver(updateSchema),
     })
@@ -80,8 +81,30 @@ export function Profile() {
                         placement: "top",
                     })
                 }
-                setPhotoURI(photoSelected.assets[0].uri)
+                const fileExtension = photoSelected.assets[0].uri.split('.').pop()
+
+                const photoFile = {
+                name: `${photoSelected.assets[0].fileName}.${fileExtension}`.toLowerCase(),
+                uri: photoSelected.assets[0].uri,
+                type: `${photoSelected.assets[0].type}/${fileExtension}`
+                } as any
+
+                const userPhotoUploadForm = new FormData()
+                userPhotoUploadForm.append('file', photoFile);
+
+                const response = await api.post('/user/img', userPhotoUploadForm, {
+                    headers: {
+                        "Content-Type": 'multipart/form-data'
+                    }
+                })
+                const urlAvata = response.data
+
+                const patchAvata = await api.patch('/user/avata', { avata: urlAvata })
+                const avataUpdate = user
+                avataUpdate.avata = patchAvata.data.avata
+                updateUserProfile(avataUpdate)
             }
+
         } catch(err) {
             console.log(err)
         } finally {

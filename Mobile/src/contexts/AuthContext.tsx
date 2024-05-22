@@ -10,6 +10,7 @@ import { decodeJwt } from "../utils/decodeJwt";
 export type AuthContextDataPropos = {
     user: userDTO;
     signIn: ( email: string, password: string) => Promise<void>;
+    updateUserProfile: (userUpdated: userDTO) => Promise<void>;
     signOut: () => Promise<void>;
     isLoadingUserStorageData: boolean;
 }
@@ -68,6 +69,15 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
         }
     } // verifica se o usuario ja fez login
 
+    async function updateUserProfile(userUpdated: userDTO) {
+        try {
+          setUser(userUpdated);
+          await storageUserSave(userUpdated);
+        } catch (error) {
+          throw error;
+        }
+      }
+
     async function signOut() {
         try {
             setIsLoadingUserStorageData(true)
@@ -89,6 +99,7 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
         <AuthContext.Provider value={{
             user,
             signIn,
+            updateUserProfile,
             signOut,
             isLoadingUserStorageData
         }}>
