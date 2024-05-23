@@ -47,7 +47,6 @@ export function Profile() {
     })
 
     const [photoIsloading, setPhotoIsLoading] = useState(false)
-    const [photoURI, setPhotoURI] = useState(avataUserDefault)
 
     const toast = useToast()
 
@@ -102,7 +101,7 @@ export function Profile() {
                 const patchAvata = await api.patch('/user/avata', { avata: urlAvata })
                 const avataUpdate = user
                 avataUpdate.avata = patchAvata.data.avata
-                updateUserProfile(avataUpdate)
+                await updateUserProfile(avataUpdate)
             }
 
         } catch(err) {
@@ -127,7 +126,7 @@ export function Profile() {
                         <Image
                             size={PHOTO_SIZE}
                             rounded={"full"}
-                            source={user.avata ? {uri: user.avata} : photoURI}
+                            source={user.avata ? {uri: user.avata} : avataUserDefault}
                             alt="UserProfile"
                         />
                     }
