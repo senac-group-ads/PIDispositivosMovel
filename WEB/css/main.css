@@ -63,15 +63,25 @@ nav{
 
 .ul{
     display: flex;
-    align-items: center;
 }
 .ul li{
-    margin: 0 35px;
+    margin: auto 15px;
     font-size: 15px;
+    font-weight: bold;
+    padding: 10px;
 }
 .ul li a{
     color: var(--500);
+    border-radius: 5px ;
+    transition: 0.3s;
 }
+.ul li a:hover{
+    background-color: var(--500);
+    color: var(--100);
+    padding: 8px;
+
+}
+
 
 /*main*/
 main .container{
@@ -141,7 +151,7 @@ main .container{
     font-size: small;
     font-weight: bold;
     background-color: var(--200);
-    color: var(--500);
+    color: var(--100);
     text-align: center;
     padding: 10px;
 }
@@ -154,7 +164,7 @@ main .container{
 }
 .diferenciais .card:hover{
     background-color: var(--50);
-    box-shadow: 10px 10px 30px 8px var(--500);
+    box-shadow: 10px 10px 30px 8px var(--200);
 
 }
 .diferenciais .container{
@@ -222,6 +232,10 @@ main .container{
     }
     .diferenciais .container{
         flex-direction: column;
+    }
+    .diferenciais .card{
+        width: 100%;
+        text-align: center;
     }
 }
 @media (max-width:440px){
