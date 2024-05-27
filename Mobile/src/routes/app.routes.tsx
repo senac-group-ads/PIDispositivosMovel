@@ -10,10 +10,10 @@ import PetSvg from '../assets/Pet.svg'
 type AppRoutes = {
     home: undefined;
     listPets: {listPetType?: string | null};
-    listOng: undefined;
+    listOng:  {listOngType?: string | null};
     profile: undefined;
     createPet: undefined;
-    petDescription: undefined;
+    petDescription: {listPetId: string};
     ongDescription: {listOngId: string};
 }
 

@@ -3,10 +3,6 @@ import { HStack, VStack, Text, ScrollView, FlatList, useToast } from "native-bas
 import { HomeHeader } from "../components/HomeHeader";
 import { PetsCard } from "../components/PetsCard";
 
-type petType = {
-    listPetType?: string | null
-}
-
 import { useCallback, useState } from "react";
 import { PetsDTO } from "../dtos/PetsDTO";
 import { useFocusEffect, useRoute } from "@react-navigation/native";
