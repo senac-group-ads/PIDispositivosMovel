@@ -145,7 +145,30 @@ main .container{
     text-align: center;
     padding: 10px;
 }
+/*diferenciais*/
+.diferenciais .card{
+    width: 30%;
+    padding: 30px;
+    border-radius: 15px;
+    transition: 0.3s;
+}
+.diferenciais .card:hover{
+    background-color: var(--50);
+    box-shadow: 10px 10px 30px 8px var(--500);
 
+}
+.diferenciais .container{
+    display: flex;
+    justify-content: space-between;
+    margin: 30px auto;
+}
+.diferenciais .card img{
+    width: 150px;
+}
+.diferenciais .card .titulo{
+    margin: 13px 0;
+    font-weight: 600;
+}
     
 /*responsivo*/
 @media (max-width: 960px){
@@ -197,7 +220,9 @@ main .container{
     .resultados-numeros{
         margin-top: 30px;        
     }
-    
+    .diferenciais .container{
+        flex-direction: column;
+    }
 }
 @media (max-width:440px){
     .resultados .resultados-numeros{
