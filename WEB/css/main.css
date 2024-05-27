@@ -43,8 +43,8 @@ body{
     cursor: pointer;
     background-image: var(--degrade-btn) ;
 }
-section,
-footer{
+section
+{
     padding: 2.7rem 0;
 }
 
@@ -135,6 +135,17 @@ main .container{
     font-size: 25px;
     font-weight: 600;
 }
+/*footer*/
+
+.footer-bottom{
+    font-size: small;
+    font-weight: bold;
+    background-color: var(--200);
+    color: var(--500);
+    text-align: center;
+    padding: 10px;
+}
+
     
 /*responsivo*/
 @media (max-width: 960px){
