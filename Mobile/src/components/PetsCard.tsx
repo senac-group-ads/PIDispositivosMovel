@@ -16,8 +16,8 @@ export function PetsCard({ data, ...rest }: props) {
     const navigation = useNavigation<AppNavigatorRoutesProps>()
 
     // Função que leva o card do pet para o perfil do pet
-    function petProfile(id: string){
-        navigation.navigate("petDescription")
+    function petProfile(listPetId: string){
+        navigation.navigate("petDescription", { listPetId })
     }
 
     const petURI = data.fotos

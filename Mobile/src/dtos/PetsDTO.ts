@@ -8,5 +8,6 @@ export type PetsDTO = {
     descricao: string
     requisitos: string
     fotos: string | null,
-    userId: string
+    userId: string,
+    costumerId: string
 }
