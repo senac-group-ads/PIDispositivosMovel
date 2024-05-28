@@ -8,6 +8,7 @@ import { listPetsForId } from "./listPetForId";
 import { petAdopted } from "./petAdopted";
 import { ImageController } from "../ImageController";
 import { listPetsForType } from "./listPetForType";
+import { listPetByUser } from "./listPetByUser";
 
 export async function petsRoutes(app: FastifyInstance) {
     app.post('/create', { onRequest: [verifyJwt] }, createPets)
@@ -16,6 +17,7 @@ export async function petsRoutes(app: FastifyInstance) {
     app.get('/list', { onRequest: [verifyJwt] }, listPets)
     app.get('/list/:id', { onRequest: [verifyJwt] }, listPetsForId)
     app.get('/listfortype', { onRequest: [verifyJwt] }, listPetsForType)
+    app.get('/listbyuser', { onRequest: [verifyJwt] }, listPetByUser)
 
     app.patch('/adopted/:id', { onRequest: [verifyJwt] }, petAdopted)
 }

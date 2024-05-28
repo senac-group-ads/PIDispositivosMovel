@@ -5,6 +5,23 @@ import { pets } from "../drizzle";
 import { eq } from "drizzle-orm";
 
 export class DrizzlePetsRepository extends PetsRepository {
+    async fndPetByUser(costumerId: string): Promise<Pets[] | null> {
+        const data = await db.select({
+            id: pets.id,
+            name: pets.name,
+            idade: pets.idade,
+            peso: pets.peso,
+            porte: pets.porte,
+            tipo: pets.tipo,
+            descricao: pets.descricao,
+            requisitos: pets.requisitos,
+            fotos: pets.fotos,
+            userId: pets.costumerId,
+            adotado: pets.adotado
+        }).from(pets).where(eq(pets.costumerId, costumerId) && eq(pets.adotado, false));
+
+        return data
+    }
     async findByType(type: string): Promise<Pets[] | null> {
         const typePet = await db.select({
             id: pets.id,

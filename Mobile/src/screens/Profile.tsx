@@ -15,6 +15,7 @@ import { useAuth } from "../hooks/useAuth";
 
 import avataUserDefault from '../assets/userPhotoDefault.png'
 import { api } from "../services/api";
+import { AppErrors } from "../utils/appErrors";
 
 const PHOTO_SIZE = 32;
 
@@ -41,7 +42,8 @@ const updateSchema = yup.object({
 })
 
 export function Profile() {
-    const { user,  updateUserProfile} = useAuth()
+    const [isLoading, setIsLoading] = useState(false)
+    const { user,  updateUserProfile, signOut} = useAuth()
     const { control, handleSubmit, formState: { errors } } = useForm<formDataProps>({
         resolver: yupResolver(updateSchema),
     })
@@ -108,6 +110,33 @@ export function Profile() {
             console.log(err)
         } finally {
             setPhotoIsLoading(false)
+        }
+    }
+
+    async function deletaConta() {
+        try {
+            setIsLoading(true)
+            const { status } = await api.delete('/user/delete')
+
+            if (status === 200) {
+                toast.show({
+                    title: 'Conta deletada',
+                    placement: 'top',
+                    bgColor: 'green.500'
+                })
+            signOut()
+            }
+        } catch (err) {
+            const isAppError = err instanceof AppErrors;
+            const title = isAppError ? err.message : 'Não foi possível carregar as informações';
+        
+            toast.show({
+            title,
+            placement: 'top',
+            bgColor: 'red.500'
+            })
+        } finally {
+            setIsLoading(false)
         }
     }
     
@@ -266,6 +295,7 @@ export function Profile() {
                     
                     <Button title="Editar" variant={"solid"} mt={10} onPress={handleSubmit(handleUpdate)}></Button>
                     {user.role == 'ong' ? <Button title="Cadastrar novo pet" variant={"outline"} onPress={createAPet}></Button> : ''}
+                    <Button title="Deletar Conta" variant={"solid"} background={"red.600"} onPress={deletaConta} isLoading={isLoading}></Button>
                 </VStack>
             </VStack>
         </ScrollView>
