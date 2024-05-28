@@ -1,8 +1,8 @@
 import { VStack, Image, useToast, Center } from "native-base";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 
 import ongImage from '../assets/userPhotoDefault.png';
-import { useRoute } from "@react-navigation/native";
+import { useFocusEffect, useRoute } from "@react-navigation/native";
 import { api } from "../services/api";
 import { AppErrors } from "../utils/appErrors";
 import { TextImputDetails } from "../components/TextInputDetails";
@@ -42,7 +42,7 @@ export function OngDescription() {
     }
   }
 
-  useEffect(
+  useFocusEffect(
     useCallback(() => {
       findOngDescription()
     }, [listOngId])

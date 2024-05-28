@@ -22,7 +22,7 @@ export function OngCard({ data, ...rest }: props) {
 
     return (
         <TouchableOpacity
-            onPress={() => ongProfile(data.id)}                                                                          
+            onPress={() => {ongProfile(data.id)}}                                                                          
             id={data.id}
             {...rest}
         >

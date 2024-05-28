@@ -1,6 +1,6 @@
 import { VStack, Image, useToast, Center } from "native-base";
-import React, { useCallback, useEffect, useState } from "react";
-import { useNavigation, useRoute } from "@react-navigation/native";
+import React, { useCallback, useState } from "react";
+import { useFocusEffect, useNavigation, useRoute } from "@react-navigation/native";
 
 import petImage from '../assets/userPhotoDefault.png';
 
@@ -52,7 +52,7 @@ export function PetDescription() {
     navigation.navigate("ongDescription", {listOngId})
 }
 
-  useEffect(
+useFocusEffect(
     useCallback(() => {
       findPetDescription()
     }, [listPetId])

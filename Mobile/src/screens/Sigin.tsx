@@ -106,7 +106,7 @@ export function Sigin() {
                             secureTextEntry
                             onChangeText={onChange}
                             value={value}
-                            errorMessage={errors.email?.message}
+                            errorMessage={errors.password?.message}
                         />
                     ) }
                 />
