@@ -71,7 +71,7 @@ describe('Create a pet Use Case', () => {
       peso: '5kg',
       tipo: 'Cachorro',
       descricao: 'Um fofo doginho de 1 ano',
-      adotado: false,
+      petAdotado: false,
       porte: 'pequeno',
       costumerId,
       idade: '1 ano',

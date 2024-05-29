@@ -9,6 +9,7 @@ import { petAdopted } from "./petAdopted";
 import { ImageController } from "../ImageController";
 import { listPetsForType } from "./listPetForType";
 import { listPetByUser } from "./listPetByUser";
+import { deletePet } from "./deletePet";
 
 export async function petsRoutes(app: FastifyInstance) {
     app.post('/create', { onRequest: [verifyJwt] }, createPets)
@@ -20,4 +21,5 @@ export async function petsRoutes(app: FastifyInstance) {
     app.get('/listbyuser', { onRequest: [verifyJwt] }, listPetByUser)
 
     app.patch('/adopted/:id', { onRequest: [verifyJwt] }, petAdopted)
+    app.delete('/delete/:id', { onRequest: [verifyJwt] }, deletePet)
 }

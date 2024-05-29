@@ -30,7 +30,7 @@ export class DrizzleUserRepository extends UserRepository{
         return ong
     }
     async delete(id: string) {
-        const [test] = await db.delete(users).where(eq(users.id, id)).returning()
+        await db.delete(users).where(eq(users.id, id))
     }
     async update(user: User, id: string): Promise<User> {
 

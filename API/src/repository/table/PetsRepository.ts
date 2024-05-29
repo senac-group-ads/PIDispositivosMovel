@@ -5,6 +5,10 @@ import { pets } from "../drizzle";
 import { eq } from "drizzle-orm";
 
 export class DrizzlePetsRepository extends PetsRepository {
+    async delet(id: string): Promise<void> {
+        await db.delete(pets).where(eq(pets.id, id))
+    }
+
     async fndPetByUser(costumerId: string): Promise<Pets[] | null> {
         const data = await db.select({
             id: pets.id,
@@ -22,6 +26,7 @@ export class DrizzlePetsRepository extends PetsRepository {
 
         return data
     }
+    
     async findByType(type: string): Promise<Pets[] | null> {
         const typePet = await db.select({
             id: pets.id,
