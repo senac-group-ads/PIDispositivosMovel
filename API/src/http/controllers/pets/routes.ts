@@ -18,7 +18,7 @@ export async function petsRoutes(app: FastifyInstance) {
     app.get('/list', { onRequest: [verifyJwt] }, listPets)
     app.get('/list/:id', { onRequest: [verifyJwt] }, listPetsForId)
     app.get('/listfortype', { onRequest: [verifyJwt] }, listPetsForType)
-    app.get('/listbyuser', { onRequest: [verifyJwt] }, listPetByUser)
+    app.get('/listbyuser/:costumerId', { onRequest: [verifyJwt] }, listPetByUser)
 
     app.patch('/adopted/:id', { onRequest: [verifyJwt] }, petAdopted)
     app.delete('/delete/:id', { onRequest: [verifyJwt] }, deletePet)

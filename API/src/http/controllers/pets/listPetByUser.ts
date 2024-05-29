@@ -7,7 +7,7 @@ export async function listPetByUser(request: FastifyRequest, reply: FastifyReply
         costumerId: z.string()
     })
     
-    const { costumerId } = costumerSchema.parse(request.query)
+    const { costumerId } = costumerSchema.parse(request.params)
 
     try {
         const makeListPetForUser = makeListPetForUserUseCase()

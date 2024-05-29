@@ -1,7 +1,8 @@
-import { VStack, Image, useToast, Center, ScrollView, FlatList, HStack, Text, Heading } from "native-base";
+import { VStack, Image, useToast, Center, ScrollView, FlatList, Heading } from "native-base";
 import React, { useCallback, useState } from "react";
 
 import ongImage from '../assets/userPhotoDefault.png';
+
 import { useFocusEffect, useRoute } from "@react-navigation/native";
 import { api } from "../services/api";
 import { AppErrors } from "../utils/appErrors";
@@ -23,7 +24,7 @@ export function OngDescription() {
   const toast = useToast()
   const routes = useRoute()
 
-  const {listOngId} = routes.params as OngDescriptionHeaderProps
+  const { listOngId } = routes.params as OngDescriptionHeaderProps
 
   async function findOngDescription() {
     try {
@@ -53,7 +54,8 @@ export function OngDescription() {
 
 async function petForUser() {
   try {
-    const { data } = await api.get(`/pet/listbyuser`, { params: {costumerId: listOngId}})
+    const { data } = await api.get(`/pet/listbyuser/${ongDescription.id}`)
+    console.log(data)
 
     setPets(data)
 

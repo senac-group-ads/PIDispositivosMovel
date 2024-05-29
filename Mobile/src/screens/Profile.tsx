@@ -60,6 +60,10 @@ export function Profile() {
     function handleUpdate({ name, email, password, passwordConfirm, cep, numero, contato, newPassword }: formDataProps) {
         console.log(name, email, password, passwordConfirm, cep, numero, contato, newPassword)
      }
+
+     function myPets() {
+        navigator.navigate("listPetByOng")
+     }
     
     async function handleUserPhotoSelect() {
         setPhotoIsLoading(true)
@@ -164,6 +168,12 @@ export function Profile() {
                     <TouchableOpacity onPress={handleUserPhotoSelect}>
                         <Text mt={2} mb={2} fontSize={16} fontWeight={"bold"} color={"blue.200"}>
                             Editar foto
+                        </Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity onPress={myPets}>
+                        <Text mt={2} mb={2} fontSize={16} fontWeight={"bold"} color={"blue.200"}>
+                            Meus Pets
                         </Text>
                     </TouchableOpacity>
 

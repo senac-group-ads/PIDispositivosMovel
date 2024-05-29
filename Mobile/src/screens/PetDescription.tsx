@@ -32,7 +32,6 @@ export function PetDescription() {
       setIsLoading(true);
 
       const response = await api.get(`/pet/list/${listPetId}`);
-      console.log(response.data.pet)
       setPetDescription(response.data.pet);
     } catch (err) {
       const isAppError = err instanceof AppErrors;

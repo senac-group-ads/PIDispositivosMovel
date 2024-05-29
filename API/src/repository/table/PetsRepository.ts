@@ -22,7 +22,7 @@ export class DrizzlePetsRepository extends PetsRepository {
             fotos: pets.fotos,
             userId: pets.costumerId,
             adotado: pets.adotado
-        }).from(pets).where(eq(pets.costumerId, costumerId) && eq(pets.adotado, false));
+        }).from(pets).where(eq(pets.costumerId, costumerId));
 
         return data
     }
