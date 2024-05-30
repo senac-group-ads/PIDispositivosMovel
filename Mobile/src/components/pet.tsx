@@ -22,17 +22,19 @@ export function Pet({ data, ...rest }: props) {
     const navigation = useNavigation<AppNavigatorRoutesProps>()
     const [isOpen, setIsOpen] = useState(false)
     const cancelRef = useRef(null)
+    const [isLoading, setIsLoading] = useState(false)
 
     const onClose = () => setIsOpen(false)
 
     const toast = useToast()
 
     function petInput(listPetId: string){
-        navigation.navigate("petDescription", { listPetId })
+        navigation.navigate("editPet", { listPetId })
     }
 
     async function delet(id: string) {
         try {
+            setIsLoading(true)
             await api.delete(`/pet/delete/${id}`)
             setIsOpen(false)
         } catch (err) {
@@ -44,16 +46,18 @@ export function Pet({ data, ...rest }: props) {
             placement: 'top',
             bgColor: 'red.500'
             })
+        } finally {
+            setIsLoading(false)
         }
     }
 
     return (
         <TouchableOpacity
-            // onPress={() => petProfile(data.id)}
-            // id={data.id}
+            onPress={() => petInput(data.id)}
+            id={data.id}
             {...rest}
         >
-            <VStack mt={5} borderRadius={5} borderColor={"blue.100"} h='64' w='48' alignItems="center">
+            <VStack mt={5} borderRadius={5} borderColor="blue.100" bg={data.adotado == true ? "green.100" : 'red.50'} ml={3} mr={2} h='64' w='48' alignItems="center">
                 <TouchableOpacity
                 onPress={() => setIsOpen(!isOpen)}
                 >
@@ -67,7 +71,9 @@ export function Pet({ data, ...rest }: props) {
                             <AlertDialog.Footer>
                                 <nativeButton.Group space={2}>
                                     <Button w={32} variant={"outline"} title="CANCELAR" onPress={onClose}/>
-                                    <Button width={32} variant={"solid"} bgColor={'red.600'} title="DELETAR" onPress={() => delet(data.id)}/>
+                                    <Button width={32} variant={"solid"} bgColor={'red.600'} title="DELETAR" isLoading={isLoading} onPress={() => delet(data.id)} _pressed={{
+                                        bg: 'red.800'
+                                    }}/>
                                 </nativeButton.Group>
                             </AlertDialog.Footer>
                         </AlertDialog.Content>
@@ -86,7 +92,8 @@ export function Pet({ data, ...rest }: props) {
                 />
                 
                 <VStack flex={1}>
-                    <Text fontSize="20px" mt={2}>Nome: {data.name}</Text>
+                    <Text fontSize="15px" mt={2}>Nome: {data.name}</Text>
+                    <Text fontSize="15px" fontWeight={'light'} mt={2}>Adotado: {data.adotado == true ? 'Pet adotado' : 'Não adotado'}</Text>
                 </VStack>
             </VStack>
         </TouchableOpacity>

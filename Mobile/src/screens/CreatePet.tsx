@@ -1,7 +1,7 @@
 import { Center, Image, ScrollView, Text, VStack, useToast } from "native-base";
 import * as ImagePicker from 'expo-image-picker'
 import * as FileSystem from 'expo-file-system'
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import * as yup from 'yup'
 import { TouchableOpacity } from "react-native";
 import { Controller, useForm } from "react-hook-form";
@@ -95,7 +95,6 @@ export function CreatePet() {
             console.log(err)
         } 
     }
-
 
     async function createPet({ name, descricao, idade, peso, porte, requisitos, tipo }: formDataProps) {
        try {

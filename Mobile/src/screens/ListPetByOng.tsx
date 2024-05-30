@@ -1,7 +1,7 @@
-import { FlatList, HStack, Heading, ScrollView, VStack, useToast } from "native-base";
+import { Center, FlatList, HStack, Heading, ScrollView, VStack, useToast } from "native-base";
 import { useFocusEffect } from "@react-navigation/native";
 import { RefreshControl } from "react-native";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { HomeHeader } from "../components/HomeHeader";
 import { Pet } from '../components/pet'
@@ -38,9 +38,10 @@ export function ListPetByOng() {
         }
     }
 
-    useFocusEffect(
+    useEffect(
         useCallback(() => {
             listPet()
+            setRefreshing(false)
         }, [])
       )
 
@@ -49,14 +50,14 @@ export function ListPetByOng() {
       }, [])
 
     return (
-        <ScrollView 
+        <ScrollView
         _contentContainerStyle={{ pb: 4}}
         refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh}></RefreshControl>
         }
         >
             <VStack flex={1}>
-            <   HStack width='100%' alignItems={"center"} height={32} background={"blue.100"}>
+                <HStack width='100%' alignItems={"center"} height={32} background={"blue.100"}>
                     <HomeHeader />
                 </HStack>
 
@@ -72,7 +73,6 @@ export function ListPetByOng() {
                         )}
                     />
                 </VStack>
-
             </VStack>
         </ScrollView>
     );

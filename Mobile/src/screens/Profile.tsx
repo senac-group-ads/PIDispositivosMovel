@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { TouchableOpacity } from "react-native";
+import { useCallback, useState } from "react";
+import { RefreshControl, TouchableOpacity } from "react-native";
 import { ScrollView, VStack, Image, Skeleton, Text, Center, Heading, useToast } from "native-base";
 import * as ImagePicker from 'expo-image-picker'
 import * as FileSystem from 'expo-file-system'
@@ -44,6 +44,8 @@ const updateSchema = yup.object({
 export function Profile() {
     const [isLoading, setIsLoading] = useState(false)
     const { user,  updateUserProfile, signOut} = useAuth()
+    const [refreshing, setRefreshing] = useState(false)
+
     const { control, handleSubmit, formState: { errors } } = useForm<formDataProps>({
         resolver: yupResolver(updateSchema),
     })
@@ -52,7 +54,8 @@ export function Profile() {
 
     const toast = useToast()
 
-    const navigator = useNavigation<AppNavigatorRoutesProps>()
+    const navigator = useNavigation<AppNavigatorRoutesProps>() //navegação
+
     function createAPet() {
         navigator.navigate("createPet")
     }
@@ -143,9 +146,18 @@ export function Profile() {
             setIsLoading(false)
         }
     }
+
+    const onRefresh = useCallback(() => {
+        user
+      }, [])
     
     return(
-        <ScrollView flex={1}>
+        <ScrollView
+            flex={1}
+            refreshControl={
+                <RefreshControl refreshing={refreshing} onRefresh={onRefresh}></RefreshControl>
+            }
+        >
             <VStack py={16} px={8}>
                 <Center>
                     {

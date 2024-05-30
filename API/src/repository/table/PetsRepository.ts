@@ -5,6 +5,19 @@ import { pets } from "../drizzle";
 import { eq } from "drizzle-orm";
 
 export class DrizzlePetsRepository extends PetsRepository {
+    async update(id: string, data: Pets): Promise<void> {
+        await db.update(pets).set({
+            name: data.name,
+            idade: data.idade,
+            descricao: data.descricao,
+            peso: data.peso,
+            porte: data.porte,
+            tipo: data.tipo,
+            requisitos: data.requisitos,
+            fotos: data.fotos,
+            updatedAt: new Date()
+        }).where(eq(pets.id, id))
+    }
     async delet(id: string): Promise<void> {
         await db.delete(pets).where(eq(pets.id, id))
     }

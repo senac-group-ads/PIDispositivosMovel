@@ -42,8 +42,6 @@ export class UpdateUser{
             role: user.role
         })
 
-        console.log(userUpdate.password)
-
         const updated = await this.userRepository.update(userUpdate, id)
 
         if (!updated) {

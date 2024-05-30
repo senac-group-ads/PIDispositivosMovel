@@ -7,5 +7,6 @@ export abstract class PetsRepository {
     abstract findByType(type: string): Promise< Pets[] | null>
     abstract find(pg: number): Promise< Pets[] | null>
     abstract adopted(id: string, adotado: boolean): Promise<void>
+    abstract update(id: string, data: Pets): Promise<void>
     abstract delet(id: string): Promise<void>
 }
