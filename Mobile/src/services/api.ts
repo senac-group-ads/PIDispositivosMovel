@@ -8,7 +8,7 @@ type APIInstanceProps = AxiosInstance & {
 }
 
 const api = axios.create({
-    baseURL: 'http://192.168.0.107:3333' // Mudar ip conforme ip da maquina utilizada!!!!!!
+    baseURL: 'http://54.242.40.77:3333' // Mudar ip conforme ip da maquina utilizada!!!!!!
 }) as APIInstanceProps;
 
 api.registerInterceptTokenManeger = signOut => {
