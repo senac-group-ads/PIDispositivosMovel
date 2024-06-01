@@ -1,6 +1,13 @@
 <h1 align='center'> Projeto Integrador para dispositivos móveis Parte MOBILE </h1>
 
-Essa é a parte de API do projeto integrado do curso tecnologia em análise e desenvolvimento de sistemas, nele será desenvolvido o back-end de um aplicativo mobile e web.
+Desenvolvimento ta parte mobile do projeto integrador da faculdade de Analise e desenvolvimento de sistemas.
+Feito por: 
+- Marcos Monteiro
+- Rafael Victor
+- Gabriel Boniolo
+- Camila Turbiani
+- Audrey Santana
+- Gustavo Adenir
 
 ## Bibliotecas e ferramentas utilizadas
 Algumas das ferramentas utilizados para facilitar o desenvolvimento do nosso sistema foi
@@ -27,3 +34,6 @@ Algumas das ferramentas utilizados para facilitar o desenvolvimento do nosso sis
 - 12/05/2024: Finalização do controle dos formulários, já é possível identificar tudo que vem nos inputs da aplicação e repassar para a chamada da api, também foi criado a navegação para a descrição da ong, o próximo passo é integrar com a API do back-end e fazer os ajustes. Marcos
 - 13/05/2024: integração com a API de cadastro de usuario: Marcos
 - 19/05/2024: Feita as implementações do back-end nas rotas, Home, ListPet, ListOng e ongDescription. Já é possivel listar as informações vindas do banco de dados: Marcos
+- 26/05/2024: Feita a tela de descrição de pet: Rafael
+- 27/05/2024: Ajustes da tela de descrição de pet, conexão com a API e inicio da tela de criação de pet: Marcos
+- 28/05/2024: Finalizada a tela de criação de pet: Marcos

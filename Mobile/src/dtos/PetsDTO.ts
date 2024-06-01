@@ -10,4 +10,5 @@ export type PetsDTO = {
     fotos: string | null,
     userId: string,
     costumerId: string
+    adotado: boolean
 }

@@ -1,6 +1,13 @@
 <h1 align='center'> Projeto Integrador para dispositivos móveis Parte API </h1>
 
 Essa é a parte de API do projeto integrado do curso tecnologia em análise e desenvolvimento de sistemas, nele será desenvolvido o back-end de um aplicativo mobile e web.
+Feito por: 
+- Marcos Monteiro
+- Rafael Victor
+- Gabriel Boniolo
+- Camila Turbiani
+- Audrey Santana
+- Gustavo Adenir
 
 ## Bibliotecas e ferramentas utilizadas
 Algumas das ferramentas utilizados para facilitar o desenvolvimento do nosso sistema foi:
@@ -19,6 +26,7 @@ Algumas das ferramentas utilizados para facilitar o desenvolvimento do nosso sis
 - Cors
 - Docker
 - Docker-compose
+- Firebase
 
 ## Histórico de modificações
 

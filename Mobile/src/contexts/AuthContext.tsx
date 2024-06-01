@@ -32,7 +32,7 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
 
     async function signIn(email: string, password: string) {
         try {
-            const { data } = await api.post('/user/sessions', { email, password }) //Pega o token 
+            const { data } = await api.post('/user/login', { email, password }) //Pega o token 
             const response = await api.get(`/user/me`, {headers: {Authorization:`Bearer ${data.token}`}})
 
             const apiUser = response.data.user

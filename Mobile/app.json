@@ -4,7 +4,7 @@
     "slug": "Mobile2",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./src/assets/Loggo.svg",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
@@ -21,7 +21,11 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.nerdtron.pisenac"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -30,10 +34,15 @@
       "expo-font",
       [
         "expo-image-picker",
-          {
-            "photosPermission": "The app accesses your photos to let you share them with your friends."
-          }
+        {
+          "photosPermission": "The app accesses your photos to let you share them with your friends."
+        }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "66537099-9820-48d2-88b6-8bd59cda4a54"
+      }
+    }
   }
 }

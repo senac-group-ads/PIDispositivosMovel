@@ -15,6 +15,8 @@ type AppRoutes = {
     createPet: undefined;
     petDescription: {listPetId: string};
     ongDescription: {listOngId: string};
+    listPetByOng: undefined
+    editPet: {listPetId: string};
 }
 
 export type AppNavigatorRoutesProps = BottomTabNavigationProp<AppRoutes>;
@@ -28,6 +30,8 @@ import { ListOng } from "../screens/ListOng";
 import { OngDescription } from "../screens/OngDescription";
 import { PetDescription } from "../screens/PetDescription";
 import { Profile } from "../screens/Profile";
+import { ListPetByOng } from "../screens/ListPetByOng"
+import { EditPet } from "../screens/EditPet";
 
 export function AppRoutes(){
     const { sizes, colors } = useTheme();
@@ -97,6 +101,17 @@ export function AppRoutes(){
             <Screen
                 name="ongDescription"
                 component={OngDescription}
+                options={{ tabBarButton: () => null}}
+            />
+            <Screen
+                name="listPetByOng"
+                component={ListPetByOng}
+                options={{ tabBarButton: () => null}}
+            />
+
+            <Screen
+                name="editPet"
+                component={EditPet}
                 options={{ tabBarButton: () => null}}
             />
         </Navigator>

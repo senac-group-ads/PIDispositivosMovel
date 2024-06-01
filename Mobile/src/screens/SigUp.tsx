@@ -39,7 +39,6 @@ const sigUpSchema = yup.object({
     roleBody: yup.string().required('Selecione um tipo de usuario')
 }) // tipagem dos dados do formulario
 
-
 export function SigUp() {
     const [isLoading, setIsLoading] = useState(false)
     const { signIn } = useAuth()
@@ -165,7 +164,10 @@ export function SigUp() {
                         control={control}
                         name='roleBody'
                         render={( {field: { onChange, value }}) => (
-                            <Select 
+                            <Select
+                                placeholder='Escolha qual seu tipo de usuario'
+                                label1='Ong'
+                                label2='Tutor'
                                 onValueChange={intemValue => onChange(intemValue)}
                             />
                         )}

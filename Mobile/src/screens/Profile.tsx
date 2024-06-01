@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { TouchableOpacity } from "react-native";
+import { useCallback, useState } from "react";
+import { RefreshControl, TouchableOpacity } from "react-native";
 import { ScrollView, VStack, Image, Skeleton, Text, Center, Heading, useToast } from "native-base";
 import * as ImagePicker from 'expo-image-picker'
 import * as FileSystem from 'expo-file-system'
@@ -15,6 +15,7 @@ import { useAuth } from "../hooks/useAuth";
 
 import avataUserDefault from '../assets/userPhotoDefault.png'
 import { api } from "../services/api";
+import { AppErrors } from "../utils/appErrors";
 
 const PHOTO_SIZE = 32;
 
@@ -41,7 +42,10 @@ const updateSchema = yup.object({
 })
 
 export function Profile() {
-    const { user,  updateUserProfile} = useAuth()
+    const [isLoading, setIsLoading] = useState(false)
+    const { user,  updateUserProfile, signOut} = useAuth()
+    const [refreshing, setRefreshing] = useState(false)
+
     const { control, handleSubmit, formState: { errors } } = useForm<formDataProps>({
         resolver: yupResolver(updateSchema),
     })
@@ -50,13 +54,18 @@ export function Profile() {
 
     const toast = useToast()
 
-    const navigator = useNavigation<AppNavigatorRoutesProps>()
+    const navigator = useNavigation<AppNavigatorRoutesProps>() //navegação
+
     function createAPet() {
         navigator.navigate("createPet")
     }
 
     function handleUpdate({ name, email, password, passwordConfirm, cep, numero, contato, newPassword }: formDataProps) {
         console.log(name, email, password, passwordConfirm, cep, numero, contato, newPassword)
+     }
+
+     function myPets() {
+        navigator.navigate("listPetByOng")
      }
     
     async function handleUserPhotoSelect() {
@@ -110,9 +119,45 @@ export function Profile() {
             setPhotoIsLoading(false)
         }
     }
+
+    async function deletaConta() {
+        try {
+            setIsLoading(true)
+            const { status } = await api.delete('/user/delete')
+
+            if (status === 200) {
+                toast.show({
+                    title: 'Conta deletada',
+                    placement: 'top',
+                    bgColor: 'green.500'
+                })
+            signOut()
+            }
+        } catch (err) {
+            const isAppError = err instanceof AppErrors;
+            const title = isAppError ? err.message : 'Não foi possível carregar as informações';
+        
+            toast.show({
+            title,
+            placement: 'top',
+            bgColor: 'red.500'
+            })
+        } finally {
+            setIsLoading(false)
+        }
+    }
+
+    const onRefresh = useCallback(() => {
+        user
+      }, [])
     
     return(
-        <ScrollView flex={1}>
+        <ScrollView
+            flex={1}
+            refreshControl={
+                <RefreshControl refreshing={refreshing} onRefresh={onRefresh}></RefreshControl>
+            }
+        >
             <VStack py={16} px={8}>
                 <Center>
                     {
@@ -135,6 +180,12 @@ export function Profile() {
                     <TouchableOpacity onPress={handleUserPhotoSelect}>
                         <Text mt={2} mb={2} fontSize={16} fontWeight={"bold"} color={"blue.200"}>
                             Editar foto
+                        </Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity onPress={myPets}>
+                        <Text mt={2} mb={2} fontSize={16} fontWeight={"bold"} color={"blue.200"}>
+                            Meus Pets
                         </Text>
                     </TouchableOpacity>
 
@@ -266,6 +317,7 @@ export function Profile() {
                     
                     <Button title="Editar" variant={"solid"} mt={10} onPress={handleSubmit(handleUpdate)}></Button>
                     {user.role == 'ong' ? <Button title="Cadastrar novo pet" variant={"outline"} onPress={createAPet}></Button> : ''}
+                    <Button title="Deletar Conta" variant={"solid"} background={"red.600"} onPress={deletaConta} isLoading={isLoading}></Button>
                 </VStack>
             </VStack>
         </ScrollView>
