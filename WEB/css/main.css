@@ -40,6 +40,7 @@ body{
     padding: 10px 25px;
     color: white;
     border: none;
+    border-radius: 5px;
     cursor: pointer;
     background-image: var(--degrade-btn) ;
 }
@@ -53,7 +54,7 @@ nav{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 0;
+    padding: 10px 0;
 }
 .logo a{
     font-size: 30px;
@@ -65,7 +66,7 @@ nav{
     display: flex;
 }
 .ul li{
-    margin: auto 15px;
+    margin: auto 10px;
     font-size: 15px;
     font-weight: bold;
     padding: 10px;
@@ -81,6 +82,9 @@ nav{
     padding: 8px;
 
 }
+
+
+
 
 
 /*main*/
@@ -195,10 +199,11 @@ main .container{
         transition: 0.3s;
         flex-direction: column;
         justify-content: center;
+        text-align: center;
     }
     .ul li{
         font-size: 20px;
-        margin: 20px 0;
+        margin: 10px 0;
     }
     .ul.ativo{
         left: 0;
