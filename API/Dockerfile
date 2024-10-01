@@ -22,7 +22,6 @@ COPY --from=build /usr/src/drizzle.config.ts ./drizzle.config.ts
 COPY --from=build /usr/src/start.sh ./start.sh
 
 RUN chmod +x ./start.sh
-RUN npm run generate
 
 EXPOSE 3333
 
