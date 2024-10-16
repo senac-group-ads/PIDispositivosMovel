@@ -1,13 +1,36 @@
-import { Outlet } from "react-router-dom";
+import { Footer } from "@/components/footer";
+import { Link, Outlet } from "react-router-dom";
+
+import Logo from '@/assets/logo.svg'
+import { Button } from "@/components/ui/button";
 
 export function AppLayout() {
     return (
-        <div>
-            <h1>Ola</h1>
+        <div className=" min-h-screen flex flex-col justify-between items-center">
+            <div className="flex items-center justify-around min-w-full">
+                <img src={Logo} alt="Logo" className="w-[5rem] h-[4.3rem]" />
+
+                <div className="flex gap-4 items-center">
+                    <Link to={'/'}>Inicio</Link>
+                    <Link to={'/sobre'}>Sobre</Link>
+                    <Link to={'/queroadotar'}>Quero adotar</Link>
+                    <Link to={'/queroajudar'}>Quero ajudar</Link>
+
+                    <Button asChild>
+                        <Link to={'/sign-in'}>ENTRAR</Link>
+                    </Button>
+
+                    <Button asChild variant={"outline"} className="border-popover-foreground">
+                        <Link to={'/sign-up'}>CADASTRAR</Link>
+                    </Button>
+                </div>
+            </div>
             
             <div>
                 <Outlet/>
             </div>
+
+            <Footer/>
         </div>
     )
 }
