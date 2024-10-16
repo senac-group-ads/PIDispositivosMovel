@@ -19,7 +19,7 @@ export function Home() {
                 <img className="w-[4rem] mt-[-4.5rem] ml-[10rem] absolute" src={Osso} alt="Osso" />
             </h1>
             <img src={Home_img} alt="Imagem inicial" />
-            <div className="col-span-2 mt-10 w-[50rem] border-[1px] border-muted-foreground rounded-lg h-[18rem] grid grid-cols-2">
+            <div className="col-span-2 mt-10 w-[50rem] border-[1px] bg-muted-foreground/30 border-muted-foreground rounded-[20px] h-[18rem] grid grid-cols-2">
                 <div className="flex flex-col items-center justify-center">
                     <h2 className="font-bold text-[28px] p-5 text-center">Adotar um pet não muda só a sua vida</h2>
                     <p className="text-[19px] p-5 text-center">Veja ao lado alguns pets em destaques, ou va até a pagina de adotar para ver mais</p>
