@@ -22,7 +22,7 @@ services:
       - 3333:3333
     container_name: pi_mobile_api
     environment:
-      DATABASE_URL: 'postgres://postgres:abc.123@pi_mobile:5432/find-a-friend'
+      DATABASE_URL: 'postgres://postgres:abc.123@pi_mobile_bd:5432/find-a-friend'
       JWT_SECRET: '1797573924E6B9EA99BFF9C1F88A0CD294FF1ADF2A0897EA931992A0'
     depends_on: 
       - pi_mobile
