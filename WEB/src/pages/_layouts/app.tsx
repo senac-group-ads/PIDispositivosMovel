@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 
 export function AppLayout() {
     return (
-        <div className=" min-h-screen flex flex-col justify-between items-center">
+        <div className=" min-h-screen ">
             <div className="flex items-center justify-around min-w-full">
                 <img src={Logo} alt="Logo" className="w-[5rem] h-[4.3rem]" />
 
@@ -26,7 +26,7 @@ export function AppLayout() {
                 </div>
             </div>
             
-            <div>
+            <div className="min-h-[84.9vh]">
                 <Outlet/>
             </div>
 
