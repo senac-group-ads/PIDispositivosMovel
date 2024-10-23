@@ -1,8 +1,7 @@
-import { OngPerfil } from "@/components/ong-perfil";
-import { Button } from "@/components/ui/button";
-import { Dialog, DialogTrigger } from "@/components/ui/dialog";
-import { useState } from "react";
-import { Helmet } from "react-helmet-async";
+import { Table, TableBody, TableCell, TableRow } from "./ui/table";
+import { DialogContent } from "./ui/dialog";
+
+import Dog from '@/assets/logo.svg'
 
 const listPets = [
     {
@@ -85,26 +84,46 @@ const listPets = [
     }
 ]
 
-export function QueroAjudar() {
+export function OngPerfil() {
     return (
-        <div className="min-w-full mt-10 mb-5 flex flex-col items-center">
-            <Helmet title="Quero Ajudar" />
-            <h2 className="font-bold text-[30px]">Ongs parceiras</h2>
-                <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-5 m-4 mt-5 justify-items-center">
-                    {
-                        listPets.map((listPet) => (
-                            <Dialog>
-                                <DialogTrigger>
-                                    <Button className="w-[20rem] h-[15rem] bg-muted-foreground flex flex-col items-center justify-center rounded-[10px]">
-                                        <img className="w-[19rem] rounded-[5px]" src={listPet.fotos} alt={listPet.name} />
-                                        <p className="font-semibold text-[20px] text-muted">{listPet.name}</p>
-                                    </Button>
-                                </DialogTrigger>
-                                <OngPerfil/>
-                            </Dialog>
-                        ))
-                    }
-                </div>
-        </div>
+        <DialogContent className="w-full">
+            <Table className="flex flex-col items-center">
+                <img src={Dog} className="w-[8rem]" />
+                <TableBody>
+                    <TableRow>
+                        <TableCell className="w-20 text-muted-foreground">Nome:</TableCell>
+                        <TableCell className="flex">Toto</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell className="w-20 text-muted-foreground">Enail:</TableCell>
+                        <TableCell className="flex ">marcos.moliveira@outlook.com</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell className="w-20 text-muted-foreground">Cep:</TableCell>
+                        <TableCell className="flex ">26170330</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell className="w-20 text-muted-foreground">Nº:</TableCell>
+                        <TableCell className="flex ">16</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell className="w-20 text-muted-foreground">Contato:</TableCell>
+                        <TableCell className="flex ">21 99390-8503</TableCell>
+                    </TableRow>
+
+                    <div className="grid grid-cols-2 gap-5">
+                        <h3 className="col-span-2 text-muted-foreground text-[15px]">Alguns dos pets cadastrados por esta Ong</h3>
+                        {
+                            listPets.slice(0, 4).map((pet) => (
+                                <div className="flex flex-col justify-center items-center bg-muted-foreground/50 rounded-sm">
+                                    <img className="w-[5rem]" src={pet.fotos} />
+                                    <p>{pet.name}</p>
+                                </div>
+                            ))
+                        }
+                    </div>
+                </TableBody>
+            </Table>
+        </DialogContent>
     )
 }

@@ -13,8 +13,8 @@ export function AppLayout() {
                 <div className="flex gap-4 items-center">
                     <Link to={'/'}>Inicio</Link>
                     <Link to={'/sobre'}>Sobre</Link>
-                    <Link to={'/queroadotar'}>Quero adotar</Link>
-                    <Link to={'/queroajudar'}>Quero ajudar</Link>
+                    <Link to={'/queroadotar'}>Pets</Link>
+                    <Link to={'/queroajudar'}>Ongs</Link>
 
                     <Button asChild>
                         <Link to={'/sign-in'}>ENTRAR</Link>

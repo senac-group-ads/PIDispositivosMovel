@@ -1,6 +1,8 @@
+import { PetPerfil } from "@/components/pet-perfil";
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { Link } from "react-router-dom";
 
 const listPets = [
     {
@@ -92,10 +94,15 @@ export function QueroAdotar() {
                 <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-5 m-4 mt-5 justify-items-center">
                     {
                         listPets.map((listPet) => (
-                            <Link to={'/'} className="w-[20rem] h-[15rem] bg-primary flex flex-col items-center justify-center rounded-[10px]">
-                                <img className="w-[19rem] rounded-[5px]" src={listPet.fotos} alt={listPet.name} />
-                                <p className="font-semibold text-[20px] text-muted">{listPet.name}</p>
-                            </Link>
+                            <Dialog>
+                                <DialogTrigger>
+                                    <Button className="w-[20rem] h-[15rem] bg-primary flex flex-col items-center justify-center rounded-[10px]">
+                                        <img className="w-[19rem] rounded-[5px]" src={listPet.fotos} alt={listPet.name} />
+                                        <p className="font-semibold text-[20px] text-muted">{listPet.name}</p>
+                                    </Button>
+                                </DialogTrigger>
+                                <PetPerfil/>
+                            </Dialog>
                         ))
                     }
                 </div>
