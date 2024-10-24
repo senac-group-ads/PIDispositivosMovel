@@ -1,8 +1,17 @@
 import { Footer } from "@/components/footer";
 import { Link, Outlet } from "react-router-dom";
+import { CircleUser } from 'lucide-react'
 
 import Logo from '@/assets/logo.svg'
 import { Button } from "@/components/ui/button";
+import { Profile } from "@/components/Profile";
+import { DropdownMenu, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+
+let token = 'ghçjkflgdkhjlkfjdlkhjdf'
+
+const user = {
+    avata: 'https://love.doghero.com.br/wp-content/uploads/2018/12/golden-retriever-1.png'
+}
 
 export function AppLayout() {
     return (
@@ -16,13 +25,31 @@ export function AppLayout() {
                     <Link to={'/queroadotar'}>Pets</Link>
                     <Link to={'/queroajudar'}>Ongs</Link>
 
-                    <Button asChild>
-                        <Link to={'/sign-in'}>ENTRAR</Link>
-                    </Button>
+                    {
+                        token ? 
+                        <DropdownMenu>
+                            <DropdownMenuTrigger asChild className="cursor-pointer" >
+                                {
+                                    user.avata ? 
+                                    <img src={user.avata} className="w-[3rem] h-[3rem] rounded-[50%]"/> : 
+                                    <CircleUser className="w-[3rem] h-[3rem]" />
+                                }
+                            </DropdownMenuTrigger>
 
-                    <Button asChild variant={"outline"} className="border-popover-foreground">
-                        <Link to={'/sign-up'}>CADASTRAR</Link>
-                    </Button>
+                            <Profile/>
+                        </DropdownMenu> :
+                   
+                        <div className="space-x-5">
+                            <Button asChild>
+                                <Link to={'/sign-in'}>ENTRAR</Link>
+                            </Button>
+
+                            <Button asChild variant={"outline"} className="border-popover-foreground">
+                                <Link to={'/sign-up'}>CADASTRAR</Link>
+                            </Button>
+                        </div>
+
+                    }
                 </div>
             </div>
             
