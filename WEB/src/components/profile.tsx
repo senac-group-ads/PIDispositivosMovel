@@ -13,7 +13,7 @@ import { CircleUser } from 'lucide-react'
 
 const user = {
     nome: 'marcos',
-    role: 'tutor',
+    role: 'ong',
     avata: 'https://love.doghero.com.br/wp-content/uploads/2018/12/golden-retriever-1.png'
 }
 

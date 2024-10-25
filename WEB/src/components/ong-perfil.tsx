@@ -1,7 +1,9 @@
 import { Table, TableBody, TableCell, TableRow } from "./ui/table";
-import { DialogContent } from "./ui/dialog";
+import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
 
 import Dog from '@/assets/logo.svg'
+import { Button } from "./ui/button";
+import { PetPerfil } from "./pet-perfil";
 
 const listPets = [
     {
@@ -99,26 +101,31 @@ export function OngPerfil() {
                         <TableCell className="flex ">marcos.moliveira@outlook.com</TableCell>
                     </TableRow>
                     <TableRow>
-                        <TableCell className="w-20 text-muted-foreground">Cep:</TableCell>
-                        <TableCell className="flex ">26170330</TableCell>
+                        <TableCell className="w-20 text-muted-foreground">Contato:</TableCell>
+                        <TableCell className="flex ">21 99988-7722</TableCell>
                     </TableRow>
                     <TableRow>
                         <TableCell className="w-20 text-muted-foreground">Nº:</TableCell>
                         <TableCell className="flex ">16</TableCell>
                     </TableRow>
                     <TableRow>
-                        <TableCell className="w-20 text-muted-foreground">Contato:</TableCell>
-                        <TableCell className="flex ">21 99390-8503</TableCell>
+                        <TableCell className="w-20 text-muted-foreground">cep:</TableCell>
+                        <TableCell className="flex ">26170330</TableCell>
                     </TableRow>
 
                     <div className="grid grid-cols-2 gap-5">
                         <h3 className="col-span-2 text-muted-foreground text-[15px]">Alguns dos pets cadastrados por esta Ong</h3>
                         {
                             listPets.slice(0, 4).map((pet) => (
-                                <div className="flex flex-col justify-center items-center bg-muted-foreground/50 rounded-sm">
-                                    <img className="w-[5rem]" src={pet.fotos} />
-                                    <p>{pet.name}</p>
-                                </div>
+                                <Dialog>
+                                    <DialogTrigger>
+                                        <Button className="flex flex-col justify-center items-center bg-primary rounded-sm w-full h-[5rem]">
+                                            <img className="w-[5rem]" src={pet.fotos} />
+                                            <p>{pet.name}</p>
+                                        </Button>
+                                    </DialogTrigger>
+                                    <PetPerfil/>
+                                </Dialog>
                             ))
                         }
                     </div>
