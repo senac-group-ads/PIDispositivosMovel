@@ -4,7 +4,7 @@ import { CircleUser } from 'lucide-react'
 
 import Logo from '@/assets/logo.svg'
 import { Button } from "@/components/ui/button";
-import { Profile } from "@/components/Profile";
+import { Profile } from "@/components/profile";
 import { DropdownMenu, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
 let token = 'ghçjkflgdkhjlkfjdlkhjdf'

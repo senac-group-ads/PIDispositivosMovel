@@ -37,7 +37,7 @@ export function Profile() {
                     user.role == 'ong' ? 
                     <DropdownMenuItem>
                         <Button variant={"outline"} className="border-blue-700 dark:border-blue-300 w-full" asChild>
-                            <Link to={'/'}>
+                            <Link to={'/cadastropet'}>
                                 Cadastrar novo pet
                             </Link>
                         </Button>
