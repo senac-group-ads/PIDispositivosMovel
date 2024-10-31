@@ -46,9 +46,7 @@ export function Profile() {
                 }
                 <DropdownMenuItem>
                     <Button className="bg-destructive hover:bg-destructive/70 w-full" asChild>
-                        <Link to={'/'}>
-                            SAIR
-                        </Link>
+                        SAIR
                     </Button>
                 </DropdownMenuItem>
             </DropdownMenuGroup>

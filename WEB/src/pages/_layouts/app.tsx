@@ -7,13 +7,13 @@ import { Button } from "@/components/ui/button";
 import { Profile } from "@/components/profile";
 import { DropdownMenu, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
-let token = 'ghçjkflgdkhjlkfjdlkhjdf'
-
 const user = {
     avata: 'https://love.doghero.com.br/wp-content/uploads/2018/12/golden-retriever-1.png'
 }
 
 export function AppLayout() {
+    let token = localStorage.getItem('@token')
+    
     return (
         <div className=" min-h-screen ">
             <div className="flex items-center justify-around min-w-full">

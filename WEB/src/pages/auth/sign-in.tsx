@@ -1,8 +1,11 @@
+import { signIn } from "@/api/sign-in";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { AppErrors } from "@/lib/appErrors";
+import { useMutation } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { z } from "zod";
 
@@ -14,13 +17,21 @@ const signInSchema = z.object({
 type SignInSchema = z.infer<typeof signInSchema>
 
 export function SignIn() {
-    const { register, handleSubmit } = useForm<SignInSchema>()
+    const { register, handleSubmit, formState: { isSubmitting } } = useForm<SignInSchema>()
+    const navigation = useNavigate()
 
-    function handleSignIn({ email, password }: SignInSchema) {
+    const { mutateAsync: authentication } = useMutation({
+        mutationFn: signIn,
+    })
+
+    async function handleSignIn({ email, password }: SignInSchema) {
         try {
-            console.log(email, password)
+            await authentication({email, password})
+            navigation('/')
         } catch (err) {
-            toast.error('erro')
+            const isAppError = err instanceof AppErrors
+            const title = isAppError ? err.message : 'Falha no login'
+            toast.error(title)
         }
     }
 
@@ -36,7 +47,7 @@ export function SignIn() {
                 <div className="w-[30rem]">
                     <Input className="bg-muted-foreground/40 text-muted-foreground" id="Senha" placeholder="Senha" type="password" {...register("password")} />
                 </div>
-                <Button className="w-full" type="submit">ENTRAR</Button>
+                <Button disabled={isSubmitting} className="w-full" type="submit">ENTRAR</Button>
             </form>
             <p>Não tem cadastro? <Link to={"/sign-up"} className="hover:text-muted-foreground text-destructive">Clique aqui</Link> e se cadastre agora</p>
         </div>
