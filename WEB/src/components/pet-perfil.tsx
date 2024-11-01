@@ -25,49 +25,51 @@ export function PetPerfil({ petId, open }: IPet) {
     return (
         <DialogContent>
             <DialogHeader>
-                <DialogTitle>
+                <DialogTitle className="flex flex-col items-center">
                     {isFetchingPetProfile && (
                         <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
                     )}
                 </DialogTitle>
             </DialogHeader>
-            <Table className="flex flex-col items-center">
-                <img src={petProfile?.fotos? petProfile.fotos : Dog} className="w-[8rem]" />
-                <TableBody>
-                    <TableRow>
-                        <TableCell className="w-20 text-muted-foreground">Nome:</TableCell>
-                        <TableCell className="flex">{petProfile?.name}</TableCell>
-                    </TableRow>
-                    <TableRow>
-                        <TableCell className="w-20 text-muted-foreground">Idade:</TableCell>
-                        <TableCell className="flex ">{petProfile?.idade}</TableCell>
-                    </TableRow>
-                    <TableRow>
-                        <TableCell className="w-20 text-muted-foreground">Peso:</TableCell>
-                        <TableCell className="flex ">{petProfile?.peso}</TableCell>
-                    </TableRow>
-                    <TableRow>
-                        <TableCell className="w-20 text-muted-foreground">Porte:</TableCell>
-                        <TableCell className="flex ">{petProfile?.porte}</TableCell>
-                    </TableRow>
-                    <TableRow>
-                        <TableCell className="w-20 text-muted-foreground">Descrição:</TableCell>
-                        <TableCell className="flex ">{petProfile?.descricao}</TableCell>
-                    </TableRow>
-                </TableBody>
-                {
-                    local.pathname === '/queroajudar' ? 
-                    <div></div> :
-                    <TableFooter>
-                        <Dialog>
-                            <DialogTrigger asChild>
-                                <Button>QUERO ADOTAR</Button>
-                            </DialogTrigger>
-                            <OngPerfil/>
-                        </Dialog>
-                    </TableFooter>
-                }
-            </Table>
+            {petProfile && (
+                <Table className="flex flex-col items-center">
+                    <img src={petProfile?.fotos? petProfile.fotos : Dog} className="w-[8rem]" />
+                    <TableBody>
+                        <TableRow>
+                            <TableCell className="w-20 text-muted-foreground">Nome:</TableCell>
+                            <TableCell className="flex">{petProfile?.name}</TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell className="w-20 text-muted-foreground">Idade:</TableCell>
+                            <TableCell className="flex ">{petProfile?.idade}</TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell className="w-20 text-muted-foreground">Peso:</TableCell>
+                            <TableCell className="flex ">{petProfile?.peso}</TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell className="w-20 text-muted-foreground">Porte:</TableCell>
+                            <TableCell className="flex ">{petProfile?.porte}</TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell className="w-20 text-muted-foreground">Descrição:</TableCell>
+                            <TableCell className="flex ">{petProfile?.descricao}</TableCell>
+                        </TableRow>
+                    </TableBody>
+                    {
+                        local.pathname === '/queroajudar' ? 
+                        <div></div> :
+                        <TableFooter>
+                            <Dialog>
+                                <DialogTrigger asChild>
+                                    <Button>QUERO ADOTAR</Button>
+                                </DialogTrigger>
+                                <OngPerfil/>
+                            </Dialog>
+                        </TableFooter>
+                    }
+                </Table>
+            )}
         </DialogContent>
     )
 }
