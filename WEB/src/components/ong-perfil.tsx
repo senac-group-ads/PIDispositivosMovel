@@ -86,7 +86,21 @@ const listPets = [
     }
 ]
 
-export function OngPerfil() {
+interface OngProfile {
+    pet: {
+        id: string,
+        name: string
+        email: string
+        cep: string
+        numero: string
+        contato: string
+        role: string
+        avata: string | null
+    },
+    open: boolean
+}
+
+export function OngPerfil({ pet, open }: OngProfile) {
     return (
         <DialogContent className="w-full">
             <Table className="flex flex-col items-center">
