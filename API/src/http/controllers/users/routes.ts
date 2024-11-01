@@ -23,7 +23,7 @@ export async function usersRroutes(app: FastifyInstance) {
     app.delete('/delete', { onRequest: [verifyJwt]}, deleteUser) //Delete o perfil do usuario
 
     app.get('/list', { onRequest: [verifyJwt]} , listUser) // lista todos os usuarios
-    app.get('/list/:id', { onRequest: [verifyJwt]} , listUserForId) // lista usuario por id
+    app.get('/list/:id', listUserForId) // lista usuario por id
     app.get('/me', { onRequest: [verifyJwt]} , profile) // lista o perfil do usuario logado
-    app.get('/list/ong', { onRequest: [verifyJwt]}, listUserOng)
+    app.get('/list/ong', listUserOng)
 }
