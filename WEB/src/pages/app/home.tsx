@@ -7,6 +7,7 @@ import Pote from '@/assets/pote.svg'
 import Osso from '@/assets/osso.svg'
 import Pata from '@/assets/pata.svg'
 import { Link } from "react-router-dom";
+import { CarouselPet } from "@/components/carousel";
 
 export function Home() {
     return (
@@ -26,9 +27,7 @@ export function Home() {
                         <p className="text-[19px] p-5 text-center">Veja ao lado alguns pets em destaques, ou va até a pagina de adotar para ver mais</p>
                     </div>
                     <div className="border-l-[1px] border-b-[1px] border-muted-foreground flex flex-col justify-center items-center">
-                        {/* TODO: slide */}
-                        <img src={Home_img} className="w-[11rem] h-[11rem] mb-2" /> 
-                        <p className="font-semibold">Thanos</p>
+                        <CarouselPet/>
                     </div>
                     <div className="col-start-2 border-l-[1px] border-muted-foreground flex justify-center items-center">
                         <Button asChild className="rounded-[1rem] flex items-center justify-center w-[10rem]">

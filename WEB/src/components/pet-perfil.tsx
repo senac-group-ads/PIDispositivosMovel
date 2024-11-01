@@ -1,37 +1,58 @@
 import { Button } from "./ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTrigger, DialogTitle } from "./ui/dialog";
 import { Table, TableBody, TableCell, TableFooter, TableRow } from "./ui/table";
 import { useLocation } from 'react-router-dom'
 
 import Dog from '@/assets/logo.svg'
 import { OngPerfil } from "./ong-perfil";
+import { useQuery } from "@tanstack/react-query";
+import { getPetId } from "@/api/getPetId";
+import { Loader2 } from "lucide-react";
 
-export function PetPerfil() {
+interface IPet {
+    petId: string,
+    open: boolean
+}
+
+export function PetPerfil({ petId, open }: IPet) {
     const local = useLocation()
+
+    const { data: petProfile, isFetching: isFetchingPetProfile } = useQuery({
+        queryKey: ['petProfile', petId],
+        queryFn: () => getPetId({id: petId}),
+        enabled: open
+    })
     return (
         <DialogContent>
+            <DialogHeader>
+                <DialogTitle>
+                    {isFetchingPetProfile && (
+                        <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
+                    )}
+                </DialogTitle>
+            </DialogHeader>
             <Table className="flex flex-col items-center">
-                <img src={Dog} className="w-[8rem]" />
+                <img src={petProfile?.fotos? petProfile.fotos : Dog} className="w-[8rem]" />
                 <TableBody>
                     <TableRow>
                         <TableCell className="w-20 text-muted-foreground">Nome:</TableCell>
-                        <TableCell className="flex">Toto</TableCell>
+                        <TableCell className="flex">{petProfile?.name}</TableCell>
                     </TableRow>
                     <TableRow>
                         <TableCell className="w-20 text-muted-foreground">Idade:</TableCell>
-                        <TableCell className="flex ">1 ano</TableCell>
+                        <TableCell className="flex ">{petProfile?.idade}</TableCell>
                     </TableRow>
                     <TableRow>
                         <TableCell className="w-20 text-muted-foreground">Peso:</TableCell>
-                        <TableCell className="flex ">20 kg</TableCell>
+                        <TableCell className="flex ">{petProfile?.peso}</TableCell>
                     </TableRow>
                     <TableRow>
                         <TableCell className="w-20 text-muted-foreground">Porte:</TableCell>
-                        <TableCell className="flex ">Grande</TableCell>
+                        <TableCell className="flex ">{petProfile?.porte}</TableCell>
                     </TableRow>
                     <TableRow>
                         <TableCell className="w-20 text-muted-foreground">Descrição:</TableCell>
-                        <TableCell className="flex ">As fontes de tamanho normal podem ajudá-lo a transmitir seu tom e suas emoções, mas e se você simplesmente não conseguir conter o que sente da maneira normal? Para essas ocasiões, use o gerador de texto grande. Gere palavras tão grandes quanto seus sentimentos ou personalidade em um instante.</TableCell>
+                        <TableCell className="flex ">{petProfile?.descricao}</TableCell>
                     </TableRow>
                 </TableBody>
                 {
@@ -39,7 +60,7 @@ export function PetPerfil() {
                     <div></div> :
                     <TableFooter>
                         <Dialog>
-                            <DialogTrigger>
+                            <DialogTrigger asChild>
                                 <Button>QUERO ADOTAR</Button>
                             </DialogTrigger>
                             <OngPerfil/>
