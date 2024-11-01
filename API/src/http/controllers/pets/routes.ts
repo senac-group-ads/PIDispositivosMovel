@@ -16,10 +16,10 @@ export async function petsRoutes(app: FastifyInstance) {
     app.post('/create', { onRequest: [verifyJwt] }, createPets)
     // app.post('/img', { onRequest: [verifyJwt] }, ImageController)
 
-    app.get('/list', { onRequest: [verifyJwt] }, listPets)
-    app.get('/list/:id', { onRequest: [verifyJwt] }, listPetsForId)
-    app.get('/listfortype', { onRequest: [verifyJwt] }, listPetsForType)
-    app.get('/listbyuser/:costumerId', { onRequest: [verifyJwt] }, listPetByUser)
+    app.get('/list', listPets)
+    app.get('/list/:id', listPetsForId)
+    app.get('/listfortype', listPetsForType)
+    app.get('/listbyuser/:costumerId', listPetByUser)
 
     app.patch('/adopted/:id', { onRequest: [verifyJwt] }, petAdopted)
     app.put('/update/:id', { onRequest: [verifyJwt] }, updatePet)

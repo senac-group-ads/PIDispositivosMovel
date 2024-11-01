@@ -8,33 +8,39 @@ import {
 } from "./ui/dropdown-menu";
 
 import { Button } from "./ui/button";
-
 import { CircleUser } from 'lucide-react'
-
-const user = {
-    nome: 'marcos',
-    role: 'ong',
-    avata: 'https://love.doghero.com.br/wp-content/uploads/2018/12/golden-retriever-1.png'
-}
-
+import { useQuery } from "@tanstack/react-query";
+import { profile } from "@/api/profile";
 
 export function Profile() {
+
+    const { data } = useQuery({
+        queryKey: ['profile'],
+        queryFn: profile,
+        staleTime: Infinity
+    })
+
+    function signOut() {
+        localStorage.removeItem('@token')
+        window.location.reload()
+    }
+
     return (
         <DropdownMenuContent className="w-60">
             <DropdownMenuLabel>
                 <Link className="flex items-center space-x-3" to={'/'}>
                     {
-                        user.avata ? 
-                        <img src={user.avata} className="w-[2rem] h-[2rem] rounded-[50%]" /> :
+                        data?.avata ? 
+                        <img src={data.avata} className="w-[2rem] h-[2rem] rounded-[50%]" /> :
                         <CircleUser className="w-[2rem]"/>
                     }
-                    <p>Marcos Monteiro</p>
+                    <p>{data?.name}</p>
                 </Link>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
                 {
-                    user.role == 'ong' ? 
+                    data?.role == 'ong' ? 
                     <DropdownMenuItem>
                         <Button variant={"outline"} className="border-blue-700 dark:border-blue-300 w-full" asChild>
                             <Link to={'/cadastropet'}>
@@ -45,7 +51,7 @@ export function Profile() {
                     <div></div>
                 }
                 <DropdownMenuItem>
-                    <Button className="bg-destructive hover:bg-destructive/70 w-full" asChild>
+                    <Button onClick={signOut} className="bg-destructive hover:bg-destructive/70 w-full">
                         SAIR
                     </Button>
                 </DropdownMenuItem>
