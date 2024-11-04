@@ -1,5 +1,7 @@
+import { AppErrors } from "@/lib/appErrors"
 import { api } from "@/lib/axios"
 import { createContext, ReactNode, useEffect } from "react"
+import { toast } from "sonner"
 
 type AuthContextDataProps = {
     signOut: () => void
@@ -16,8 +18,10 @@ export function AuthContextProvider({ children }:AuthContextProviderProps) {
         try {
             localStorage.removeItem('@token')
             window.location.reload()
-        } catch (error) {
-            
+        } catch (err) {
+            const isAppError = err instanceof AppErrors
+            const title = isAppError ? err.message : 'Erro inesperado'
+            toast.error(title)
         }
     }
 
