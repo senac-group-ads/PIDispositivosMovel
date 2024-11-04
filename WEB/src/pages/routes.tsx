@@ -9,6 +9,7 @@ import { Sobre } from "./app/sobre";
 import { QueroAdotar } from "./app/quero-adotar";
 import { QueroAjudar } from "./app/quero-ajudar";
 import { CadastroPet } from "./app/cadastro-pet";
+import { Atualizarperfil } from "./app/atualizarPerfil";
 
 export const routes = createBrowserRouter([
     {
@@ -19,7 +20,8 @@ export const routes = createBrowserRouter([
             { path: '/sobre', element: <Sobre /> },
             { path: '/queroadotar', element: <QueroAdotar /> },
             { path: '/queroajudar', element: <QueroAjudar /> },
-            { path: '/cadastropet', element: <CadastroPet /> }
+            { path: '/cadastropet', element: <CadastroPet /> },
+            { path: '/atualizarperfil', element: <Atualizarperfil /> },
         ]
     },
     {

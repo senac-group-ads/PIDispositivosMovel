@@ -13,6 +13,7 @@ export function QueroAjudar() {
         queryKey: ['getOngs'],
         queryFn: getOngs
     })
+
     return (
         <div className="min-w-full mt-10 mb-5 flex flex-col items-center">
             <Helmet title="Quero Ajudar" />
@@ -28,7 +29,7 @@ export function QueroAjudar() {
                                     </Button>
                                 </DialogTrigger>
 
-                                <OngPerfil open={isOngOpen} pet={ong} />
+                                <OngPerfil open={isOngOpen} id={ong.id} />
                             </Dialog>
                         ))
                     }

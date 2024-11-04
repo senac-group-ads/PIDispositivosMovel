@@ -8,6 +8,7 @@ import { OngPerfil } from "./ong-perfil";
 import { useQuery } from "@tanstack/react-query";
 import { getPetId } from "@/api/getPetId";
 import { Loader2 } from "lucide-react";
+import { useState } from "react";
 
 interface IPet {
     petId: string,
@@ -16,6 +17,7 @@ interface IPet {
 
 export function PetPerfil({ petId, open }: IPet) {
     const local = useLocation()
+    const [ isOngOpen, setOngOpen ] = useState(false)
 
     const { data: petProfile, isFetching: isFetchingPetProfile } = useQuery({
         queryKey: ['petProfile', petId],
@@ -60,11 +62,11 @@ export function PetPerfil({ petId, open }: IPet) {
                         local.pathname === '/queroajudar' ? 
                         <div></div> :
                         <TableFooter>
-                            <Dialog>
+                            <Dialog open={isOngOpen} onOpenChange={setOngOpen}>
                                 <DialogTrigger asChild>
                                     <Button>QUERO ADOTAR</Button>
                                 </DialogTrigger>
-                                <OngPerfil/>
+                                <OngPerfil id={petProfile.userId} open={isOngOpen}/>
                             </Dialog>
                         </TableFooter>
                     }

@@ -28,7 +28,7 @@ export function Profile() {
     return (
         <DropdownMenuContent className="w-60">
             <DropdownMenuLabel>
-                <Link className="flex items-center space-x-3" to={'/'}>
+                <Link className="flex items-center space-x-3" to={'/atualizarperfil'}>
                     {
                         data?.avata ? 
                         <img src={data.avata} className="w-[2rem] h-[2rem] rounded-[50%]" /> :

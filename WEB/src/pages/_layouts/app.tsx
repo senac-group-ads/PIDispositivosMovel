@@ -8,11 +8,22 @@ import { Profile } from "@/components/profile";
 import { DropdownMenu, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { useQueryClient } from "@tanstack/react-query";
 
+interface user {
+    id: string;
+    name: string;
+    email: string;
+    cep: string;
+    numero: string;
+    contato: string;
+    role: string;
+    avata: string | null
+}
+
 export function AppLayout() {
     let token = localStorage.getItem('@token')
     const queryClient = useQueryClient()
 
-    const profile = queryClient.getQueryData(['profile'])
+    const profile = queryClient.getQueryData<user>(['profile'])
 
     return (
         <div className=" min-h-screen ">
@@ -31,7 +42,7 @@ export function AppLayout() {
                             <DropdownMenuTrigger asChild className="cursor-pointer" >
                                 {
                                     profile?.avata ? 
-                                    <img src={profile?.avata} className="w-[3rem] h-[3rem] rounded-[50%]"/> : 
+                                    <img src={profile.avata} className="w-[3rem] h-[3rem] rounded-[50%]"/> : 
                                     <CircleUser className="w-[3rem] h-[3rem]" />
                                 }
                             </DropdownMenuTrigger>
