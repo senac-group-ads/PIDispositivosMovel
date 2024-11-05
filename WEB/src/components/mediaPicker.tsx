@@ -1,11 +1,11 @@
 import { ChangeEvent, useState } from "react";
 
 interface UserPhoto {
-    photo: string | null
+    photo?: string | null
 }
 
 export function MediaPicker({ photo }: UserPhoto) {
-    const [ previw, setPreview ] = useState<string | null>(photo)
+    const [ previw, setPreview ] = useState<string | null | undefined>(photo)
 
     function onFileSected(event: ChangeEvent<HTMLInputElement>) {
         const { files } = event.target
@@ -30,7 +30,7 @@ export function MediaPicker({ photo }: UserPhoto) {
                 className="invisible h-0 w-0" 
             />
             {previw && (
-                    <img 
+                    <img
                         src={previw} 
                         alt=""
                         className="aspect-video w-[10rem] h-[10rem] rounded-[50%] object-cover"

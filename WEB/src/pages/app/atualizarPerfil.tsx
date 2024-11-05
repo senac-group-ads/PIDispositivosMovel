@@ -1,8 +1,14 @@
-import { MediaPicker } from "@/components/MediaPicker";
+import { OngResponse } from "@/api/getOngId";
+import { getPetByUser } from "@/api/getPetByUser";
+import { AtualizarPet } from "@/components/atualizarPet";
+import { MediaPicker } from "@/components/mediaPicker";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { AppErrors } from "@/lib/appErrors";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Camera } from "lucide-react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -18,7 +24,20 @@ const updateUser = z.object({
 type UpdateUset = z.infer<typeof updateUser>
 
 export function Atualizarperfil() {
+    const [isPetOpen, setPetOpen] = useState(false)
     const { register, handleSubmit, formState: { isSubmitted }} = useForm<UpdateUset>()
+    const queryClient = useQueryClient()
+
+    const data = queryClient.getQueryData<OngResponse>(['profile'])
+
+    if (!data) {
+        return
+    }
+
+    const { data: pets } = useQuery({
+        queryKey: ['petByOng'],
+        queryFn: () => getPetByUser( data.id ),
+    })
 
     async function handleUpdateUser({ cep, contato, email, nome, numero }: UpdateUset) {
         try {
@@ -53,6 +72,21 @@ export function Atualizarperfil() {
                     ATUALIZAR
                 </Button>
             </form>
+            <div className="grid grid-cols-3 gap-5 justify-items-center mb-5">
+                {
+                    pets && (
+                        pets.map((pet) => (
+                            <Dialog open={isPetOpen} onOpenChange={setPetOpen}>
+                                <DialogTrigger className="w-[20rem] h-[15rem] bg-muted-foreground flex flex-col items-center justify-center rounded-[10px]">
+                                    <img className="w-[18rem] h-[12rem] rounded-[5px]" src={pet.fotos ? pet.fotos : ''} alt={pet.name} />
+                                    <p className="font-semibold text-[20px] text-muted">{pet.name}</p>
+                                </DialogTrigger>
+                                <AtualizarPet id={pet.id} open={isPetOpen}/>
+                            </Dialog>
+                        ))
+                    )
+                }
+            </div>
         </div>
     )
 }
