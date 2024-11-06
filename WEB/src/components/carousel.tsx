@@ -6,7 +6,8 @@ import { getPet } from '@/api/getPet'
 export function CarouselPet() {
     const { data: pet } = useQuery({
         queryKey: ['ListPet'],
-        queryFn: getPet
+        queryFn: getPet,
+        initialData: []
     })
     
     return (
@@ -17,7 +18,7 @@ export function CarouselPet() {
         ]}>
             <CarouselContent>
                 {
-                    pet?.slice(0, 4).map((pet: any) => (
+                    pet.slice(0, 4).map((pet: any) => (
                         <CarouselItem key={pet.id} className='flex flex-col justify-center items-center'>
                             <img src={pet.fotos ? pet.fotos : '' } alt={pet.name} className="w-[11rem] h-[11rem] mb-2" />
                             <p className="font-semibold">{pet.name}</p>

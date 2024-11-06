@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { useForm, Controller } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { z } from "zod";
 
@@ -13,11 +13,14 @@ import {
     SelectContent,
     SelectItem 
 } from "@/components/ui/select";
+import { useMutation } from "@tanstack/react-query";
+import { signUp } from "@/api/sign-up";
+import { signIn } from "@/api/sign-in"
 
 const signUpSchema = z.object({
     name: z.string(),
     email: z.string().email(),
-    password: z.string(),
+    password: z.string().min(6),
     passwordConfirm: z.string(),
     numero: z.string(),
     cep: z.string().min(8),
@@ -30,8 +33,17 @@ type SignUnSchema = z.infer<typeof signUpSchema>
 
 export function SignUp() {
     const { register, handleSubmit, control } = useForm<SignUnSchema>()
+    const navigation = useNavigate()
 
-    function handleSignUn({ email, password, passwordConfirm, cep, contato, name, numero, roleBody }: SignUnSchema) {
+    const { mutateAsync: signUpUser } = useMutation({
+        mutationFn: signUp
+    })
+
+    const { mutateAsync: signInUser } = useMutation({
+        mutationFn: signIn
+    })
+
+    async function handleSignUn({ email, password, passwordConfirm, cep, contato, name, numero, roleBody }: SignUnSchema) {
         if ( password !== passwordConfirm ) {
             toast.error('A senha não confere', {
                 duration: 5000
@@ -39,7 +51,10 @@ export function SignUp() {
             return
         }
         try {
-            console.log( email, password, cep, contato, name, numero, roleBody )
+            await signUpUser({ email, password, cep, contato, name, numero, roleBody })
+
+            await signInUser({ email, password })
+            navigation('/')
         } catch (err) {
             toast.error('erro')
         }

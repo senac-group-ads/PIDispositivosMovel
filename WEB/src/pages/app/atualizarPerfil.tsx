@@ -1,6 +1,7 @@
 import { OngResponse } from "@/api/getOngId";
 import { getPetByUser } from "@/api/getPetByUser";
 import { AtualizarPet } from "@/components/atualizarPet";
+import { CardAtualizarPet } from "@/components/cardAtualizarPet";
 import { MediaPicker } from "@/components/mediaPicker";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
@@ -24,7 +25,8 @@ const updateUser = z.object({
 type UpdateUset = z.infer<typeof updateUser>
 
 export function Atualizarperfil() {
-    const [isPetOpen, setPetOpen] = useState(false)
+    const [openPetId, setOpenPetId] = useState(null)
+
     const { register, handleSubmit, formState: { isSubmitted }} = useForm<UpdateUset>()
     const queryClient = useQueryClient()
 
@@ -73,19 +75,11 @@ export function Atualizarperfil() {
                 </Button>
             </form>
             <div className="grid grid-cols-3 gap-5 justify-items-center mb-5">
-                {
-                    pets && (
-                        pets.map((pet) => (
-                            <Dialog open={isPetOpen} onOpenChange={setPetOpen}>
-                                <DialogTrigger className="w-[20rem] h-[15rem] bg-muted-foreground flex flex-col items-center justify-center rounded-[10px]">
-                                    <img className="w-[18rem] h-[12rem] rounded-[5px]" src={pet.fotos ? pet.fotos : ''} alt={pet.name} />
-                                    <p className="font-semibold text-[20px] text-muted">{pet.name}</p>
-                                </DialogTrigger>
-                                <AtualizarPet id={pet.id} open={isPetOpen}/>
-                            </Dialog>
-                        ))
-                    )
-                }
+                {pets && (
+                    pets.map((pet) => (
+                        <CardAtualizarPet key={pet.id} pet={pet} />
+                    ))
+                )}
             </div>
         </div>
     )

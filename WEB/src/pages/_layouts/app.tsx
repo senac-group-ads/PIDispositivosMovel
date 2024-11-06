@@ -20,8 +20,8 @@ interface user {
 }
 
 export function AppLayout() {
-    let token = localStorage.getItem('@token')
     const queryClient = useQueryClient()
+    let token = localStorage.getItem('@token')
 
     const profile = queryClient.getQueryData<user>(['profile'])
 
