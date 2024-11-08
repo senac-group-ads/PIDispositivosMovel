@@ -9,14 +9,18 @@ import { profile } from "./profileUser";
 import { listUserForId } from "./listUserForId";
 import { update } from "./updateUser";
 import { deleteUser } from "./DeleteUser";
-// import { ImageController } from "../ImageController";
 import { listUserOng } from "./listOng";
 import { patchAvataPicture } from "./patchAvataPicture";
+import { ImageController } from "../ImageController";
+
+const image = new ImageController()
 
 export async function usersRroutes(app: FastifyInstance) {
     app.post('/create', createUser) // criar usuario
     app.post('/sessions', authenticate) // login
-    // app.post('/img', ImageController)
+    app.post('/img', async (request, reply ) => {
+        return image.upload(request, reply)
+    })
 
     app.put('/update', { onRequest: [verifyJwt]}, update) // update do usuario
     app.patch('/avata', { onRequest: [verifyJwt]}, patchAvataPicture)

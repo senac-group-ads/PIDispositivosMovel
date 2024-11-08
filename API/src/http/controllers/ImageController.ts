@@ -1,51 +1,39 @@
-// import { FastifyRequest, FastifyReply } from 'fastify'
-// import admin from 'firebase-admin'
+import { FastifyReply, FastifyRequest } from "fastify";
+import { createWriteStream } from 'node:fs'
+import { promisify } from 'node:util'
+import { pipeline } from 'node:stream'
+import { resolve } from "node:path";
 
-// const  serviceAccount = require('../../../firebase-key.json')
+const pump = promisify(pipeline)
+ 
+export class ImageController {
+    async upload(request: FastifyRequest, reply: FastifyReply) {
+        const file = await request.file();
 
-// const BUCKET = 'pjasistarefas.appspot.com'
+        if (file === undefined) {
+            throw new Error('Erro na seleção e envio da imagem!')
+        }
 
-// admin.initializeApp({
-//     credential: admin.credential.cert(serviceAccount),
-//     storageBucket: BUCKET
-// })
+        let random
+        for(var i = 0; i < 6; i++) {
+            i == 0 ? random = Math.floor(Math.random() * 10).toString() 
+            : random += Math.floor(Math.random() * 10).toString()
+        }
 
-// const bucket = admin.storage().bucket()
+        const fullName = file.filename
+        const newFileName = fullName.replace(/\s/g, '')
+        const name = `${random}-${newFileName}`
 
-// export async function ImageController(request: FastifyRequest, reply: FastifyReply) {
-//     const file = await request.file()
+        const writeStream = createWriteStream(
+            resolve(__dirname, '../../upload', name)
+        )
 
-//     if(!file) {
-//         throw new Error('Sem anexo')
-//     }
+        await pump(file.file, writeStream)
 
-//     let random
-//     for(let i = 0; i <6; i++) {
-//         i == 0 ? random = Math.floor(Math.random() *10).toString() : random += Math.floor(Math.random() * 10).toString()
-//     }
+        const fullUrl = request.protocol.concat('://').concat(request.hostname).concat(':3333')
 
-//     const fullName = file.filename
-//     const newFileName = fullName.replace(/\s/g, '')
-//     const name = `${random}-${newFileName}`
+        const fileUrl = new URL(`/upload/${name}`, fullUrl).toString()
 
-//     const arquivo = bucket.file(name)
-
-//     const stream = arquivo.createWriteStream({
-//         metadata: {
-//             contentType: file.mimetype
-//         }
-//     })
-
-//     stream.on("error", (e) => {
-//         console.error(e)
-//     })
-
-//     stream.on("finish", async () => {
-//         await arquivo.makePublic()
-//     })
-//     const firebaseURL = `https://storage.googleapis.com/${BUCKET}/${name}`
-    
-//     stream.end(await file.toBuffer())
-    
-//     return reply.status(200).send(firebaseURL)
-// }
+        return fileUrl
+    }
+}

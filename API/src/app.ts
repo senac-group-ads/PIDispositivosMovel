@@ -3,11 +3,13 @@ import fastify from "fastify";
 import fastifyJwt from "@fastify/jwt"
 import multipart from '@fastify/multipart'
 import fastifyCookie from "@fastify/cookie";
+import fastifyStatic from "@fastify/static"
 import cors from "@fastify/cors"
 
 import { env } from "./lib/env";
 import { usersRroutes } from "./http/controllers/users/routes";
 import { petsRoutes } from "./http/controllers/pets/routes";
+import { resolve } from "path";
 
 
 export const app = fastify()
@@ -24,6 +26,11 @@ app.register(fastifyJwt, {
 })
 
 app.register(multipart)
+
+app.register(fastifyStatic, {
+    root: resolve(__dirname, './upload'),
+    prefix: '/upload'
+})
 
 app.register(fastifyCookie)
 

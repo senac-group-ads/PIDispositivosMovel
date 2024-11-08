@@ -6,7 +6,6 @@ export async function listUserOng(
     reply: FastifyReply
 ) {
     try {
-
         const makeListUser = makeListUserOngUseCase()
 
         const { user } = await makeListUser.execute()
