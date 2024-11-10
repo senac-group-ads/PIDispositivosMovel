@@ -12,7 +12,7 @@ export function App() {
     <HelmetProvider>
       <QueryClientProvider client={queryClient}>
         <AuthContextProvider>
-          <Toaster duration={1000} closeButton richColors position="top-center"/>
+          <Toaster duration={10000} closeButton richColors position="top-center"/>
           <RouterProvider router={routes}/>
         </AuthContextProvider>
       </QueryClientProvider>

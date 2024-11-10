@@ -1,18 +1,16 @@
 import { OngResponse } from "@/api/getOngId";
 import { getPetByUser } from "@/api/getPetByUser";
-import { AtualizarPet } from "@/components/atualizarPet";
 import { CardAtualizarPet } from "@/components/cardAtualizarPet";
 import { MediaPicker } from "@/components/mediaPicker";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { AppErrors } from "@/lib/appErrors";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Camera } from "lucide-react";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
+import AddImage from '@/assets/add.png'
 
 const updateUser = z.object({
     nome: z.string(),
@@ -25,7 +23,6 @@ const updateUser = z.object({
 type UpdateUset = z.infer<typeof updateUser>
 
 export function Atualizarperfil() {
-    const [openPetId, setOpenPetId] = useState(null)
 
     const { register, handleSubmit, formState: { isSubmitted }} = useForm<UpdateUset>()
     const queryClient = useQueryClient()
@@ -58,7 +55,7 @@ export function Atualizarperfil() {
                 htmlFor="media"
                 className="flex items-center flex-col gap-2 cursor-pointer"
                 >
-                    <MediaPicker photo={'https://github.com/MarcosMOliveiradev.png'}/>
+                    <MediaPicker photo={AddImage}/>
                     <div className="flex items-center gap-2 cursor-pointer">
                         <Camera className="w-4 h-4"/>
                         Editar foto
