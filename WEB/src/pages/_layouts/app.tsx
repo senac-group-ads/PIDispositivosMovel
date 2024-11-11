@@ -4,26 +4,18 @@ import { CircleUser } from 'lucide-react'
 
 import Logo from '@/assets/logo.svg'
 import { Button } from "@/components/ui/button";
-import { Profile } from "@/components/profile";
 import { DropdownMenu, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { useQueryClient } from "@tanstack/react-query";
-
-interface user {
-    id: string;
-    name: string;
-    email: string;
-    cep: string;
-    numero: string;
-    contato: string;
-    role: string;
-    avata: string | null
-}
+import { useQuery } from "@tanstack/react-query";
+import { profile } from "@/api/profile";
+import { Profile } from "@/components/profile";
 
 export function AppLayout() {
-    const queryClient = useQueryClient()
     let token = localStorage.getItem('@token')
 
-    const profile = queryClient.getQueryData<user>(['profile'])
+    const { data: ProfileUser } = useQuery({
+        queryKey: ['profile'],
+        queryFn: profile
+    })
 
     return (
         <div className=" min-h-screen ">
@@ -39,14 +31,15 @@ export function AppLayout() {
                     {
                         token ? 
                         <DropdownMenu>
-                            <DropdownMenuTrigger asChild className="cursor-pointer" >
-                                {
-                                    profile?.avata ? 
-                                    <img src={profile.avata} className="w-[3rem] h-[3rem] rounded-[50%]"/> : 
-                                    <CircleUser className="w-[3rem] h-[3rem]" />
-                                }
-                            </DropdownMenuTrigger>
-
+                            {ProfileUser && (
+                                <DropdownMenuTrigger asChild className="cursor-pointer" >
+                                    {
+                                        ProfileUser.avata ? 
+                                        <img src={ProfileUser.avata} className="w-[3rem] h-[3rem] rounded-[50%]"/> : 
+                                        <CircleUser className="w-[3rem] h-[3rem]" />
+                                    }
+                                </DropdownMenuTrigger>
+                            )}
                             <Profile/>
                         </DropdownMenu> :
                    

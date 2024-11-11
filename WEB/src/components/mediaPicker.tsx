@@ -27,7 +27,7 @@ export function MediaPicker({ photo }: UserPhoto) {
                 name="coverURL"
                 id="media"
                 accept="image/*"
-                className="invisible h-0 w-0" 
+                className="invisible h-0 w-0"
             />
             {previw && (
                     <img
