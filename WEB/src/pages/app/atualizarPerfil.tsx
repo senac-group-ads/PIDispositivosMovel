@@ -1,46 +1,85 @@
 import { OngResponse } from "@/api/getOngId";
 import { getPetByUser } from "@/api/getPetByUser";
 import { CardAtualizarPet } from "@/components/cardAtualizarPet";
-import { MediaPicker } from "@/components/mediaPicker";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { AppErrors } from "@/lib/appErrors";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { Camera } from "lucide-react";
-import { useForm } from "react-hook-form";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
-import AddImage from '@/assets/add.png'
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
+import { api } from "@/lib/axios";
+import { updateProfile } from "@/api/updateProfile";
+import { useNavigate } from "react-router-dom";
 
 const updateUser = z.object({
-    nome: z.string(),
+    name: z.string(),
     email: z.string().email(),
     contato: z.string(),
     cep: z.string(),
-    numero: z.string()
+    numero: z.string(),
+    avata: z.any()
 })
 
 type UpdateUset = z.infer<typeof updateUser>
 
 export function Atualizarperfil() {
-
-    const { register, handleSubmit, formState: { isSubmitted }} = useForm<UpdateUset>()
     const queryClient = useQueryClient()
-
+    
     const data = queryClient.getQueryData<OngResponse>(['profile'])
+    
+    const [ previw, setPreview ] = useState<string | null | undefined >(data?.avata)
 
+    const { register, handleSubmit, control, formState: { isSubmitted }} = useForm<UpdateUset>({
+        resolver: zodResolver(updateUser),
+        values: {
+            cep: data?.cep ?? '',
+            contato: data?.contato ?? '',
+            email: data?.email ?? '',
+            name: data?.name ?? '',
+            numero: data?.numero ?? '',
+            avata: data?.avata ?? previw
+        }
+    })
     if (!data) {
         return
     }
+
+    const navigate = useNavigate()
 
     const { data: pets } = useQuery({
         queryKey: ['petByOng'],
         queryFn: () => getPetByUser( data.id ),
     })
 
-    async function handleUpdateUser({ cep, contato, email, nome, numero }: UpdateUset) {
+    const { mutateAsync: updateUserProfile } = useMutation({
+        mutationFn: updateProfile
+    })
+
+    async function handleUpdateUser({ cep, contato, email, name, numero, avata }: UpdateUset) {
         try {
-            console.log(cep, contato, email, nome, numero)
+            const token = localStorage.getItem('@token')
+            const response = await api.post('/pet/img', {avata}, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "multipart/form-data"
+                }
+            })
+
+            await updateUserProfile({
+                cep,
+                contato,
+                email,
+                name,
+                numero,
+                avataBody: response.data
+            })
+
+            toast.success('Perfil atualizado!')
+
+            navigate('/')
         } catch (err) {
             const isAppError = err instanceof AppErrors
             const title = isAppError ? err.message : 'Falha na atualização'
@@ -51,22 +90,40 @@ export function Atualizarperfil() {
     return (
         <div className="flex flex-col items-center gap-4 justify-center pt-10 w-full">
             <form className="flex flex-col w-[50%] gap-4 mb-5" onSubmit={handleSubmit(handleUpdateUser)}>
-                <label 
-                htmlFor="media"
-                className="flex items-center flex-col gap-2 cursor-pointer"
-                >
-                    <MediaPicker photo={AddImage}/>
-                    <div className="flex items-center gap-2 cursor-pointer">
-                        <Camera className="w-4 h-4"/>
-                        Editar foto
-                    </div>
-                </label>
+            <Controller
+                    control={control}
+                    name={"avata"}
+                    render={({ field: { value, onChange, ...field }}) => {
+                        return (
+                            <label htmlFor="foto" className="cursor-pointer w-[10rem] h-[10rem] mb-5">
+                                <Input
+                                    {...field}
+                                    value={value?.fileName}
+                                    type="file"
+                                    id="foto"
+                                    name="fotos"
+                                    className="invisible h-0 w-0"
+                                    onChange={(e) => {
+                                        if(e.target.files) {
+                                            const previewUrl = URL.createObjectURL(e.target.files[0])
+                                            setPreview(previewUrl)
+                                            onChange(e.target.files[0])
+                                        }
+                                    }}
+                                />{ previw && (
+                                    <img className="w-[10rem] h-[10rem]" src={previw ?? data.avata}/>
+                                )
+                                }
+                            </label>
+                        )
+                    }}
+                />
 
-                <Input id="nome" placeholder="Nome:" type="text" className="bg-muted-foreground/40 text-muted-foreground h-[3rem]" {...register("nome")} />
-                <Input id="email" placeholder="E-mail:" type="text" className="bg-muted-foreground/40 text-muted-foreground h-[3rem]" {...register("email")}/>
-                <Input id="contato" placeholder="Contato:" type="text" className="bg-muted-foreground/40 text-muted-foreground h-[3rem]" {...register("contato")}/>
-                <Input id="cep" placeholder="Cep:" type="text" className="bg-muted-foreground/40 text-muted-foreground h-[3rem]" {...register("cep")}/>
-                <Input id="numero" placeholder="Numero:" type="text" className="bg-muted-foreground/40 text-muted-foreground h-[3rem]" {...register("numero")}/>
+                <Input id="name" type="text" className="bg-muted-foreground/40 text-muted-foreground h-[3rem]" {...register("name")} />
+                <Input id="email" type="text" className="bg-muted-foreground/40 text-muted-foreground h-[3rem]" {...register("email")}/>
+                <Input id="contato" type="text" className="bg-muted-foreground/40 text-muted-foreground h-[3rem]" {...register("contato")}/>
+                <Input id="cep" type="text" className="bg-muted-foreground/40 text-muted-foreground h-[3rem]" {...register("cep")}/>
+                <Input id="numero" type="text" className="bg-muted-foreground/40 text-muted-foreground h-[3rem]" {...register("numero")}/>
                 <Button type="submit" className="w-full h-[3rem]">
                     ATUALIZAR
                 </Button>

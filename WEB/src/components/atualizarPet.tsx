@@ -19,7 +19,7 @@ import { AlertDialogTitle } from "@radix-ui/react-alert-dialog";
 import { deletPet } from "@/api/deletPet";
 import { AppErrors } from "@/lib/appErrors";
 import { Controller, useForm } from "react-hook-form";
-import { string, z } from "zod";
+import { z } from "zod";
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useState } from "react";
 import { api } from "@/lib/axios";
@@ -50,6 +50,8 @@ export function AtualizarPet({ id, open }: PetId) {
         enabled: open
     })
 
+    const [ previw, setPreview ] = useState<string | null | undefined >(pet?.fotos)
+
     const { register, handleSubmit, control } = useForm<PetSchema>({
         resolver: zodResolver(petSchema),
         values: {
@@ -60,11 +62,10 @@ export function AtualizarPet({ id, open }: PetId) {
             porte: pet?.porte ?? '',
             requisitos: pet?.requisitos ?? '',
             tipo: pet?.tipo ?? '',
-            fotos: pet?.fotos ?? ''
+            fotos: pet?.fotos ?? previw
         }
     })
 
-    const [ previw, setPreview ] = useState<string | null | undefined >(pet?.fotos)
 
     const { mutateAsync: delet } = useMutation({
         mutationFn: deletPet

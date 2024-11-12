@@ -1,6 +1,6 @@
 import { getPet } from "@/api/getPet";
 import { CardPet } from "@/components/cart-pet";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
 
 interface pet {
@@ -18,8 +18,6 @@ interface pet {
 }
 
 export function QueroAdotar() {
-    const queryClient = useQueryClient()
-
     const { data: data } = useQuery({
         queryKey: ['ListPets'],
         queryFn: getPet,
