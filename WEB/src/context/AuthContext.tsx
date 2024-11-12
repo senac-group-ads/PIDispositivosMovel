@@ -17,7 +17,6 @@ export function AuthContextProvider({ children }:AuthContextProviderProps) {
     async function signOut() {
         try {
             localStorage.removeItem('@token')
-            window.location.reload()
         } catch (err) {
             const isAppError = err instanceof AppErrors
             const title = isAppError ? err.message : 'Erro inesperado'

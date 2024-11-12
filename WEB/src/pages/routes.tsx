@@ -5,7 +5,6 @@ import { SignIn } from "./auth/sign-in";
 import { AppLayout } from "./_layouts/app";
 import { AuthLayout } from "./_layouts/auth";
 import { SignUp } from "./auth/sign-up";
-import { Sobre } from "./app/sobre";
 import { QueroAdotar } from "./app/quero-adotar";
 import { QueroAjudar } from "./app/quero-ajudar";
 import { CadastroPet } from "./app/cadastro-pet";
@@ -17,7 +16,6 @@ export const routes = createBrowserRouter([
         element: <AppLayout />, 
         children: [
             { path: '/', element: <Home /> },
-            { path: '/sobre', element: <Sobre /> },
             { path: '/queroadotar', element: <QueroAdotar /> },
             { path: '/queroajudar', element: <QueroAjudar /> },
             { path: '/cadastropet', element: <CadastroPet /> },

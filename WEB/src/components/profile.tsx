@@ -13,7 +13,6 @@ import { useQuery } from "@tanstack/react-query";
 import { profile } from "@/api/profile";
 
 export function Profile() {
-
     const { data } = useQuery({
         queryKey: ['profile'],
         queryFn: profile,

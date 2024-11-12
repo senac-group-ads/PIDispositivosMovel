@@ -15,7 +15,7 @@ export interface getPetIdResponse {
         porte?: string | null
         requisitos?: string | null
         fotos?: string | null
-        userId: string
+        costumerId: string
         adotado: boolean
     }
 }

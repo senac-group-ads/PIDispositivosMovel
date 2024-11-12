@@ -1,13 +1,12 @@
 import { Table, TableBody, TableCell, TableRow } from "./ui/table";
-import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
+import { DialogContent } from "./ui/dialog";
 
 import Dog from '@/assets/logo.svg'
-import { PetPerfil } from "./pet-perfil";
 import { useQuery } from "@tanstack/react-query";
 import { getPetByUser } from "@/api/getPetByUser";
-import { useState } from "react";
 import { getOngId, OngResponse } from "@/api/getOngId";
 import { Loader2 } from "lucide-react";
+import { MiniCardPet } from "@/api/miniCardPet";
 
 interface OngProfile {
     id: string
@@ -15,8 +14,6 @@ interface OngProfile {
 }
 
 export function OngPerfil({ id, open }: OngProfile) {
-    const [ isPetProfileOpen, setPetProfileOpen ] = useState(false)
-
     const { data: ong, isLoading: ongLoad, isFetching: ongFething } = useQuery<OngResponse>({
         queryKey: ['ongId'],
         queryFn: () => getOngId(id),
@@ -27,7 +24,7 @@ export function OngPerfil({ id, open }: OngProfile) {
         queryKey: ['petByOng'],
         queryFn: () => getPetByUser( id ),
         initialData: [],
-        enabled: open,
+        enabled: open
     })
 
     return (
@@ -64,15 +61,9 @@ export function OngPerfil({ id, open }: OngProfile) {
                         <div className="grid grid-cols-2 gap-5">
                             <h3 className="col-span-2 text-muted-foreground text-[15px]">Alguns dos pets cadastrados por esta Ong</h3>
                             {
-                                pets.slice(0, 4).map((pet: any) => (
-                                    <Dialog open={isPetProfileOpen} onOpenChange={setPetProfileOpen}>
-                                        <DialogTrigger className="flex flex-col justify-center items-center bg-primary rounded-sm w-full h-[5rem]">
-                                            <img className="w-[5rem]" src={pet.fotos ? pet.fotos : ''} />
-                                            <p className="text-muted-foreground font-bold">{pet.name}</p>
-                                        </DialogTrigger>
-                                        <PetPerfil open={isPetProfileOpen} petId={pet.id}/>
-                                    </Dialog>
-                                ))
+                                pets.slice(0, 4).map((pet: any) => {
+                                    return <MiniCardPet key={pet.id} pet={pet} />
+                                })
                             }
                         </div>
                     </TableBody>

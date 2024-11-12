@@ -24,6 +24,7 @@ export function PetPerfil({ petId, open }: IPet) {
         queryFn: () => getPetId({id: petId}),
         enabled: open
     })
+
     return (
         <DialogContent>
             <DialogHeader>
@@ -46,6 +47,10 @@ export function PetPerfil({ petId, open }: IPet) {
                             <TableCell className="flex ">{petProfile?.idade}</TableCell>
                         </TableRow>
                         <TableRow>
+                            <TableCell className="w-20 text-muted-foreground">Tipo:</TableCell>
+                            <TableCell className="flex">{petProfile?.tipo}</TableCell>
+                        </TableRow>
+                        <TableRow>
                             <TableCell className="w-20 text-muted-foreground">Peso:</TableCell>
                             <TableCell className="flex ">{petProfile?.peso}</TableCell>
                         </TableRow>
@@ -57,6 +62,10 @@ export function PetPerfil({ petId, open }: IPet) {
                             <TableCell className="w-20 text-muted-foreground">Descrição:</TableCell>
                             <TableCell className="flex ">{petProfile?.descricao}</TableCell>
                         </TableRow>
+                        <TableRow>
+                            <TableCell className="w-20 text-muted-foreground">Requisitos:</TableCell>
+                            <TableCell className="flex ">{petProfile?.requisitos}</TableCell>
+                        </TableRow>
                     </TableBody>
                     {
                         local.pathname === '/queroajudar' ? 
@@ -66,7 +75,7 @@ export function PetPerfil({ petId, open }: IPet) {
                                 <DialogTrigger asChild>
                                     <Button>QUERO ADOTAR</Button>
                                 </DialogTrigger>
-                                <OngPerfil id={petProfile.userId} open={isOngOpen}/>
+                                <OngPerfil id={petProfile.costumerId} open={isOngOpen}/>
                             </Dialog>
                         </TableFooter>
                     }
