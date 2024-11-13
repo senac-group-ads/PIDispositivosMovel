@@ -7,7 +7,6 @@ export function CarouselPet() {
     const { data: pet } = useQuery({
         queryKey: ['ListPet'],
         queryFn: getPet,
-        staleTime: Infinity,
         initialData: []
     })
     

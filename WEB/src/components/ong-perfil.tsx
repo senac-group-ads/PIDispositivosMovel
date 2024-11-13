@@ -7,6 +7,7 @@ import { getPetByUser } from "@/api/getPetByUser";
 import { getOngId, OngResponse } from "@/api/getOngId";
 import { Loader2 } from "lucide-react";
 import { MiniCardPet } from "@/api/miniCardPet";
+import { SkeletonPetMiniCard } from "./skeletonPetMiniCard";
 
 interface OngProfile {
     id: string
@@ -14,26 +15,22 @@ interface OngProfile {
 }
 
 export function OngPerfil({ id, open }: OngProfile) {
-    const { data: ong, isLoading: ongLoad, isFetching: ongFething } = useQuery<OngResponse>({
-        queryKey: ['ongId'],
+    const { data: ong, isLoading: ongLoad} = useQuery<OngResponse>({
+        queryKey: ['ongId', id],
         queryFn: () => getOngId(id),
         staleTime: 1000 * 60 * 15, // 15 minutos
         enabled: open
     })
 
-    const { data: pets } = useQuery({
+    const { data: pets, isFetching: isPetFetching } = useQuery({
         queryKey: ['petByOng'],
         queryFn: () => getPetByUser( id ),
         initialData: [],
-        staleTime: Infinity,
         enabled: open
     })
 
     return (
         <DialogContent className="w-full">
-            {ongFething && (
-                <Loader2/>
-            )}
             {ongLoad && <Loader2 />}
             {ong && (
                 <Table className="flex flex-col items-center">
@@ -62,7 +59,7 @@ export function OngPerfil({ id, open }: OngProfile) {
 
                         <div className="grid grid-cols-2 gap-5">
                             <h3 className="col-span-2 text-muted-foreground text-[15px]">Alguns dos pets cadastrados por esta Ong</h3>
-                            {
+                            { isPetFetching ? <SkeletonPetMiniCard /> :
                                 pets.slice(0, 4).map((pet: any) => {
                                     return <MiniCardPet key={pet.id} pet={pet} />
                                 })

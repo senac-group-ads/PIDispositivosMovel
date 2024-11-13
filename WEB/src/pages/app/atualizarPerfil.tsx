@@ -13,6 +13,7 @@ import { useState } from "react";
 import { api } from "@/lib/axios";
 import { updateProfile } from "@/api/updateProfile";
 import { useNavigate } from "react-router-dom";
+import { SkeletonPetCard } from "@/components/skeletonPetCard";
 
 const updateUser = z.object({
     name: z.string(),
@@ -49,14 +50,29 @@ export function Atualizarperfil() {
 
     const navigate = useNavigate()
 
-    const { data: pets } = useQuery({
+    const { data: pets, isFetching: isPetFetching } = useQuery({
         queryKey: ['petByOng'],
         queryFn: () => getPetByUser( data.id ),
-        staleTime: Infinity,
+        initialData: []
     })
 
     const { mutateAsync: updateUserProfile } = useMutation({
-        mutationFn: updateProfile
+        mutationFn: updateProfile,
+        onSuccess(_, {avataBody, cep, contato, email, name, numero}) {
+            const cached = queryClient.getQueryData(['profile'])
+
+            if(cached) {
+                queryClient.setQueryData(['profile'], {
+                    ...cached,
+                    name,
+                    avataBody,
+                    cep,
+                    contato,
+                    email,
+                    numero
+                }) 
+            }
+        }
     })
 
     async function handleUpdateUser({ cep, contato, email, name, numero, avata }: UpdateUset) {
@@ -130,7 +146,7 @@ export function Atualizarperfil() {
                 </Button>
             </form>
             <div className="grid grid-cols-3 gap-5 justify-items-center mb-5">
-                {pets && (
+                {isPetFetching ? <SkeletonPetCard/> : (
                     pets.map((pet) => (
                         <CardAtualizarPet key={pet.id} pet={pet} />
                     ))
