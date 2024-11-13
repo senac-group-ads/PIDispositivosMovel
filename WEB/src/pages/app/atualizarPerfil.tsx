@@ -32,7 +32,7 @@ export function Atualizarperfil() {
     
     const [ previw, setPreview ] = useState<string | null | undefined >(data?.avata)
 
-    const { register, handleSubmit, control, formState: { isSubmitted }} = useForm<UpdateUset>({
+    const { register, handleSubmit, control } = useForm<UpdateUset>({
         resolver: zodResolver(updateUser),
         values: {
             cep: data?.cep ?? '',
@@ -52,6 +52,7 @@ export function Atualizarperfil() {
     const { data: pets } = useQuery({
         queryKey: ['petByOng'],
         queryFn: () => getPetByUser( data.id ),
+        staleTime: Infinity,
     })
 
     const { mutateAsync: updateUserProfile } = useMutation({

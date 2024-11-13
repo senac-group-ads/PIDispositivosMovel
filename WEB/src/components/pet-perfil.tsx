@@ -22,6 +22,7 @@ export function PetPerfil({ petId, open }: IPet) {
     const { data: petProfile, isFetching: isFetchingPetProfile } = useQuery({
         queryKey: ['petProfile', petId],
         queryFn: () => getPetId({id: petId}),
+        staleTime: 1000 * 60 * 15, // 15 minutos
         enabled: open
     })
 

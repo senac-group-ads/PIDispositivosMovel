@@ -14,7 +14,8 @@ export function AppLayout() {
 
     const { data: ProfileUser } = useQuery({
         queryKey: ['profile'],
-        queryFn: profile
+        queryFn: profile,
+        staleTime: Infinity
     })
 
     return (

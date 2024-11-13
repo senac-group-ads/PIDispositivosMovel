@@ -3,24 +3,11 @@ import { CardPet } from "@/components/cart-pet";
 import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
 
-interface pet {
-    id: string
-    name: string
-    idade: string
-    peso?: string | null
-    tipo?: string | null
-    descricao?: string | null
-    porte?: string | null
-    requisitos?: string | null
-    fotos?: string | null
-    userId: string
-    adotado: boolean
-}
-
 export function QueroAdotar() {
     const { data: data } = useQuery({
         queryKey: ['ListPets'],
         queryFn: getPet,
+        staleTime: 1000 * 60 * 15, // 15 minutos
         initialData: []
     })
 

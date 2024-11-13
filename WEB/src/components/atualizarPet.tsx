@@ -47,6 +47,7 @@ export function AtualizarPet({ id, open }: PetId) {
     const { data: pet } = useQuery({
         queryKey: ['petByUser', id],
         queryFn: () => getPetId({ id }),
+        staleTime: Infinity,
         enabled: open
     })
 
@@ -125,7 +126,6 @@ export function AtualizarPet({ id, open }: PetId) {
         toast.error(title)
        }
     }
-
 
     return (
         <DialogContent>

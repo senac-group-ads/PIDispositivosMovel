@@ -17,6 +17,7 @@ export function OngPerfil({ id, open }: OngProfile) {
     const { data: ong, isLoading: ongLoad, isFetching: ongFething } = useQuery<OngResponse>({
         queryKey: ['ongId'],
         queryFn: () => getOngId(id),
+        staleTime: 1000 * 60 * 15, // 15 minutos
         enabled: open
     })
 
@@ -24,6 +25,7 @@ export function OngPerfil({ id, open }: OngProfile) {
         queryKey: ['petByOng'],
         queryFn: () => getPetByUser( id ),
         initialData: [],
+        staleTime: Infinity,
         enabled: open
     })
 

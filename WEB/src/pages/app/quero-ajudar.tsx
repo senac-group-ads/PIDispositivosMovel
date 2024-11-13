@@ -7,7 +7,7 @@ export function QueroAjudar() {
     const { data: GetOngs } = useQuery({
         queryKey: ['getOngs'],
         queryFn: getOngs,
-        staleTime: Infinity
+        staleTime: 1000 * 60 * 15, // 15 minutos
     })
 
     return (
