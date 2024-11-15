@@ -40,8 +40,7 @@ export function Atualizarperfil() {
             contato: data?.contato ?? '',
             email: data?.email ?? '',
             name: data?.name ?? '',
-            numero: data?.numero ?? '',
-            avata: data?.avata ?? previw
+            numero: data?.numero ?? ''
         }
     })
     if (!data) {
@@ -78,6 +77,7 @@ export function Atualizarperfil() {
     async function handleUpdateUser({ cep, contato, email, name, numero, avata }: UpdateUset) {
         try {
             const token = localStorage.getItem('@token')
+            console.log(avata)
             const response = await api.post('/pet/img', {avata}, {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -118,7 +118,7 @@ export function Atualizarperfil() {
                                     value={value?.fileName}
                                     type="file"
                                     id="foto"
-                                    name="fotos"
+                                    name="foto"
                                     className="invisible h-0 w-0"
                                     onChange={(e) => {
                                         if(e.target.files) {

@@ -62,8 +62,7 @@ export function AtualizarPet({ id, open }: PetId) {
             descricao: pet?.descricao ?? '',
             porte: pet?.porte ?? '',
             requisitos: pet?.requisitos ?? '',
-            tipo: pet?.tipo ?? '',
-            fotos: pet?.fotos ?? previw
+            tipo: pet?.tipo ?? ''
         }
     })
 
