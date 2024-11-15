@@ -75,7 +75,6 @@ export function AtualizarPet({ id, open }: PetId) {
         try {
             await delet(id)
             toast('Pet deletado com sucesso!')
-            window.location.reload()
         } catch (err) {
             const isAppError = err instanceof AppErrors
             const title = isAppError ? err.message : 'Não foi possivel continuar...'
@@ -129,18 +128,18 @@ export function AtualizarPet({ id, open }: PetId) {
     return (
         <DialogContent>
             <form onSubmit={handleSubmit(handlePetSubmit)} className="grid grid-cols-2 gap-4">
-                <Controller
+            <Controller
                     control={control}
                     name={"fotos"}
                     render={({ field: { value, onChange, ...field }}) => {
                         return (
-                            <label htmlFor="foto" className="cursor-pointer">
+                            <label htmlFor="foto" className="cursor-pointer w-[10rem] h-[10rem] mb-5">
                                 <Input
                                     {...field}
                                     value={value?.fileName}
                                     type="file"
                                     id="foto"
-                                    name="fotos"
+                                    name="foto"
                                     className="invisible h-0 w-0"
                                     onChange={(e) => {
                                         if(e.target.files) {

@@ -41,7 +41,7 @@ export function OngPerfil({ id, open }: OngProfile) {
                             <TableCell className="flex">{ong.name}</TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableCell className="w-20 text-muted-foreground">Enail:</TableCell>
+                            <TableCell className="w-20 text-muted-foreground">Email:</TableCell>
                             <TableCell className="flex ">{ong.email}</TableCell>
                         </TableRow>
                         <TableRow>

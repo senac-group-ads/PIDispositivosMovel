@@ -77,7 +77,6 @@ export function Atualizarperfil() {
     async function handleUpdateUser({ cep, contato, email, name, numero, avata }: UpdateUset) {
         try {
             const token = localStorage.getItem('@token')
-            console.log(avata)
             const response = await api.post('/pet/img', {avata}, {
                 headers: {
                     Authorization: `Bearer ${token}`,
